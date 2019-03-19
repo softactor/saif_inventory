@@ -304,3 +304,7 @@ function get_table_data_by_table($table, $order_by  =   null){
 function get_data_name_by_where($table,$where){
     return DB::table($table)->where($where)->get();
 }
+
+function get_product_name_by_product_id($product_id){
+    return DB::table('products')->where('id', $product_id)->first();
+}

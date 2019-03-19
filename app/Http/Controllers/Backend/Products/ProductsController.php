@@ -42,7 +42,7 @@ class ProductsController extends Controller {
             "name"                  => "required",
             "item_id"               => "required",
             "code"                  => "required",
-            "unit_name"                  => "required"
+            "unit_name"             => "required"
         ]);
         
         // Validation Fails:

@@ -103,6 +103,7 @@
           $( "#receive_date" ).datepicker({
             dateFormat: "yy-mm-dd"
           });
+          $( "#material_information" ).accordion();
         });
         function getFilterWisePlantEquipmentResult(){
             $.ajax({
@@ -123,7 +124,6 @@
             });
         }
         function get_product_by_item_id(item_id){
-            console.log(item_id);
             $.ajax({
                 url: $('#get_product_url').val(),
                 type: 'Get',
@@ -138,7 +138,6 @@
             });
         }
         function addProductIntoProductReceiveForm(){
-            console.log(item_id);
             $.ajax({
                 url: $('#process_product_receive_url').val(),
                 type: 'POST',
@@ -153,7 +152,82 @@
                 async: false // <- this turns it into synchronous
             });
         }
+        
+        function addParentItemCategory(){
+            $('#parentItemModal').modal('show');
+            $('#item_name').val('');
+        }
+        function addChildItemCategory(){
+            $('#childItemModal').modal('show');
+            $('#item_name').val('');
+        }
+        
+        function storeParentItem(url){
+            $.ajax({
+                url         : url,
+                type        : 'POST',
+                dataType    : 'json',
+                data        : $("#parentItemModalForm").serialize(),
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function (response) {
+                    if(response.status == 'success'){
+                        $('#item_name').val('');
+                        $('#parentItemModal').modal('hide');
+                        swal("Success", response.message, "success");
+                        window.location = response.redirect_url;
+                    }else{
+                        $('#item_name').val('');
+                        $('#parentItemModal').modal('hide');
+                        swal("Error", response.message, "error");
+                    }                  
+                },
+                async: false // <- this turns it into synchronous
+            });
+        }
+        function updateParentItem(url){
+            $.ajax({
+                url         : url,
+                type        : 'POST',
+                dataType    : 'json',
+                data        : $("#parentItemEditModalForm").serialize(),
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function (response) {
+                    if(response.status == 'success'){
+                        $('#item_name').val('');
+                        $('#parentItemEditModal').modal('hide');
+                        swal("Success", response.message, "success");
+                        window.location = response.redirect_url;
+                    }else{
+                        $('#item_name').val('');
+                        $('#parentItemModal').modal('hide');
+                        swal("Error", response.message, "error");
+                    }                  
+                },
+                async: false // <- this turns it into synchronous
+            });
+        }
         // Code that uses other library's $ can follow here.
+        
+        function openItemeditForm(item_id, url){
+            $.ajax({
+                url: url,
+                type: 'Get',
+                dataType: 'json',
+                data: 'item_id=' + item_id,
+                success: function (response) {
+                    if(response.status == 'success'){   
+                        $('#parentItemEditModal').modal();
+                        $('#edit_item_name').val(response.data.name);
+                        $('#item_edit_id').val(response.data.id);
+                    }                   
+                },
+                async: false // <- this turns it into synchronous
+            });
+        }
         </script>
     </body>
 </html>

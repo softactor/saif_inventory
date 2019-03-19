@@ -39,14 +39,11 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>receive_date</th>
-                                    <th>receive_no</th>
-                                    <th>item_id</th>
-                                    <th>product_id</th>
-                                    <th>part_no</th>
-                                    <th>supplier_id</th>
-                                    <th>quantity</th>
-                                    <th>project_id</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th style="text-align: right">Total</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody id="receiveProductBody">

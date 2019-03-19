@@ -35,21 +35,14 @@ class ProductReceiveController extends Controller
     }
     
     public function create(){
-        $project_code   = $this->generateReceivecode();
-        print '<pre>';
-        print_r($project_code);
-        print '</pre>';
-        exit;
-        
-        return new ViewResponse('backend.product_receive.create');
+        $receiveCode   = $this->generateReceivecode();        
+        return new ViewResponse('backend.product_receive.create', compact('receiveCode'));
     }
     
     public function generateReceivecode(){
         
-        $query = DB::select(DB::substr('receive_no',3))
-                ->latest()
-                ->first();
-        return $query;
+        $rendomnumber   =   rand(10, 200);
+        return 'RCV-'.$rendomnumber;
     }
     public function store(Request $request) {
         // Create a new validator instance
@@ -99,7 +92,7 @@ class ProductReceiveController extends Controller
     }
     
     public function process_product_receive_url(Request $request){
-        $all    =   $request->all();        
+        $all    =   $request->all();          
         $productsData   =    [
             'receive_date'  => $request->receive_date,
             'receive_no'    => $request->receive_no,
@@ -108,10 +101,28 @@ class ProductReceiveController extends Controller
             'part_no'       => $request->part_no,
             'supplier_id'   => $request->supplier_id,
             'quantity'      => $request->quantity,
+            'unit_price'    => $request->unit_price,
             'project_id'    => $request->project_id
         ];
-        DB::table('temp_product_receive_data')->insert($productsData);
-          
+        
+        // check product is already in the receive form:
+        $whereParam     =   [
+            'receive_no'    =>  $request->receive_no,
+            'product_id'    =>  $request->product_id,
+        ];
+        $existingProduct    =   DB::table('temp_product_receive_data')->where($whereParam)->first();
+        if(isset($existingProduct) && !empty($existingProduct)){
+            $updateQuantity     =   $existingProduct->quantity + $request->quantity;
+            $updateData     =   [
+                'quantity'    =>  $updateQuantity,
+            ];
+            DB::table('temp_product_receive_data')
+            ->where('id', $existingProduct->id)
+            ->update($updateData);
+        }else{            
+            DB::table('temp_product_receive_data')->insert($productsData);
+        }
+        // Now update the generated dom file 
         $products       =   $users = DB::table('temp_product_receive_data')->where('receive_no', $request->receive_no)->get();
         $details_data   =   View::make('backend.partial.process_product_receive_table', compact('products'));
         $feedback_data  =   [

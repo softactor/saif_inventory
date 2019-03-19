@@ -37,16 +37,21 @@ class ItemsController extends Controller
         
         // Validation Fails:
         if ($validator->fails()) {
-            echo 'Validation Error!';
-            exit;
+            return $feedback   =   [
+                'status'    =>  'error',
+                'message'   =>  'Please fill all required fields',
+            ];
+            
         }
         
         // Duplicate check:
         $hasAlreadyData = ItemsModel::where('name', $request->name)->first();
         if(isset($hasAlreadyData) && !empty($hasAlreadyData)){
-            return redirect(route('admin.items.create'))
-                        ->withErrors('Duplicate data found')
-                        ->withInput();
+            $feedback   =   [
+                'status'    =>  'error',
+                'message'   =>  'Duplicate data found',
+            ];
+            echo json_encode($feedback);
         }
         
         $createData = [
@@ -55,20 +60,73 @@ class ItemsController extends Controller
         ];
 
         $create_response = ItemsModel::create($createData);
-        return new RedirectResponse(route('admin.items.index'), ['flash_success' => trans('alerts.backend.items.created')]);
+        $feedback   =   [
+                'status'        =>  'success',
+                'redirect_url'  =>  route('admin.items.index'),
+                'message'       =>  'Data have successfully saved.',
+            ];
+        echo json_encode($feedback);
+    }
+    public function child_store(Request $request) {
+        // Create a new validator instance
+        $validator  =   Validator::make($request->all(), [
+            "name"                      => "required",
+            "material_sub_description"  => "required"
+        ]);
+        
+        // Validation Fails:
+        if ($validator->fails()) {
+            return $feedback   =   [
+                'status'    =>  'error',
+                'message'   =>  'Please fill all required fields',
+            ];
+            
+        }
+        
+        // Duplicate check:
+        $hasAlreadyData = ItemsModel::where('name', $request->name)->first();
+        if(isset($hasAlreadyData) && !empty($hasAlreadyData)){
+            return $feedback   =   [
+                'status'    =>  'error',
+                'message'   =>  'Duplicate data found',
+            ];
+        }
+        
+        $createData = [
+            'name'  => $request->name,
+            'created_by'        => access()->user()->id,
+        ];
+
+        $create_response = ItemsModel::create($createData);
+        return $feedback   =   [
+                'status'        =>  'success',
+                'redirect_url'  =>  route('admin.items.index'),
+                'message'       =>  'Data have successfully saved.',
+            ];
     }
 
-    public function edit($edit_id){
+    public function edit(Request $request){        
         $datas   =   [
-            'editData'  =>  ItemsModel::where('id', $edit_id)->first()
+            'editData'  =>  ItemsModel::where('id', $request->item_id)->first()
         ];
-        return new ViewResponse('backend.items.edit',$datas);
+        $feedbackData   =   [
+            'message'   => 'Edit data information',
+            'data'      =>  ItemsModel::where('id', $request->item_id)->first(),
+            'status'    =>  'success'
+        ];
+//        return new ViewResponse('backend.items.edit',$datas);
+        echo json_encode($feedbackData);
     }
     public function update(Request $request){
         $equipment                      = ItemsModel::find($request->edit_id);
         $equipment->name        = $request->name;
         $equipment->save();
-        return new RedirectResponse(route('admin.items.index'), ['flash_success' => trans('alerts.backend.items.updated')]); 
+        $feedback   =   [
+                'status'        =>  'success',
+                'redirect_url'  =>  route('admin.items.index'),
+                'message'       =>  'Data have successfully updated.',
+            ];
+        echo json_encode($feedback);
     }
     
     public function delete($deleteId){
