@@ -303,6 +303,117 @@
                 async: false // <- this turns it into synchronous
             });
         }
+        
+        // Code that uses openSubmaterialEditForm modal can follow here.        
+        function openSubmaterialEditForm(subMaterial_id, url){
+            $.ajax({
+                url: url,
+                type: 'Get',
+                dataType: 'json',
+                data: 'sub_material_id=' + subMaterial_id,
+                success: function (response) {
+                    if(response.status == 'success'){   
+                        console.log(response.data);
+                        $('#sub_material_edit_modal').modal();
+                        $('#edit_category_id').val(response.data.category_id);
+                        $('#edit_material_sub_description').val(response.data.material_sub_description);
+                        $('#sub_item_edit_id').val(response.data.id);
+                    }                   
+                },
+                async: false // <- this turns it into synchronous
+            });
+        }
+        
+        // Sub material Update code goes here:
+        function storeSubMaterialEditModalData(url){
+            $.ajax({
+                url         : url,
+                type        : 'POST',
+                dataType    : 'json',
+                data        : $("#sub_material_edit_form").serialize(),
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function (response) {
+                    if(response.status == 'success'){
+                        $('#edit_category_id').val('');
+                        $('#edit_material_sub_description').val('');
+                        $('#sub_item_edit_id').val('');
+                        $('#sub_material_edit_modal').modal('hide');
+                        swal("Success", response.message, "success");
+                        window.location = response.redirect_url;
+                    }else{
+                        $('#edit_category_id').val('');
+                        $('#edit_material_sub_description').val('');
+                        $('#sub_item_edit_id').val('');
+                        $('#parentItemModal').modal('hide');
+                        swal("Error", response.message, "error");
+                    }                  
+                },
+                async: false // <- this turns it into synchronous
+            });
+        }
+        
+        // open material edit modal
+        function openMaterialeditForm(id, url){
+            $.ajax({
+                url: url,
+                type: 'Get',
+                dataType: 'json',
+                data: 'id=' + id,
+                success: function (response) {
+                    if(response.status == 'success'){   
+                        $('#materialEditModal').modal();
+                        $('#edit_material_id').val(response.data.material_id);
+                        $('#edit_material_sub_id').html(response.sub_material_data);
+                        $('#edit_material_sub_id').val(response.data.material_sub_id);
+                        $('#edit_qty_unit').val(response.data.qty_unit);
+                        $('#edit_material_min_stock').val(response.data.material_min_stock);
+                        $('#edit_material_description').val(response.data.material_description);
+                        $('#material_edit_id').val(response.data.id);
+                    }                   
+                },
+                async: false // <- this turns it into synchronous
+            });
+        }
+        
+        //updateInvMaterial
+        function updateInvMaterialModalData(url){
+            $.ajax({
+                url         : url,
+                type        : 'POST',
+                dataType    : 'json',
+                data        : $("#materialEditForm").serialize(),
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function (response) {
+                    if(response.status == 'success'){
+                        $('#edit_material_id').val('');
+                        $('#edit_material_sub_id').html('');
+                        $('#edit_material_sub_id').val('');
+                        $('#edit_qty_unit').val('');
+                        $('#edit_material_min_stock').val('');
+                        $('#edit_material_description').val('');
+                        $('#material_edit_id').val('');
+                        $('#materialEditModal').modal('hide');
+                        swal("Success", response.message, "success");
+                        window.location = response.redirect_url;
+                    }else{
+                        $('#edit_material_id').val('');
+                        $('#edit_material_sub_id').html('');
+                        $('#edit_material_sub_id').val('');
+                        $('#edit_qty_unit').val('');
+                        $('#edit_material_min_stock').val('');
+                        $('#edit_material_description').val('');
+                        $('#material_edit_id').val('');
+                        $('#materialEditModal').modal('hide');
+                        swal("Error", response.message, "error");
+                    }                  
+                },
+                async: false // <- this turns it into synchronous
+            });
+        }
         </script>
     </body>
 </html>

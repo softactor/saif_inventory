@@ -7,13 +7,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Create Child Items</h4>
+                <h4 class="modal-title">Create Material</h4>
             </div>
             <div class="modal-body">                   
 
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Child Items</h3>
+                        <h3 class="box-title">Material</h3>
                     </div><!-- /.box-header -->
 
                     {{-- Including Form blade file --}}
@@ -25,7 +25,7 @@
                                         <tr>
                                             <td>
                                                 <div class="form-group">
-                                                    <label for="name" class="control-label col-sm-2">Material</label>
+                                                    <label for="name" class="control-label col-sm-2">Category</label>
                                                     <div class="col-sm-10">
                                                         <?php
                                                             $get_child_items_by_parent  =   url('admin/get_child_items_by_parent');

@@ -18,9 +18,7 @@
 
     <div class="box-body">
         <div id="material_information">
-            <h3>
-                Parent Category                
-            </h3>
+            <h3>Category</h3>
             <div class='row'>
                 <div class='col-md-10'>
                     <div class="table-responsive data-table-wrapper">
@@ -65,10 +63,10 @@
                     </div><!--table-responsive-->
                 </div>
                 <div class='col-md-2'>
-                    <button class="btn btn-flat btn-default pull-left" onclick="addParentItemCategory();"><i class="fa fa-plus"></i> Create items</button>
+                    <button class="btn btn-flat btn-default pull-left" onclick="addParentItemCategory();"><i class="fa fa-plus"></i> Category</button>
                 </div>
             </div>
-            <h3>Child Category</h3>
+            <h3>Sub Material</h3>
             <div class='row'>
                 <div class='col-md-10'>
                     <div class="table-responsive data-table-wrapper">
@@ -91,8 +89,8 @@
                                             <td>
                                                 <div class="btn-group action-btn">
                                                     @permission('edit-items')
-                                                    <?php $editUrl  =    url("admin/items/edit"); ?>
-                                                    <a class="btn btn-flat btn-default" href="#" onclick="openItemeditForm('<?php echo $equipments->id; ?>','<?php echo $editUrl; ?>');">
+                                                    <?php $editUrl  =    url("admin/sub_material/edit"); ?>
+                                                    <a class="btn btn-flat btn-default" href="#" onclick="openSubmaterialEditForm('<?php echo $equipments->id; ?>','<?php echo $editUrl; ?>');">
                                                         <i data-toggle="tooltip" data-placement="top" title="" class="fa fa-pencil" data-original-title="Edit"></i>
                                                     </a>
                                                     @endauth
@@ -100,7 +98,7 @@
                                                     <a class="btn btn-flat btn-default" data-method="delete" data-trans-button-cancel="Cancel" data-trans-button-confirm="Delete" data-trans-title="Are you sure you want to do this?" style="cursor:pointer;" onclick="$(this).find(&quot;form&quot;).submit();">
                                                         <i data-toggle="tooltip" data-placement="top" title="" class="fa fa-trash" data-original-title="Delete"></i>
 
-                                                        <form action="<?php echo url('admin/items/delete/' . $equipments->id); ?>" method="get" name="delete_item" style="display:none">
+                                                        <form action="<?php echo url('admin/sub_material/delete/' . $equipments->id); ?>" method="get" name="delete_item" style="display:none">
                                                         </form>
                                                     </a>
                                                     @endauth
@@ -115,10 +113,10 @@
                     </div><!--table-responsive-->
                 </div>
                 <div class='col-md-2'>
-                    <button class="btn btn-flat btn-default pull-left" onclick="addChildItemCategory();"><i class="fa fa-plus"></i> Create Child</button>
+                    <button class="btn btn-flat btn-default pull-left" onclick="addChildItemCategory();"><i class="fa fa-plus"></i> Sub Material</button>
                 </div>
             </div>
-            <h3>Second Child Category</h3>
+            <h3>Material</h3>
             <div class="row">
                 <div class='col-md-10'>
                     <div class="table-responsive data-table-wrapper">
@@ -147,8 +145,8 @@
                                             <td>
                                                 <div class="btn-group action-btn">
                                                     @permission('edit-items')
-                                                    <?php $editUrl  =    url("admin/items/edit"); ?>
-                                                    <a class="btn btn-flat btn-default" href="#" onclick="openItemeditForm('<?php echo $equipments->id; ?>','<?php echo $editUrl; ?>');">
+                                                    <?php $editUrl  =    url("admin/material/edit"); ?>
+                                                    <a class="btn btn-flat btn-default" href="#" onclick="openMaterialeditForm('<?php echo $equipments->id; ?>','<?php echo $editUrl; ?>');">
                                                         <i data-toggle="tooltip" data-placement="top" title="" class="fa fa-pencil" data-original-title="Edit"></i>
                                                     </a>
                                                     @endauth
@@ -156,7 +154,7 @@
                                                     <a class="btn btn-flat btn-default" data-method="delete" data-trans-button-cancel="Cancel" data-trans-button-confirm="Delete" data-trans-title="Are you sure you want to do this?" style="cursor:pointer;" onclick="$(this).find(&quot;form&quot;).submit();">
                                                         <i data-toggle="tooltip" data-placement="top" title="" class="fa fa-trash" data-original-title="Delete"></i>
 
-                                                        <form action="<?php echo url('admin/items/delete/' . $equipments->id); ?>" method="get" name="delete_item" style="display:none">
+                                                        <form action="<?php echo url('admin/material/delete/' . $equipments->id); ?>" method="get" name="delete_item" style="display:none">
                                                         </form>
                                                     </a>
                                                     @endauth
@@ -171,7 +169,7 @@
                     </div><!--table-responsive-->
                 </div>
                 <div class='col-md-2'>
-                    <button class="btn btn-flat btn-default pull-left" onclick="addSubChildItemCategory();"><i class="fa fa-plus"></i> Create Sub Child</button>
+                    <button class="btn btn-flat btn-default pull-left" onclick="addSubChildItemCategory();"><i class="fa fa-plus"></i> Material</button>
                 </div>
             </div>
         </div>
@@ -193,4 +191,6 @@
 @include('backend/partial/parent_item_modal')
 @include('backend/partial/parent_item_edit_modal')
 @include('backend/partial/child_item_modal')
-@include('backend/partial/sub_child_item_modal')
+@include('backend/partial/sub_material_edit_modal')
+@include('backend/partial/material_create_modal')
+@include('backend/partial/material_edit_modal')
