@@ -30,7 +30,17 @@ class ItemsController extends Controller
             ->orderBy('i.name', 'ASC')
             ->orderBy('im.material_sub_description', 'ASC')
             ->get();
-        return new ViewResponse('backend.items.index', compact('plantEquipments', 'childInfo'));
+        
+        $subChildInfo = DB::table('inv_material as im')
+            ->join('items as i', 'i.id', '=', 'im.material_id')
+            ->join('inv_materialcategory as imc', 'imc.id', '=', 'im.material_sub_id')
+            ->join('inv_item_unit as iiu', 'iiu.id', '=', 'im.qty_unit')
+            ->select('im.*', 'i.name', 'imc.material_sub_description','iiu.*')
+            ->orderBy('im.material_description', 'ASC')
+            ->orderBy('imc.material_sub_description', 'ASC')
+            ->orderBy('i.name', 'ASC')
+            ->get();
+        return new ViewResponse('backend.items.index', compact('plantEquipments', 'childInfo', 'subChildInfo'));
     }
     
     public function create(){
@@ -155,9 +165,11 @@ class ItemsController extends Controller
         
         // Create a new validator instance
         $validator  =   Validator::make($request->all(), [
-            "category_id"           => "required",
+            "material_id"           => "required",
             "material_sub_id"       => "required",
-            "material_description"  => "required"
+            "material_description"  => "required",
+            "qty_unit"              => "required",
+            "material_min_stock"    => "required"
         ]);
         
         // Validation Fails:
@@ -171,8 +183,8 @@ class ItemsController extends Controller
         
         // Duplicate check:         
         $hasAlreadyData = DB::table('inv_material')
-                ->where('category_id', $request->category_id)
                 ->where('material_id', $request->material_id)
+                ->where('material_sub_id', $request->material_sub_id)
                 ->where('material_description', $request->material_description)
                 ->first();
         if(isset($hasAlreadyData) && !empty($hasAlreadyData)){
@@ -183,9 +195,11 @@ class ItemsController extends Controller
         }
         
         $createData = [
-            'category_id'               => $request->category_id,
-            'material_id'               => $request->material_id,
-            'material_description'      => $request->material_sub_description,
+            'material_id'           => $request->material_id,
+            'material_sub_id'       => $request->material_sub_id,
+            'material_description'  => $request->material_description,
+            'qty_unit'              => $request->qty_unit,
+            'material_min_stock'    => $request->material_min_stock,
         ];
 
         $create_response = DB::table('inv_material')->insert($createData);

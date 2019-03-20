@@ -125,21 +125,25 @@
                         <table id="blogs-table" class="table table-condensed table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Parent</th>
-                                    <th>Child</th>
-                                    <th>Sub Child</th>
+                                    <th>Material</th>
+                                    <th>Sub Material</th>
+                                    <th>Description</th>
+                                    <th>Unit</th>
+                                    <th>Minimum Stock</th>
                                     <th>{{ trans('labels.general.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                if (isset($childInfo) && !empty($childInfo)) {
-                                    foreach ($childInfo as $equipments) {
+                                if (isset($subChildInfo) && !empty($subChildInfo)) {
+                                    foreach ($subChildInfo as $equipments) {
                                         ?>
                                         <tr>
                                             <td><?php echo $equipments->name; ?></td>
                                             <td><?php echo $equipments->material_sub_description; ?></td>
-                                            <td><?php echo 'Sub child'; ?></td>
+                                            <td><?php echo $equipments->material_description; ?></td>
+                                            <td><?php echo $equipments->unit_name; ?></td>
+                                            <td><?php echo $equipments->material_min_stock; ?></td>
                                             <td>
                                                 <div class="btn-group action-btn">
                                                     @permission('edit-items')
