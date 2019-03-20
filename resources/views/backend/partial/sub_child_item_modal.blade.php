@@ -1,6 +1,6 @@
 <!-- Modal -->
-{{ Form::open(['route' => 'admin.items.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'id' => 'childItemModalForm', 'files' => true]) }}
-<div id="childItemModal" class="modal fade" role="dialog">
+{{ Form::open(['route' => 'admin.items.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'id' => 'invMaterialForm', 'files' => true]) }}
+<div id="subChildItemModal" class="modal fade" role="dialog">
     <div class="modal-dialog" style="width: 70%">
 
         <!-- Modal content-->
@@ -25,9 +25,12 @@
                                         <tr>
                                             <td>
                                                 <div class="form-group">
-                                                    <label for="name" class="col-md-4 required">Items</label>
-                                                    <div class="col-md-8">
-                                                        <select class="form-control" id="category_id" name="category_id" required>
+                                                    <label for="name" class="control-label col-sm-2">Parent</label>
+                                                    <div class="col-sm-10">
+                                                        <?php
+                                                            $get_child_items_by_parent  =   url('admin/get_child_items_by_parent');
+                                                        ?>
+                                                        <select class="form-control" id="category_id" name="category_id" onchange="getchilditemsByparent(this.value, '{{ $get_child_items_by_parent }}')">
                                                             <option value="">Select</option>
                                                             <?php
                                                             $tableName = 'items';
@@ -43,13 +46,25 @@
                                                             ?>
                                                         </select>
                                                     </div>
+                                                </div>                                                
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label for="name" class="control-label col-sm-2">Child</label>
+                                                    <div class="col-sm-10">
+                                                        <select class="form-control" id="material_sub_id" name="material_sub_id" required>
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </td>
+                                        </tr>
+                                        <tr>
                                             <td colspan="2">
                                                 <div class="form-group">
-                                                    <label for="name" class="col-md-4 required">Child Name</label>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control" id="material_sub_description" placeholder="Enter name" name="material_sub_description">
+                                                    <label for="name" class="control-label col-sm-2">Sub Child Name</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="material_description" placeholder="Enter name" name="material_description">
                                                     </div>
                                                 </div>
                                             </td>
@@ -64,7 +79,7 @@
             </div>
             <div class="modal-footer">  
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-default" onclick="storeChildItem('{{ route('admin.child_items.store') }}');">Save</button>
+                <button type="button" class="btn btn-default" onclick="storeInvMaterial('{{ route('admin.inv_material.store') }}');">Save</button>
             </div>
         </div>
     </div>

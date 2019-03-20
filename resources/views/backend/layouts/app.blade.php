@@ -137,6 +137,22 @@
                 async: false // <- this turns it into synchronous
             });
         }
+        function getchilditemsByparent(parent_id, url){
+            if(parent_id){
+                $.ajax({
+                    url: url,
+                    type: 'Get',
+                    dataType: 'json',
+                    data: 'parent_id=' + parent_id,
+                    success: function (response) {
+                        if(response.status == 'success'){
+                            $('#material_sub_id').html(response.data);
+                        }                   
+                    },
+                    async: false // <- this turns it into synchronous
+                });
+            }
+        }
         function addProductIntoProductReceiveForm(){
             $.ajax({
                 url: $('#process_product_receive_url').val(),
@@ -161,7 +177,10 @@
             $('#childItemModal').modal('show');
             $('#item_name').val('');
         }
-        
+        function addSubChildItemCategory(){
+            $('#subChildItemModal').modal('show');
+            $('#item_name').val('');
+        }
         function storeParentItem(url){
             $.ajax({
                 url         : url,
@@ -180,6 +199,32 @@
                     }else{
                         $('#item_name').val('');
                         $('#parentItemModal').modal('hide');
+                        swal("Error", response.message, "error");
+                    }                  
+                },
+                async: false // <- this turns it into synchronous
+            });
+        }
+        // store child item
+        function storeChildItem(url){
+            $.ajax({
+                url         : url,
+                type        : 'POST',
+                dataType    : 'json',
+                data        : $("#childItemModalForm").serialize(),
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function (response) {
+                    if(response.status == 'success'){
+                        $('#material_sub_id').val('');
+                        $('#material_sub_description').val('');
+                        $('#childItemModal').modal('hide');
+                        swal("Success", response.message, "success");
+                        window.location = response.redirect_url;
+                    }else{
+                        $('#item_name').val('');
+                        $('#childItemModal').modal('hide');
                         swal("Error", response.message, "error");
                     }                  
                 },
@@ -224,6 +269,36 @@
                         $('#edit_item_name').val(response.data.name);
                         $('#item_edit_id').val(response.data.id);
                     }                   
+                },
+                async: false // <- this turns it into synchronous
+            });
+        }
+        
+        // store child item
+        function storeInvMaterial(url){
+            $.ajax({
+                url         : url,
+                type        : 'POST',
+                dataType    : 'json',
+                data        : $("#invMaterialForm").serialize(),
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function (response) {
+                    if(response.status == 'success'){
+                        $('#category_id').val('');
+                        $('#material_sub_id').val('');
+                        $('#material_description').val('');
+                        $('#subChildItemModal').modal('hide');
+                        swal("Success", response.message, "success");
+                        window.location = response.redirect_url;
+                    }else{
+                        $('#category_id').val('');
+                        $('#material_sub_id').val('');
+                        $('#material_description').val('');
+                        $('#subChildItemModal').modal('hide');
+                        swal("Error", response.message, "error");
+                    }                  
                 },
                 async: false // <- this turns it into synchronous
             });

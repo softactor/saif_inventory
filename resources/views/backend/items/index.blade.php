@@ -71,25 +71,104 @@
             <h3>Child Category</h3>
             <div class='row'>
                 <div class='col-md-10'>
-                    
+                    <div class="table-responsive data-table-wrapper">
+                        <table id="blogs-table" class="table table-condensed table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Parent</th>
+                                    <th>Child</th>
+                                    <th>{{ trans('labels.general.actions') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (isset($childInfo) && !empty($childInfo)) {
+                                    foreach ($childInfo as $equipments) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $equipments->name; ?></td>
+                                            <td><?php echo $equipments->material_sub_description; ?></td>
+                                            <td>
+                                                <div class="btn-group action-btn">
+                                                    @permission('edit-items')
+                                                    <?php $editUrl  =    url("admin/items/edit"); ?>
+                                                    <a class="btn btn-flat btn-default" href="#" onclick="openItemeditForm('<?php echo $equipments->id; ?>','<?php echo $editUrl; ?>');">
+                                                        <i data-toggle="tooltip" data-placement="top" title="" class="fa fa-pencil" data-original-title="Edit"></i>
+                                                    </a>
+                                                    @endauth
+                                                    @permission('delete-items')
+                                                    <a class="btn btn-flat btn-default" data-method="delete" data-trans-button-cancel="Cancel" data-trans-button-confirm="Delete" data-trans-title="Are you sure you want to do this?" style="cursor:pointer;" onclick="$(this).find(&quot;form&quot;).submit();">
+                                                        <i data-toggle="tooltip" data-placement="top" title="" class="fa fa-trash" data-original-title="Delete"></i>
+
+                                                        <form action="<?php echo url('admin/items/delete/' . $equipments->id); ?>" method="get" name="delete_item" style="display:none">
+                                                        </form>
+                                                    </a>
+                                                    @endauth
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div><!--table-responsive-->
                 </div>
                 <div class='col-md-2'>
                     <button class="btn btn-flat btn-default pull-left" onclick="addChildItemCategory();"><i class="fa fa-plus"></i> Create Child</button>
                 </div>
             </div>
             <h3>Second Child Category</h3>
-            <div>
-                <p>
-                    Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-                    Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-                    ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-                    lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-                </p>
-                <ul>
-                    <li>List item one</li>
-                    <li>List item two</li>
-                    <li>List item three</li>
-                </ul>
+            <div class="row">
+                <div class='col-md-10'>
+                    <div class="table-responsive data-table-wrapper">
+                        <table id="blogs-table" class="table table-condensed table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Parent</th>
+                                    <th>Child</th>
+                                    <th>Sub Child</th>
+                                    <th>{{ trans('labels.general.actions') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (isset($childInfo) && !empty($childInfo)) {
+                                    foreach ($childInfo as $equipments) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $equipments->name; ?></td>
+                                            <td><?php echo $equipments->material_sub_description; ?></td>
+                                            <td><?php echo 'Sub child'; ?></td>
+                                            <td>
+                                                <div class="btn-group action-btn">
+                                                    @permission('edit-items')
+                                                    <?php $editUrl  =    url("admin/items/edit"); ?>
+                                                    <a class="btn btn-flat btn-default" href="#" onclick="openItemeditForm('<?php echo $equipments->id; ?>','<?php echo $editUrl; ?>');">
+                                                        <i data-toggle="tooltip" data-placement="top" title="" class="fa fa-pencil" data-original-title="Edit"></i>
+                                                    </a>
+                                                    @endauth
+                                                    @permission('delete-items')
+                                                    <a class="btn btn-flat btn-default" data-method="delete" data-trans-button-cancel="Cancel" data-trans-button-confirm="Delete" data-trans-title="Are you sure you want to do this?" style="cursor:pointer;" onclick="$(this).find(&quot;form&quot;).submit();">
+                                                        <i data-toggle="tooltip" data-placement="top" title="" class="fa fa-trash" data-original-title="Delete"></i>
+
+                                                        <form action="<?php echo url('admin/items/delete/' . $equipments->id); ?>" method="get" name="delete_item" style="display:none">
+                                                        </form>
+                                                    </a>
+                                                    @endauth
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div><!--table-responsive-->
+                </div>
+                <div class='col-md-2'>
+                    <button class="btn btn-flat btn-default pull-left" onclick="addSubChildItemCategory();"><i class="fa fa-plus"></i> Create Sub Child</button>
+                </div>
             </div>
         </div>
     </div><!-- /.box-body -->
@@ -110,3 +189,4 @@
 @include('backend/partial/parent_item_modal')
 @include('backend/partial/parent_item_edit_modal')
 @include('backend/partial/child_item_modal')
+@include('backend/partial/sub_child_item_modal')
