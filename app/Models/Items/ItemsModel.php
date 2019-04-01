@@ -27,5 +27,5 @@ class ItemsModel  extends Model {
      *
      * @var array
      */
-    protected $fillable = ['id','name','created_by','updated_by','deleted_at','created_at','updated_at'];
+    protected $fillable = ['id','name','code','created_by','updated_by','deleted_at','created_at','updated_at'];
 }

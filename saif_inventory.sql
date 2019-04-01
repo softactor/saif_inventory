@@ -1,106 +1,3 @@
---
--- Table structure for table `blogs`
---
-
-CREATE TABLE `blogs` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `publish_datetime` datetime NOT NULL,
-  `featured_image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cannonical_link` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
-  `status` enum('Published','Draft','InActive','Scheduled') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `blog_categories`
---
-
-CREATE TABLE `blog_categories` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `blog_map_categories`
---
-
-CREATE TABLE `blog_map_categories` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `blog_id` int(10) UNSIGNED NOT NULL,
-  `category_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `blog_map_tags`
---
-
-CREATE TABLE `blog_map_tags` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `blog_id` int(10) UNSIGNED NOT NULL,
-  `tag_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `blog_tags`
---
-
-CREATE TABLE `blog_tags` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `faqs`
---
-
-CREATE TABLE `faqs` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `question` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `answer` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `history`
---
-
 CREATE TABLE `history` (
   `id` int(10) UNSIGNED NOT NULL,
   `type_id` int(10) UNSIGNED NOT NULL,
@@ -119,20 +16,58 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`id`, `type_id`, `user_id`, `entity_id`, `icon`, `class`, `text`, `assets`, `created_at`, `updated_at`) VALUES
-(1, 3, 1, 49, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>create-plant-equipment</strong>', NULL, '2019-01-22 05:42:35', '2019-01-22 05:42:35'),
-(2, 3, 1, 49, 'save', 'bg-aqua', 'trans(\"history.backend.permissions.updated\") <strong>create-plant-equipment</strong>', NULL, '2019-01-22 05:43:48', '2019-01-22 05:43:48'),
-(3, 2, 1, 2, 'save', 'bg-aqua', 'trans(\"history.backend.roles.updated\") <strong>Executive</strong>', NULL, '2019-01-22 05:46:25', '2019-01-22 05:46:25'),
-(4, 1, 1, 4, 'plus', 'bg-green', 'trans(\"history.backend.users.created\") <strong>{user}</strong>', '{\"user_link\":[\"admin.access.user.show\",\"Rashed Al Banna\",4]}', '2019-02-04 03:18:51', '2019-02-04 03:18:51'),
-(5, 1, 1, 4, 'save', 'bg-aqua', 'trans(\"history.backend.users.updated\") <strong>{user}</strong>', '{\"user_link\":[\"admin.access.user.show\",\"Rashed Al Banna\",4]}', '2019-02-04 03:21:04', '2019-02-04 03:21:04'),
-(6, 3, 1, 50, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>edit-plant-equipment</strong>', NULL, '2019-02-09 22:20:08', '2019-02-09 22:20:08'),
-(7, 3, 1, 51, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>view-plant-equipment</strong>', NULL, '2019-02-09 22:21:08', '2019-02-09 22:21:08'),
-(8, 3, 1, 52, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>delete-plant-equipment</strong>', NULL, '2019-02-09 22:22:25', '2019-02-09 22:22:25'),
-(9, 3, 1, 53, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>view-reports</strong>', NULL, '2019-02-09 22:48:43', '2019-02-09 22:48:43'),
-(10, 3, 1, 54, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>create-projects</strong>', NULL, '2019-02-10 02:33:20', '2019-02-10 02:33:20'),
-(11, 3, 1, 55, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>edit-projects</strong>', NULL, '2019-02-10 02:46:59', '2019-02-10 02:46:59'),
-(12, 3, 1, 56, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>view-projects</strong>', NULL, '2019-02-10 03:12:35', '2019-02-10 03:12:35'),
-(13, 3, 1, 57, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>delete-projects</strong>', NULL, '2019-02-10 03:13:20', '2019-02-10 03:13:20'),
-(14, 1, 1, 4, 'save', 'bg-aqua', 'trans(\"history.backend.users.updated\") <strong>{user}</strong>', '{\"user_link\":[\"admin.access.user.show\",\"Rashed Al Banna\",4]}', '2019-02-12 00:42:08', '2019-02-12 00:42:08');
+(1, 3, 1, 49, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>create-plant-equipment</strong>', NULL, '2019-01-21 23:42:35', '2019-01-21 23:42:35'),
+(2, 3, 1, 49, 'save', 'bg-aqua', 'trans(\"history.backend.permissions.updated\") <strong>create-plant-equipment</strong>', NULL, '2019-01-21 23:43:48', '2019-01-21 23:43:48'),
+(3, 2, 1, 2, 'save', 'bg-aqua', 'trans(\"history.backend.roles.updated\") <strong>Executive</strong>', NULL, '2019-01-21 23:46:25', '2019-01-21 23:46:25'),
+(4, 1, 1, 4, 'plus', 'bg-green', 'trans(\"history.backend.users.created\") <strong>{user}</strong>', '{\"user_link\":[\"admin.access.user.show\",\"Rashed Al Banna\",4]}', '2019-02-03 21:18:51', '2019-02-03 21:18:51'),
+(5, 1, 1, 4, 'save', 'bg-aqua', 'trans(\"history.backend.users.updated\") <strong>{user}</strong>', '{\"user_link\":[\"admin.access.user.show\",\"Rashed Al Banna\",4]}', '2019-02-03 21:21:04', '2019-02-03 21:21:04'),
+(6, 3, 1, 50, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>edit-plant-equipment</strong>', NULL, '2019-02-09 16:20:08', '2019-02-09 16:20:08'),
+(7, 3, 1, 51, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>view-plant-equipment</strong>', NULL, '2019-02-09 16:21:08', '2019-02-09 16:21:08'),
+(8, 3, 1, 52, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>delete-plant-equipment</strong>', NULL, '2019-02-09 16:22:25', '2019-02-09 16:22:25'),
+(9, 3, 1, 53, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>view-reports</strong>', NULL, '2019-02-09 16:48:43', '2019-02-09 16:48:43'),
+(10, 3, 1, 54, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>create-projects</strong>', NULL, '2019-02-09 20:33:20', '2019-02-09 20:33:20'),
+(11, 3, 1, 55, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>edit-projects</strong>', NULL, '2019-02-09 20:46:59', '2019-02-09 20:46:59'),
+(12, 3, 1, 56, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>view-projects</strong>', NULL, '2019-02-09 21:12:35', '2019-02-09 21:12:35'),
+(13, 3, 1, 57, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>delete-projects</strong>', NULL, '2019-02-09 21:13:20', '2019-02-09 21:13:20'),
+(14, 1, 1, 4, 'save', 'bg-aqua', 'trans(\"history.backend.users.updated\") <strong>{user}</strong>', '{\"user_link\":[\"admin.access.user.show\",\"Rashed Al Banna\",4]}', '2019-02-11 18:42:08', '2019-02-11 18:42:08'),
+(15, 3, 1, 58, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>create-items</strong>', NULL, '2019-02-23 06:14:05', '2019-02-23 06:14:05'),
+(16, 3, 1, 59, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>edit-items</strong>', NULL, '2019-02-23 06:15:10', '2019-02-23 06:15:10'),
+(17, 3, 1, 60, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>view-items</strong>', NULL, '2019-02-23 06:15:38', '2019-02-23 06:15:38'),
+(18, 3, 1, 61, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>delete-items</strong>', NULL, '2019-02-23 06:16:35', '2019-02-23 06:16:35'),
+(19, 3, 1, 62, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>view-products</strong>', NULL, '2019-02-23 07:09:38', '2019-02-23 07:09:38'),
+(20, 3, 1, 63, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>create-products</strong>', NULL, '2019-02-23 07:10:22', '2019-02-23 07:10:22'),
+(21, 3, 1, 64, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>edit-Products</strong>', NULL, '2019-02-23 07:10:55', '2019-02-23 07:10:55'),
+(22, 3, 1, 65, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>delete-products</strong>', NULL, '2019-02-23 07:11:18', '2019-02-23 07:11:18'),
+(23, 3, 1, 65, 'save', 'bg-aqua', 'trans(\"history.backend.permissions.updated\") <strong>delete-products</strong>', NULL, '2019-02-23 07:11:35', '2019-02-23 07:11:35'),
+(24, 3, 1, 64, 'save', 'bg-aqua', 'trans(\"history.backend.permissions.updated\") <strong>edit-products</strong>', NULL, '2019-02-23 07:11:59', '2019-02-23 07:11:59'),
+(25, 3, 1, 66, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>create-product-receive</strong>', NULL, '2019-02-23 08:51:48', '2019-02-23 08:51:48'),
+(26, 3, 1, 67, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>edit-product-receive</strong>', NULL, '2019-02-23 08:52:36', '2019-02-23 08:52:36'),
+(27, 3, 1, 68, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>view-product-receive</strong>', NULL, '2019-02-23 08:53:22', '2019-02-23 08:53:22'),
+(28, 3, 1, 69, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>delete-product-receive</strong>', NULL, '2019-02-23 08:54:06', '2019-02-23 08:54:06'),
+(29, 3, 1, 70, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>create-project-challan</strong>', NULL, '2019-02-23 10:14:49', '2019-02-23 10:14:49'),
+(30, 3, 1, 71, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>edit-project-challan</strong>', NULL, '2019-02-23 10:15:22', '2019-02-23 10:15:22'),
+(31, 3, 1, 72, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>view-project-challan</strong>', NULL, '2019-02-23 10:15:58', '2019-02-23 10:15:58'),
+(32, 3, 1, 73, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>delete-project-challan</strong>', NULL, '2019-02-23 10:16:33', '2019-02-23 10:16:33'),
+(33, 3, 1, 33, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>view-blog-category</strong>', NULL, '2019-02-24 17:34:13', '2019-02-24 17:34:13'),
+(34, 3, 1, 34, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>create-blog-category</strong>', NULL, '2019-02-24 17:34:24', '2019-02-24 17:34:24'),
+(35, 3, 1, 35, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>edit-blog-category</strong>', NULL, '2019-02-24 17:34:36', '2019-02-24 17:34:36'),
+(36, 3, 1, 36, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>delete-blog-category</strong>', NULL, '2019-02-24 17:34:47', '2019-02-24 17:34:47'),
+(37, 3, 1, 37, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>view-blog-tag</strong>', NULL, '2019-02-24 17:34:57', '2019-02-24 17:34:57'),
+(38, 3, 1, 38, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>create-blog-tag</strong>', NULL, '2019-02-24 17:35:08', '2019-02-24 17:35:08'),
+(39, 3, 1, 39, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>edit-blog-tag</strong>', NULL, '2019-02-24 17:35:19', '2019-02-24 17:35:19'),
+(40, 3, 1, 40, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>delete-blog-tag</strong>', NULL, '2019-02-24 17:35:29', '2019-02-24 17:35:29'),
+(41, 3, 1, 41, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>view-blog</strong>', NULL, '2019-02-24 17:35:52', '2019-02-24 17:35:52'),
+(42, 3, 1, 43, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>edit-blog</strong>', NULL, '2019-02-24 17:36:03', '2019-02-24 17:36:03'),
+(43, 3, 1, 42, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>create-blog</strong>', NULL, '2019-02-24 17:36:14', '2019-02-24 17:36:14'),
+(44, 3, 1, 44, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>delete-blog</strong>', NULL, '2019-02-24 17:37:55', '2019-02-24 17:37:55'),
+(45, 3, 1, 45, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>view-faq</strong>', NULL, '2019-02-24 17:38:04', '2019-02-24 17:38:04'),
+(46, 3, 1, 46, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>create-faq</strong>', NULL, '2019-02-24 17:38:12', '2019-02-24 17:38:12'),
+(47, 3, 1, 47, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>edit-faq</strong>', NULL, '2019-02-24 17:38:21', '2019-02-24 17:38:21'),
+(48, 3, 1, 48, 'trash', 'bg-maroon', 'trans(\"history.backend.permissions.deleted\") <strong>delete-faq</strong>', NULL, '2019-02-24 17:38:54', '2019-02-24 17:38:54'),
+(49, 3, 1, 74, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>view-suppliers</strong>', NULL, '2019-02-24 17:40:07', '2019-02-24 17:40:07'),
+(50, 3, 1, 75, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>edit-suppliers</strong>', NULL, '2019-02-24 17:40:39', '2019-02-24 17:40:39'),
+(51, 3, 1, 76, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>create-suppliers</strong>', NULL, '2019-02-24 17:41:08', '2019-02-24 17:41:08'),
+(52, 3, 1, 77, 'plus', 'bg-green', 'trans(\"history.backend.permissions.created\") <strong>delete-suppliers</strong>', NULL, '2019-02-24 17:41:39', '2019-02-24 17:41:39');
 
 -- --------------------------------------------------------
 
@@ -152,13 +87,307 @@ CREATE TABLE `history_types` (
 --
 
 INSERT INTO `history_types` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'User', '2019-01-15 01:17:13', '2019-01-15 01:17:13'),
-(2, 'Role', '2019-01-15 01:17:13', '2019-01-15 01:17:13'),
-(3, 'Permission', '2019-01-15 01:17:13', '2019-01-15 01:17:13'),
-(4, 'Page', '2019-01-15 01:17:13', '2019-01-15 01:17:13'),
-(5, 'BlogTag', '2019-01-15 01:17:13', '2019-01-15 01:17:13'),
-(6, 'BlogCategory', '2019-01-15 01:17:13', '2019-01-15 01:17:13'),
-(7, 'Blog', '2019-01-15 01:17:13', '2019-01-15 01:17:13');
+(1, 'User', '2019-01-14 19:17:13', '2019-01-14 19:17:13'),
+(2, 'Role', '2019-01-14 19:17:13', '2019-01-14 19:17:13'),
+(3, 'Permission', '2019-01-14 19:17:13', '2019-01-14 19:17:13'),
+(4, 'Page', '2019-01-14 19:17:13', '2019-01-14 19:17:13'),
+(5, 'BlogTag', '2019-01-14 19:17:13', '2019-01-14 19:17:13'),
+(6, 'BlogCategory', '2019-01-14 19:17:13', '2019-01-14 19:17:13'),
+(7, 'Blog', '2019-01-14 19:17:13', '2019-01-14 19:17:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inv_ga_listunit`
+--
+
+CREATE TABLE `inv_ga_listunit` (
+  `id` int(11) NOT NULL,
+  `lunit_id` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `lunit_name` varchar(25) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inv_issue`
+--
+
+CREATE TABLE `inv_issue` (
+  `id` int(11) NOT NULL,
+  `issue_id` int(10) NOT NULL,
+  `issue_date` date NOT NULL,
+  `buyer_id` varchar(25) CHARACTER SET utf8 NOT NULL,
+  `posted_to_gl` int(11) NOT NULL,
+  `remarks` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `issue_type` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `issue_unit_id` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `chk_year_end` int(11) NOT NULL,
+  `no_of_material` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inv_issuedetail`
+--
+
+CREATE TABLE `inv_issuedetail` (
+  `id` int(11) NOT NULL,
+  `issue_id` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `material_id` varchar(9) CHARACTER SET utf8 NOT NULL,
+  `expense_acct_id` varchar(9) CHARACTER SET utf8 NOT NULL,
+  `cost_center` varchar(9) CHARACTER SET utf8 NOT NULL,
+  `issue_qty` float NOT NULL,
+  `issue_price` float NOT NULL,
+  `sl_no` int(11) NOT NULL,
+  `total_issue` float NOT NULL,
+  `sales_price` float NOT NULL,
+  `total_sales` float NOT NULL,
+  `sales_profit` int(11) NOT NULL,
+  `sales_margin` float NOT NULL,
+  `id_serial_id` varchar(50) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inv_item_unit`
+--
+
+CREATE TABLE `inv_item_unit` (
+  `id` int(11) NOT NULL,
+  `unit_name` varchar(400) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `inv_item_unit`
+--
+
+INSERT INTO `inv_item_unit` (`id`, `unit_name`) VALUES
+(1, 'kg'),
+(2, 'bag'),
+(3, 'pcs');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inv_material`
+--
+
+CREATE TABLE `inv_material` (
+  `id` int(11) NOT NULL,
+  `material_id` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `material_sub_id` varchar(25) CHARACTER SET utf8 NOT NULL,
+  `material_description` varchar(75) CHARACTER SET utf8 NOT NULL,
+  `material_min_stock` int(11) NOT NULL,
+  `avg_con_sump` int(11) NOT NULL,
+  `lead_time` int(11) NOT NULL,
+  `re_order_level` int(11) NOT NULL,
+  `qty_unit` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `op_balance_qty` int(11) NOT NULL,
+  `op_balance_val` int(11) NOT NULL,
+  `chk_print` int(11) NOT NULL,
+  `cur_qty` int(11) NOT NULL,
+  `cur_price` int(11) NOT NULL,
+  `cur_value` int(11) NOT NULL,
+  `last_issue` date NOT NULL,
+  `last_receive` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `inv_material`
+--
+
+INSERT INTO `inv_material` (`id`, `material_id`, `material_sub_id`, `material_description`, `material_min_stock`, `avg_con_sump`, `lead_time`, `re_order_level`, `qty_unit`, `op_balance_qty`, `op_balance_val`, `chk_print`, `cur_qty`, `cur_price`, `cur_value`, `last_issue`, `last_receive`) VALUES
+(1, '16', '11', 'test', 5, 0, 0, 0, '1', 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inv_materialbalance`
+--
+
+CREATE TABLE `inv_materialbalance` (
+  `id` int(11) NOT NULL,
+  `mb_ref_id` varchar(25) CHARACTER SET utf8 NOT NULL,
+  `mb_materialid` varchar(25) CHARACTER SET utf8 NOT NULL,
+  `mb_date` date NOT NULL,
+  `mbin_qty` float NOT NULL,
+  `mbin_val` float NOT NULL,
+  `mbout_qty` float NOT NULL,
+  `mbout_val` float NOT NULL,
+  `mbprice` float NOT NULL,
+  `mbtype` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `mbserial` float NOT NULL,
+  `mbserial_id` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `mbunit_id` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `jvno` varchar(25) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inv_materialcategory`
+--
+
+CREATE TABLE `inv_materialcategory` (
+  `id` int(11) NOT NULL,
+  `material_sub_id` varchar(15) CHARACTER SET utf8 DEFAULT NULL,
+  `category_id` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `material_sub_description` varchar(75) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `inv_materialcategory`
+--
+
+INSERT INTO `inv_materialcategory` (`id`, `material_sub_id`, `category_id`, `material_sub_description`) VALUES
+(1, NULL, '4', 'cat test 1 updated'),
+(2, NULL, '4', 'test 2'),
+(3, NULL, '3', 'test 3'),
+(4, NULL, '3', 'test 4'),
+(5, NULL, '2', 'test 5'),
+(6, NULL, '2', 'test 6'),
+(7, NULL, '5', 'test vc 1'),
+(8, NULL, '5', 'test vc 2'),
+(11, NULL, '16', 'Acid'),
+(12, NULL, '16', 'sugar');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inv_materialcategorysub`
+--
+
+CREATE TABLE `inv_materialcategorysub` (
+  `id` int(11) NOT NULL,
+  `category_id` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `category_description` varchar(75) CHARACTER SET utf8 NOT NULL,
+  `stock_acct_id` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `chk_sbalance` int(11) NOT NULL,
+  `consumption_ac` varchar(20) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inv_receive`
+--
+
+CREATE TABLE `inv_receive` (
+  `id` int(11) NOT NULL,
+  `mrr_no` varchar(25) CHARACTER SET utf8 NOT NULL,
+  `mrr_date` date NOT NULL,
+  `purchase_id` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `receive_acct_id` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `supplier_id` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `posted_tog` int(11) NOT NULL,
+  `remarks` varchar(180) CHARACTER SET utf8 NOT NULL,
+  `receive_type` varchar(25) CHARACTER SET utf8 NOT NULL,
+  `receive_ware_hosue_id` int(11) NOT NULL,
+  `receive_unit_id` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `chk_year_end` int(11) NOT NULL,
+  `receive_total` float NOT NULL,
+  `no_of_material` float NOT NULL,
+  `jv_no` varchar(25) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inv_receivedetail`
+--
+
+CREATE TABLE `inv_receivedetail` (
+  `id` int(11) NOT NULL,
+  `mrr_no` varchar(25) CHARACTER SET utf8 NOT NULL,
+  `material_id` varchar(25) CHARACTER SET utf8 NOT NULL,
+  `receive_qty` float NOT NULL,
+  `unit_price` float NOT NULL,
+  `sl_no` int(11) NOT NULL,
+  `total_receive` float NOT NULL,
+  `rd_serial_id` varchar(20) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inv_supplier`
+--
+
+CREATE TABLE `inv_supplier` (
+  `id` int(11) NOT NULL,
+  `supplier_id` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `supplier_company` varchar(120) CHARACTER SET utf8 NOT NULL,
+  `supplier_address` varchar(150) CHARACTER SET utf8 NOT NULL,
+  `supplier_city` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `supplier_country` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `contact_person` varchar(75) CHARACTER SET utf8 NOT NULL,
+  `sposition` varchar(75) CHARACTER SET utf8 NOT NULL,
+  `supplier_phone` varchar(18) CHARACTER SET utf8 NOT NULL,
+  `supplier_op_balance` float NOT NULL,
+  `cc` varchar(20) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inv_supplierbalance`
+--
+
+CREATE TABLE `inv_supplierbalance` (
+  `id` int(11) NOT NULL,
+  `sb_ref_id` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `sb_date` date NOT NULL,
+  `sb_supplier_id` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `sb_dr_amount` float NOT NULL,
+  `sb_cr_amount` float NOT NULL,
+  `sb_remark` varchar(175) CHARACTER SET utf8 NOT NULL,
+  `sb_partac_id` varchar(25) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inv_warehosueinfo`
+--
+
+CREATE TABLE `inv_warehosueinfo` (
+  `id` int(11) NOT NULL,
+  `ware_hosue_id` int(11) NOT NULL,
+  `ware_hosue_name` varchar(75) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `items`
+--
+
+CREATE TABLE `items` (
+  `id` int(11) NOT NULL,
+  `name` varchar(400) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`id`, `name`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 'Items-2', 1, NULL, 2019, '2019-02-24 20:54:08', NULL),
+(3, 'cccc', 1, NULL, 2019, '2019-03-12 02:31:50', NULL),
+(4, 'cat 5', 1, NULL, 2019, '2019-03-18 23:33:40', NULL),
+(5, 'vc', 1, NULL, 2019, '2019-03-12 03:09:57', NULL),
+(6, 'vcd', 1, NULL, 2019, '2019-03-12 03:10:29', NULL),
+(7, 'new item update', 1, NULL, 2019, '2019-03-18 23:33:52', NULL),
+(15, 'apple', 1, NULL, 2019, '2019-03-19 01:48:52', NULL),
+(16, 'Raw materials', 1, NULL, 2019, '2019-03-19 04:47:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -183,7 +412,7 @@ CREATE TABLE `menus` (
 --
 
 INSERT INTO `menus` (`id`, `type`, `name`, `items`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'backend', 'Backend Sidebar Menu', '[{\"view_permission_id\":\"view-access-management\",\"icon\":\"fa-users\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"\",\"name\":\"Access Management\",\"id\":11,\"content\":\"Access Management\",\"children\":[{\"view_permission_id\":\"view-user-management\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.access.user.index\",\"name\":\"User Management\",\"id\":12,\"content\":\"User Management\"},{\"view_permission_id\":\"view-role-management\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.access.role.index\",\"name\":\"Role Management\",\"id\":13,\"content\":\"Role Management\"},{\"view_permission_id\":\"view-permission-management\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.access.permission.index\",\"name\":\"Permission Management\",\"id\":14,\"content\":\"Permission Management\"}]},{\"view_permission_id\":\"view-module\",\"icon\":\"fa-wrench\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.modules.index\",\"name\":\"Module\",\"id\":1,\"content\":\"Module\"},{\"view_permission_id\":\"view-menu\",\"icon\":\"fa-bars\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.menus.index\",\"name\":\"Menus\",\"id\":3,\"content\":\"Menus\"},{\"view_permission_id\":\"edit-settings\",\"icon\":\"fa-gear\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.settings.edit?id=1\",\"name\":\"Settings\",\"id\":9,\"content\":\"Settings\"},{\"view_permission_id\":\"view-projects\",\"icon\":\"fa fa-tasks\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.projects.index\",\"name\":\"Projects\",\"id\":17,\"content\":\"Projects\"},{\"id\":15,\"name\":\"Plant Equipment\",\"url\":\"admin.plantEquipment.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-trello\",\"view_permission_id\":\"view-plant-equipment\",\"content\":\"Plant Equipment\"},{\"id\":16,\"name\":\"Reports\",\"url\":\"admin.reports.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-bar-chart\",\"view_permission_id\":\"view-reports\",\"content\":\"Reports\"}]', 1, NULL, '2019-01-15 01:17:14', '2019-02-10 05:03:11', NULL);
+(1, 'backend', 'Backend Sidebar Menu', '[{\"id\":11,\"name\":\"Access Management\",\"url\":\"\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa-users\",\"view_permission_id\":\"view-access-management\",\"content\":\"Access Management\",\"children\":[{\"id\":12,\"name\":\"User Management\",\"url\":\"admin.access.user.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"view_permission_id\":\"view-user-management\",\"content\":\"User Management\"},{\"id\":13,\"name\":\"Role Management\",\"url\":\"admin.access.role.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"view_permission_id\":\"view-role-management\",\"content\":\"Role Management\"},{\"id\":14,\"name\":\"Permission Management\",\"url\":\"admin.access.permission.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"view_permission_id\":\"view-permission-management\",\"content\":\"Permission Management\"}]},{\"id\":1,\"name\":\"Module\",\"url\":\"admin.modules.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa-wrench\",\"view_permission_id\":\"view-module\",\"content\":\"Module\"},{\"id\":3,\"name\":\"Menus\",\"url\":\"admin.menus.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa-bars\",\"view_permission_id\":\"view-menu\",\"content\":\"Menus\"},{\"id\":9,\"name\":\"Settings\",\"url\":\"admin.settings.edit?id=1\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa-gear\",\"view_permission_id\":\"edit-settings\",\"content\":\"Settings\"},{\"id\":17,\"name\":\"Projects\",\"url\":\"admin.projects.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-tasks\",\"view_permission_id\":\"view-projects\",\"content\":\"Projects\"},{\"view_permission_id\":\"view-items\",\"icon\":\"fa fa-get-pocket\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.items.index\",\"name\":\"Items\",\"id\":18,\"content\":\"Items\"},{\"id\":22,\"name\":\"Suppliers\",\"url\":\"admin.suppliers.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-user-circle\",\"view_permission_id\":\"view-suppliers\",\"content\":\"Suppliers\"},{\"id\":19,\"name\":\"Products\",\"url\":\"admin.products.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-gift\",\"view_permission_id\":\"view-products\",\"content\":\"Products\"},{\"id\":20,\"name\":\"Product Receive\",\"url\":\"admin.product_receive.create\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-cube\",\"view_permission_id\":\"create-product-receive\",\"content\":\"Product Receive\"},{\"view_permission_id\":\"create-product-challan\",\"icon\":\"fa fa-truck\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.product_challan.create\",\"name\":\"Product Issue\",\"id\":21,\"content\":\"Product Issue\"},{\"view_permission_id\":\"view-plant-equipment\",\"icon\":\"fa fa-trello\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.plantEquipment.index\",\"name\":\"Plant Equipment\",\"id\":15,\"content\":\"Plant Equipment\"},{\"view_permission_id\":\"view-reports\",\"icon\":\"fa fa-bar-chart\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.reports.index\",\"name\":\"Reports\",\"id\":16,\"content\":\"Reports\"}]', 1, NULL, '2019-01-14 19:17:14', '2019-02-24 17:44:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -256,19 +485,14 @@ CREATE TABLE `modules` (
 --
 
 INSERT INTO `modules` (`id`, `view_permission_id`, `name`, `url`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 'view-access-management', 'Access Management', NULL, 1, NULL, '2019-01-15 01:17:14', NULL),
-(2, 'view-user-management', 'User Management', 'admin.access.user.index', 1, NULL, '2019-01-15 01:17:14', NULL),
-(3, 'view-role-management', 'Role Management', 'admin.access.role.index', 1, NULL, '2019-01-15 01:17:14', NULL),
-(4, 'view-permission-management', 'Permission Management', 'admin.access.permission.index', 1, NULL, '2019-01-15 01:17:14', NULL),
-(5, 'view-menu', 'Menus', 'admin.menus.index', 1, NULL, '2019-01-15 01:17:14', NULL),
-(6, 'view-module', 'Module', 'admin.modules.index', 1, NULL, '2019-01-15 01:17:14', NULL),
-(7, 'view-page', 'Pages', 'admin.pages.index', 1, NULL, '2019-01-15 01:17:14', NULL),
-(8, 'edit-settings', 'Settings', 'admin.settings.edit', 1, NULL, '2019-01-15 01:17:14', NULL),
-(9, 'view-blog', 'Blog Management', NULL, 1, NULL, '2019-01-15 01:17:14', NULL),
-(10, 'view-blog-category', 'Blog Category Management', 'admin.blogcategories.index', 1, NULL, '2019-01-15 01:17:14', NULL),
-(11, 'view-blog-tag', 'Blog Tag Management', 'admin.blogtags.index', 1, NULL, '2019-01-15 01:17:14', NULL),
-(12, 'view-blog', 'Blog Management', 'admin.blogs.index', 1, NULL, '2019-01-15 01:17:14', NULL),
-(13, 'view-faq', 'Faq Management', 'admin.faqs.index', 1, NULL, '2019-01-15 01:17:14', NULL);
+(1, 'view-access-management', 'Access Management', NULL, 1, NULL, '2019-01-14 19:17:14', NULL),
+(2, 'view-user-management', 'User Management', 'admin.access.user.index', 1, NULL, '2019-01-14 19:17:14', NULL),
+(3, 'view-role-management', 'Role Management', 'admin.access.role.index', 1, NULL, '2019-01-14 19:17:14', NULL),
+(4, 'view-permission-management', 'Permission Management', 'admin.access.permission.index', 1, NULL, '2019-01-14 19:17:14', NULL),
+(5, 'view-menu', 'Menus', 'admin.menus.index', 1, NULL, '2019-01-14 19:17:14', NULL),
+(6, 'view-module', 'Module', 'admin.modules.index', 1, NULL, '2019-01-14 19:17:14', NULL),
+(7, 'view-page', 'Pages', 'admin.pages.index', 1, NULL, '2019-01-14 19:17:14', NULL),
+(8, 'edit-settings', 'Settings', 'admin.settings.edit', 1, NULL, '2019-01-14 19:17:14', NULL);
 
 -- --------------------------------------------------------
 
@@ -291,106 +515,158 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `message`, `user_id`, `type`, `is_read`, `created_at`, `updated_at`) VALUES
-(1, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 22:50:38', '2019-01-22 05:49:53'),
-(2, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 22:53:34', '2019-01-22 05:49:51'),
-(3, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 23:05:32', '2019-01-22 05:49:51'),
-(4, 'User Logged In: Viral', 1, 1, 1, '2019-01-16 00:28:46', '2019-01-22 05:49:51'),
-(5, 'User Logged In: Viral', 1, 1, 1, '2019-01-16 00:28:54', '2019-01-22 05:49:51'),
-(6, 'User Logged In: Viral', 1, 1, 1, '2019-01-16 01:03:57', '2019-01-22 05:49:51'),
-(7, 'User Logged In: Viral', 1, 1, 1, '2019-01-16 01:24:51', '2019-01-22 05:49:47'),
-(8, 'User Logged In: Viral', 1, 1, 1, '2019-01-16 01:30:11', '2019-01-22 05:49:47'),
-(9, 'User Logged In: Viral', 1, 1, 1, '2019-01-16 03:01:53', '2019-01-22 05:49:47'),
-(10, 'User Logged In: Viral', 1, 1, 1, '2019-01-16 03:28:19', '2019-01-22 05:49:47'),
-(11, 'User Logged In: Viral', 1, 1, 1, '2019-01-16 03:57:31', '2019-01-22 05:49:47'),
-(12, 'User Logged In: Viral', 1, 1, 1, '2019-01-16 05:34:56', '2019-01-22 05:49:41'),
-(13, 'User Logged In: Viral', 1, 1, 1, '2019-01-17 20:26:27', '2019-01-22 05:49:41'),
-(14, 'User Logged In: Viral', 1, 1, 1, '2019-01-17 20:49:14', '2019-01-22 05:49:41'),
-(15, 'User Logged In: Viral', 1, 1, 1, '2019-01-19 23:35:26', '2019-01-22 05:49:41'),
-(16, 'User Logged In: Viral', 1, 1, 1, '2019-01-21 21:34:52', '2019-01-22 05:49:41'),
-(17, 'User Logged In: Admin', 1, 1, 1, '2019-01-21 21:54:14', '2019-01-22 05:49:29'),
-(18, 'User Logged In: Admin', 1, 1, 1, '2019-01-21 23:42:13', '2019-01-22 05:49:29'),
-(19, 'User Logged In: Admin', 1, 1, 1, '2019-01-21 23:54:34', '2019-01-22 05:49:29'),
-(20, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 01:08:42', '2019-01-22 05:49:29'),
-(21, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 01:21:36', '2019-01-22 05:49:29'),
-(22, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 04:11:22', '2019-01-22 05:49:56'),
-(23, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 05:01:33', '2019-01-22 05:49:56'),
-(24, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 05:12:42', '2019-01-22 05:49:56'),
-(25, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 05:31:13', '2019-01-22 05:49:56'),
-(26, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 05:44:46', '2019-01-22 05:49:56'),
-(27, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 20:55:00', '2019-02-01 21:50:54'),
-(28, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 21:42:42', '2019-02-01 21:50:54'),
-(29, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 22:02:34', '2019-02-01 21:50:54'),
-(30, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 22:48:50', '2019-02-01 21:50:54'),
-(31, 'User Logged In: Admin', 1, 1, 1, '2019-01-23 01:05:46', '2019-02-01 21:50:52'),
-(32, 'User Logged In: Admin', 1, 1, 1, '2019-01-23 02:29:09', '2019-02-01 21:50:52'),
-(33, 'User Logged In: Admin', 1, 1, 1, '2019-01-23 02:56:33', '2019-02-01 21:50:52'),
-(34, 'User Logged In: Admin', 1, 1, 1, '2019-01-23 04:15:00', '2019-02-01 21:50:52'),
-(35, 'User Logged In: Admin', 1, 1, 1, '2019-01-23 04:40:39', '2019-02-01 21:50:52'),
-(36, 'User Logged In: Admin', 1, 1, 1, '2019-01-23 21:15:31', '2019-02-01 21:50:50'),
-(37, 'User Logged In: Admin', 1, 1, 1, '2019-01-23 21:56:35', '2019-02-01 21:50:50'),
-(38, 'User Logged In: Admin', 1, 1, 1, '2019-01-23 22:21:32', '2019-02-01 21:50:50'),
-(39, 'User Logged In: Admin', 1, 1, 1, '2019-01-23 22:51:10', '2019-02-01 21:50:50'),
-(40, 'User Logged In: Admin', 1, 1, 1, '2019-02-01 21:50:13', '2019-02-01 21:50:54'),
-(41, 'User Logged In: Admin', 1, 1, 0, '2019-02-03 21:06:56', NULL),
-(42, 'User Logged In: Admin', 1, 1, 0, '2019-02-03 21:27:37', NULL),
-(43, 'User Logged In: Admin', 1, 1, 0, '2019-02-03 21:41:48', NULL),
-(44, 'User Logged In: Admin', 1, 1, 0, '2019-02-03 22:51:42', NULL),
-(45, 'User Logged In: Admin', 1, 1, 1, '2019-02-03 23:26:55', '2019-02-09 21:33:04'),
-(46, 'User Logged In: Admin', 1, 1, 1, '2019-02-03 23:31:30', '2019-02-09 21:33:04'),
-(47, 'User Logged In: Admin', 1, 1, 1, '2019-02-03 23:56:12', '2019-02-09 21:33:04'),
-(48, 'User Logged In: Admin', 1, 1, 1, '2019-02-04 00:32:44', '2019-02-09 21:33:04'),
-(49, 'User Logged In: Admin', 1, 1, 1, '2019-02-04 00:43:13', '2019-02-09 21:33:04'),
-(50, 'User Logged In: Admin', 1, 1, 1, '2019-02-04 01:03:36', '2019-02-09 21:33:01'),
-(51, 'User Logged In: Admin', 1, 1, 1, '2019-02-04 03:13:37', '2019-02-09 21:33:01'),
-(52, 'User Logged In: Rashed', 1, 1, 1, '2019-02-04 03:19:32', '2019-02-09 21:33:01'),
-(53, 'User Logged In: Admin', 1, 1, 1, '2019-02-04 03:20:42', '2019-02-05 03:14:34'),
-(54, 'User Logged In: Rashed', 1, 1, 1, '2019-02-04 03:21:20', '2019-02-05 03:14:34'),
-(55, 'User Logged In: Admin', 1, 1, 1, '2019-02-04 03:37:59', '2019-02-05 03:14:34'),
-(56, 'User Logged In: Admin', 1, 1, 1, '2019-02-05 02:28:16', '2019-02-05 03:14:34'),
-(57, 'User Logged In: Admin', 1, 1, 1, '2019-02-05 03:14:19', '2019-02-05 03:14:34'),
-(58, 'User Logged In: Admin', 1, 1, 1, '2019-02-05 03:27:24', '2019-02-09 21:33:01'),
-(59, 'User Logged In: Admin', 1, 1, 1, '2019-02-09 21:09:56', '2019-02-09 21:33:01'),
-(60, 'User Logged In: Admin', 1, 1, 0, '2019-02-09 22:15:22', NULL),
-(61, 'User Logged In: Rashed', 1, 1, 0, '2019-02-09 22:26:39', NULL),
-(62, 'User Logged In: Admin', 1, 1, 0, '2019-02-09 22:29:08', NULL),
-(63, 'User Logged In: Admin', 1, 1, 0, '2019-02-09 23:14:20', NULL),
-(64, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 00:15:05', NULL),
-(65, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 00:34:48', NULL),
-(66, 'User Logged In: Admin', 1, 1, 1, '2019-02-10 00:49:15', '2019-02-10 05:05:06'),
-(67, 'User Logged In: Admin', 1, 1, 1, '2019-02-10 01:10:08', '2019-02-10 05:05:06'),
-(68, 'User Logged In: Admin', 1, 1, 1, '2019-02-10 01:32:07', '2019-02-10 05:05:06'),
-(69, 'User Logged In: Admin', 1, 1, 1, '2019-02-10 02:31:57', '2019-02-10 05:05:06'),
-(70, 'User Logged In: Admin', 1, 1, 1, '2019-02-10 02:44:02', '2019-02-10 05:05:06'),
-(71, 'User Logged In: Admin', 1, 1, 1, '2019-02-10 03:05:42', '2019-02-10 05:04:52'),
-(72, 'User Logged In: Admin', 1, 1, 1, '2019-02-10 03:29:10', '2019-02-10 05:04:52'),
-(73, 'User Logged In: Admin', 1, 1, 1, '2019-02-10 03:43:15', '2019-02-10 05:04:52'),
-(74, 'User Logged In: Admin', 1, 1, 1, '2019-02-10 04:22:52', '2019-02-10 05:04:52'),
-(75, 'User Logged In: Admin', 1, 1, 1, '2019-02-10 04:52:17', '2019-02-10 05:04:52'),
-(76, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 05:37:31', NULL),
-(77, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 05:50:24', NULL),
-(78, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 08:54:02', NULL),
-(79, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 09:25:38', NULL),
-(80, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 09:57:31', NULL),
-(81, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 10:27:53', NULL),
-(82, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 14:58:58', NULL),
-(83, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 14:59:05', NULL),
-(84, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 15:28:03', NULL),
-(85, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 16:17:01', NULL),
-(86, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 16:55:44', NULL),
-(87, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 17:33:59', NULL),
-(88, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 17:54:21', NULL),
-(89, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 18:11:04', NULL),
-(90, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 18:19:54', NULL),
-(91, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 18:23:07', NULL),
-(92, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 18:23:29', NULL),
-(93, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 21:37:49', NULL),
-(94, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 21:38:01', NULL),
-(95, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 22:06:30', NULL),
-(96, 'User Logged In: Admin', 1, 1, 0, '2019-02-12 00:35:53', NULL),
-(97, 'User Logged In: Admin', 1, 1, 0, '2019-02-12 00:36:29', NULL),
-(98, 'User Logged In: Rashed', 1, 1, 0, '2019-02-12 00:40:08', NULL),
-(99, 'User Logged In: Admin', 1, 1, 0, '2019-02-12 00:40:35', NULL),
-(100, 'User Logged In: Rashed', 1, 1, 0, '2019-02-12 00:42:29', NULL);
+(1, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 16:50:38', '2019-01-21 23:49:53'),
+(2, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 16:53:34', '2019-01-21 23:49:51'),
+(3, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 17:05:32', '2019-01-21 23:49:51'),
+(4, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 18:28:46', '2019-01-21 23:49:51'),
+(5, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 18:28:54', '2019-01-21 23:49:51'),
+(6, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 19:03:57', '2019-01-21 23:49:51'),
+(7, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 19:24:51', '2019-01-21 23:49:47'),
+(8, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 19:30:11', '2019-01-21 23:49:47'),
+(9, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 21:01:53', '2019-01-21 23:49:47'),
+(10, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 21:28:19', '2019-01-21 23:49:47'),
+(11, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 21:57:31', '2019-01-21 23:49:47'),
+(12, 'User Logged In: Viral', 1, 1, 1, '2019-01-15 23:34:56', '2019-01-21 23:49:41'),
+(13, 'User Logged In: Viral', 1, 1, 1, '2019-01-17 14:26:27', '2019-01-21 23:49:41'),
+(14, 'User Logged In: Viral', 1, 1, 1, '2019-01-17 14:49:14', '2019-01-21 23:49:41'),
+(15, 'User Logged In: Viral', 1, 1, 1, '2019-01-19 17:35:26', '2019-01-21 23:49:41'),
+(16, 'User Logged In: Viral', 1, 1, 1, '2019-01-21 15:34:52', '2019-01-21 23:49:41'),
+(17, 'User Logged In: Admin', 1, 1, 1, '2019-01-21 15:54:14', '2019-01-21 23:49:29'),
+(18, 'User Logged In: Admin', 1, 1, 1, '2019-01-21 17:42:13', '2019-01-21 23:49:29'),
+(19, 'User Logged In: Admin', 1, 1, 1, '2019-01-21 17:54:34', '2019-01-21 23:49:29'),
+(20, 'User Logged In: Admin', 1, 1, 1, '2019-01-21 19:08:42', '2019-01-21 23:49:29'),
+(21, 'User Logged In: Admin', 1, 1, 1, '2019-01-21 19:21:36', '2019-01-21 23:49:29'),
+(22, 'User Logged In: Admin', 1, 1, 1, '2019-01-21 22:11:22', '2019-01-21 23:49:56'),
+(23, 'User Logged In: Admin', 1, 1, 1, '2019-01-21 23:01:33', '2019-01-21 23:49:56'),
+(24, 'User Logged In: Admin', 1, 1, 1, '2019-01-21 23:12:42', '2019-01-21 23:49:56'),
+(25, 'User Logged In: Admin', 1, 1, 1, '2019-01-21 23:31:13', '2019-01-21 23:49:56'),
+(26, 'User Logged In: Admin', 1, 1, 1, '2019-01-21 23:44:46', '2019-01-21 23:49:56'),
+(27, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 14:55:00', '2019-02-01 15:50:54'),
+(28, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 15:42:42', '2019-02-01 15:50:54'),
+(29, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 16:02:34', '2019-02-01 15:50:54'),
+(30, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 16:48:50', '2019-02-01 15:50:54'),
+(31, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 19:05:46', '2019-02-01 15:50:52'),
+(32, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 20:29:09', '2019-02-01 15:50:52'),
+(33, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 20:56:33', '2019-02-01 15:50:52'),
+(34, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 22:15:00', '2019-02-01 15:50:52'),
+(35, 'User Logged In: Admin', 1, 1, 1, '2019-01-22 22:40:39', '2019-02-01 15:50:52'),
+(36, 'User Logged In: Admin', 1, 1, 1, '2019-01-23 15:15:31', '2019-02-01 15:50:50'),
+(37, 'User Logged In: Admin', 1, 1, 1, '2019-01-23 15:56:35', '2019-02-01 15:50:50'),
+(38, 'User Logged In: Admin', 1, 1, 1, '2019-01-23 16:21:32', '2019-02-01 15:50:50'),
+(39, 'User Logged In: Admin', 1, 1, 1, '2019-01-23 16:51:10', '2019-02-01 15:50:50'),
+(40, 'User Logged In: Admin', 1, 1, 1, '2019-02-01 15:50:13', '2019-02-01 15:50:54'),
+(41, 'User Logged In: Admin', 1, 1, 0, '2019-02-03 15:06:56', NULL),
+(42, 'User Logged In: Admin', 1, 1, 0, '2019-02-03 15:27:37', NULL),
+(43, 'User Logged In: Admin', 1, 1, 0, '2019-02-03 15:41:48', NULL),
+(44, 'User Logged In: Admin', 1, 1, 0, '2019-02-03 16:51:42', NULL),
+(45, 'User Logged In: Admin', 1, 1, 1, '2019-02-03 17:26:55', '2019-02-09 15:33:04'),
+(46, 'User Logged In: Admin', 1, 1, 1, '2019-02-03 17:31:30', '2019-02-09 15:33:04'),
+(47, 'User Logged In: Admin', 1, 1, 1, '2019-02-03 17:56:12', '2019-02-09 15:33:04'),
+(48, 'User Logged In: Admin', 1, 1, 1, '2019-02-03 18:32:44', '2019-02-09 15:33:04'),
+(49, 'User Logged In: Admin', 1, 1, 1, '2019-02-03 18:43:13', '2019-02-09 15:33:04'),
+(50, 'User Logged In: Admin', 1, 1, 1, '2019-02-03 19:03:36', '2019-02-09 15:33:01'),
+(51, 'User Logged In: Admin', 1, 1, 1, '2019-02-03 21:13:37', '2019-02-09 15:33:01'),
+(52, 'User Logged In: Rashed', 1, 1, 1, '2019-02-03 21:19:32', '2019-02-09 15:33:01'),
+(53, 'User Logged In: Admin', 1, 1, 1, '2019-02-03 21:20:42', '2019-02-04 21:14:34'),
+(54, 'User Logged In: Rashed', 1, 1, 1, '2019-02-03 21:21:20', '2019-02-04 21:14:34'),
+(55, 'User Logged In: Admin', 1, 1, 1, '2019-02-03 21:37:59', '2019-02-04 21:14:34'),
+(56, 'User Logged In: Admin', 1, 1, 1, '2019-02-04 20:28:16', '2019-02-04 21:14:34'),
+(57, 'User Logged In: Admin', 1, 1, 1, '2019-02-04 21:14:19', '2019-02-04 21:14:34'),
+(58, 'User Logged In: Admin', 1, 1, 1, '2019-02-04 21:27:24', '2019-02-09 15:33:01'),
+(59, 'User Logged In: Admin', 1, 1, 1, '2019-02-09 15:09:56', '2019-02-09 15:33:01'),
+(60, 'User Logged In: Admin', 1, 1, 0, '2019-02-09 16:15:22', NULL),
+(61, 'User Logged In: Rashed', 1, 1, 0, '2019-02-09 16:26:39', NULL),
+(62, 'User Logged In: Admin', 1, 1, 0, '2019-02-09 16:29:08', NULL),
+(63, 'User Logged In: Admin', 1, 1, 0, '2019-02-09 17:14:20', NULL),
+(64, 'User Logged In: Admin', 1, 1, 0, '2019-02-09 18:15:05', NULL),
+(65, 'User Logged In: Admin', 1, 1, 0, '2019-02-09 18:34:48', NULL),
+(66, 'User Logged In: Admin', 1, 1, 1, '2019-02-09 18:49:15', '2019-02-09 23:05:06'),
+(67, 'User Logged In: Admin', 1, 1, 1, '2019-02-09 19:10:08', '2019-02-09 23:05:06'),
+(68, 'User Logged In: Admin', 1, 1, 1, '2019-02-09 19:32:07', '2019-02-09 23:05:06'),
+(69, 'User Logged In: Admin', 1, 1, 1, '2019-02-09 20:31:57', '2019-02-09 23:05:06'),
+(70, 'User Logged In: Admin', 1, 1, 1, '2019-02-09 20:44:02', '2019-02-09 23:05:06'),
+(71, 'User Logged In: Admin', 1, 1, 1, '2019-02-09 21:05:42', '2019-02-09 23:04:52'),
+(72, 'User Logged In: Admin', 1, 1, 1, '2019-02-09 21:29:10', '2019-02-09 23:04:52'),
+(73, 'User Logged In: Admin', 1, 1, 1, '2019-02-09 21:43:15', '2019-02-09 23:04:52'),
+(74, 'User Logged In: Admin', 1, 1, 1, '2019-02-09 22:22:52', '2019-02-09 23:04:52'),
+(75, 'User Logged In: Admin', 1, 1, 1, '2019-02-09 22:52:17', '2019-02-09 23:04:52'),
+(76, 'User Logged In: Admin', 1, 1, 0, '2019-02-09 23:37:31', NULL),
+(77, 'User Logged In: Admin', 1, 1, 0, '2019-02-09 23:50:24', NULL),
+(78, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 02:54:02', NULL),
+(79, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 03:25:38', NULL),
+(80, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 03:57:31', NULL),
+(81, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 04:27:53', NULL),
+(82, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 08:58:58', NULL),
+(83, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 08:59:05', NULL),
+(84, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 09:28:03', NULL),
+(85, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 10:17:01', NULL),
+(86, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 10:55:44', NULL),
+(87, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 11:33:59', NULL),
+(88, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 11:54:21', NULL),
+(89, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 12:11:04', NULL),
+(90, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 12:19:54', NULL),
+(91, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 12:23:07', NULL),
+(92, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 12:23:29', NULL),
+(93, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 15:37:49', NULL),
+(94, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 15:38:01', NULL),
+(95, 'User Logged In: Admin', 1, 1, 0, '2019-02-10 16:06:30', NULL),
+(96, 'User Logged In: Admin', 1, 1, 0, '2019-02-11 18:35:53', NULL),
+(97, 'User Logged In: Admin', 1, 1, 0, '2019-02-11 18:36:29', NULL),
+(98, 'User Logged In: Rashed', 1, 1, 0, '2019-02-11 18:40:08', NULL),
+(99, 'User Logged In: Admin', 1, 1, 0, '2019-02-11 18:40:35', NULL),
+(100, 'User Logged In: Rashed', 1, 1, 0, '2019-02-11 18:42:29', NULL),
+(101, 'User Logged In: Rashed', 1, 1, 0, '2019-02-22 21:19:36', NULL),
+(102, 'User Logged In: Admin', 1, 1, 0, '2019-02-22 21:29:38', NULL),
+(103, 'User Logged In: Admin', 1, 1, 0, '2019-02-22 21:54:49', NULL),
+(104, 'User Logged In: Admin', 1, 1, 0, '2019-02-23 05:47:39', NULL),
+(105, 'User Logged In: Admin', 1, 1, 0, '2019-02-23 06:08:30', NULL),
+(106, 'User Logged In: Admin', 1, 1, 0, '2019-02-23 07:08:39', NULL),
+(107, 'User Logged In: Admin', 1, 1, 0, '2019-02-23 08:50:52', NULL),
+(108, 'User Logged In: Admin', 1, 1, 0, '2019-02-23 09:17:13', NULL),
+(109, 'User Logged In: Admin', 1, 1, 0, '2019-02-23 09:31:27', NULL),
+(110, 'User Logged In: Admin', 1, 1, 0, '2019-02-23 17:54:42', NULL),
+(111, 'User Logged In: Admin', 1, 1, 0, '2019-02-23 18:21:20', NULL),
+(112, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 17:02:34', NULL),
+(113, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 17:10:57', NULL),
+(114, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 17:16:09', NULL),
+(115, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 17:19:27', NULL),
+(116, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 17:19:42', NULL),
+(117, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 17:22:52', NULL),
+(118, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 18:17:26', NULL),
+(119, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 18:44:58', NULL),
+(120, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 19:16:34', NULL),
+(121, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 19:36:08', NULL),
+(122, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 20:38:19', NULL),
+(123, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 21:18:22', NULL),
+(124, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 22:51:32', NULL),
+(125, 'User Logged In: Admin', 1, 1, 0, '2019-02-24 23:33:07', NULL),
+(126, 'User Logged In: Admin', 1, 1, 0, '2019-02-25 02:59:45', NULL),
+(127, 'User Logged In: Admin', 1, 1, 0, '2019-02-25 03:14:57', NULL),
+(128, 'User Logged In: Admin', 1, 1, 0, '2019-02-25 13:45:32', NULL),
+(129, 'User Logged In: Admin', 1, 1, 0, '2019-02-25 16:38:58', NULL),
+(130, 'User Logged In: Admin', 1, 1, 0, '2019-02-25 17:13:14', NULL),
+(131, 'User Logged In: Admin', 1, 1, 0, '2019-02-25 17:36:39', NULL),
+(132, 'User Logged In: Admin', 1, 1, 0, '2019-02-25 18:03:46', NULL),
+(133, 'User Logged In: Admin', 1, 1, 0, '2019-02-25 18:27:30', NULL),
+(134, 'User Logged In: Admin', 1, 1, 0, '2019-02-25 18:50:56', NULL),
+(135, 'User Logged In: Admin', 1, 1, 0, '2019-02-25 20:53:22', NULL),
+(136, 'User Logged In: Admin', 1, 1, 0, '2019-02-25 22:28:29', NULL),
+(137, 'User Logged In: Admin', 1, 1, 0, '2019-02-25 23:19:55', NULL),
+(138, 'User Logged In: Admin', 1, 1, 0, '2019-02-25 23:35:35', NULL),
+(139, 'User Logged In: Admin', 1, 1, 0, '2019-02-26 19:11:21', NULL),
+(140, 'User Logged In: Admin', 1, 1, 0, '2019-02-26 20:54:46', NULL),
+(141, 'User Logged In: Admin', 1, 1, 0, '2019-02-26 20:54:51', NULL),
+(142, 'User Logged In: Admin', 1, 1, 0, '2019-03-04 02:55:08', NULL),
+(143, 'User Logged In: Admin', 1, 1, 0, '2019-03-04 03:26:35', NULL),
+(144, 'User Logged In: Admin', 1, 1, 0, '2019-03-04 06:37:06', NULL),
+(145, 'User Logged In: Admin', 1, 1, 0, '2019-03-06 22:34:28', NULL),
+(146, 'User Logged In: Admin', 1, 1, 0, '2019-03-09 02:36:57', NULL),
+(147, 'User Logged In: Admin', 1, 1, 0, '2019-03-11 21:46:32', NULL),
+(148, 'User Logged In: Admin', 1, 1, 0, '2019-03-18 02:07:40', NULL),
+(149, 'User Logged In: Admin', 1, 1, 0, '2019-03-18 02:55:31', NULL),
+(150, 'User Logged In: Admin', 1, 1, 0, '2019-03-18 21:34:29', NULL),
+(151, 'User Logged In: Admin', 1, 1, 0, '2019-03-19 03:44:58', NULL),
+(152, 'User Logged In: Admin', 1, 1, 0, '2019-03-19 20:48:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -420,7 +696,7 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `title`, `page_slug`, `description`, `cannonical_link`, `seo_title`, `seo_keyword`, `seo_description`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Terms and conditions', 'terms-and-conditions', 'terms and conditions', NULL, NULL, NULL, NULL, 1, 1, NULL, '2019-01-15 01:17:14', '2019-01-15 01:17:14', NULL);
+(1, 'Terms and conditions', 'terms-and-conditions', 'terms and conditions', NULL, NULL, NULL, NULL, 1, 1, NULL, '2019-01-14 19:17:14', '2019-01-14 19:17:14', NULL);
 
 -- --------------------------------------------------------
 
@@ -458,63 +734,83 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `display_name`, `sort`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'view-backend', 'View Backend', 1, 1, 1, NULL, '2019-01-15 01:17:03', '2019-01-15 01:17:03', NULL),
-(2, 'view-frontend', 'View Frontend', 2, 1, 1, NULL, '2019-01-15 01:17:03', '2019-01-15 01:17:03', NULL),
-(3, 'view-access-management', 'View Access Management', 3, 1, 1, NULL, '2019-01-15 01:17:03', '2019-01-15 01:17:03', NULL),
-(4, 'view-user-management', 'View User Management', 4, 1, 1, NULL, '2019-01-15 01:17:03', '2019-01-15 01:17:03', NULL),
-(5, 'view-active-user', 'View Active User', 5, 1, 1, NULL, '2019-01-15 01:17:04', '2019-01-15 01:17:04', NULL),
-(6, 'view-deactive-user', 'View Deactive User', 6, 1, 1, NULL, '2019-01-15 01:17:04', '2019-01-15 01:17:04', NULL),
-(7, 'view-deleted-user', 'View Deleted User', 7, 1, 1, NULL, '2019-01-15 01:17:04', '2019-01-15 01:17:04', NULL),
-(8, 'show-user', 'Show User Details', 8, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(9, 'create-user', 'Create User', 9, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(10, 'edit-user', 'Edit User', 9, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(11, 'delete-user', 'Delete User', 10, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(12, 'activate-user', 'Activate User', 11, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(13, 'deactivate-user', 'Deactivate User', 12, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(14, 'login-as-user', 'Login As User', 13, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(15, 'clear-user-session', 'Clear User Session', 14, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(16, 'view-role-management', 'View Role Management', 15, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(17, 'create-role', 'Create Role', 16, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(18, 'edit-role', 'Edit Role', 17, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(19, 'delete-role', 'Delete Role', 18, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(20, 'view-permission-management', 'View Permission Management', 19, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(21, 'create-permission', 'Create Permission', 20, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(22, 'edit-permission', 'Edit Permission', 21, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(23, 'delete-permission', 'Delete Permission', 22, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(24, 'view-page', 'View Page', 23, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(25, 'create-page', 'Create Page', 24, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(26, 'edit-page', 'Edit Page', 25, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(27, 'delete-page', 'Delete Page', 26, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(28, 'view-email-template', 'View Email Templates', 27, 1, 1, NULL, '2019-01-15 01:17:05', '2019-01-15 01:17:05', NULL),
-(29, 'create-email-template', 'Create Email Templates', 28, 1, 1, NULL, '2019-01-15 01:17:06', '2019-01-15 01:17:06', NULL),
-(30, 'edit-email-template', 'Edit Email Templates', 29, 1, 1, NULL, '2019-01-15 01:17:06', '2019-01-15 01:17:06', NULL),
-(31, 'delete-email-template', 'Delete Email Templates', 30, 1, 1, NULL, '2019-01-15 01:17:06', '2019-01-15 01:17:06', NULL),
-(32, 'edit-settings', 'Edit Settings', 31, 1, 1, NULL, '2019-01-15 01:17:06', '2019-01-15 01:17:06', NULL),
-(33, 'view-blog-category', 'View Blog Categories Management', 32, 1, 1, NULL, '2019-01-15 01:17:06', '2019-01-15 01:17:06', NULL),
-(34, 'create-blog-category', 'Create Blog Category', 33, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(35, 'edit-blog-category', 'Edit Blog Category', 34, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(36, 'delete-blog-category', 'Delete Blog Category', 35, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(37, 'view-blog-tag', 'View Blog Tags Management', 36, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(38, 'create-blog-tag', 'Create Blog Tag', 37, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(39, 'edit-blog-tag', 'Edit Blog Tag', 38, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(40, 'delete-blog-tag', 'Delete Blog Tag', 39, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(41, 'view-blog', 'View Blogs Management', 40, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(42, 'create-blog', 'Create Blog', 41, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(43, 'edit-blog', 'Edit Blog', 42, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(44, 'delete-blog', 'Delete Blog', 43, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(45, 'view-faq', 'View FAQ Management', 44, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(46, 'create-faq', 'Create FAQ', 45, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(47, 'edit-faq', 'Edit FAQ', 46, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(48, 'delete-faq', 'Delete FAQ', 47, 1, 1, NULL, '2019-01-15 01:17:07', '2019-01-15 01:17:07', NULL),
-(49, 'create-plant-equipment', 'Create Plant Equipment', 31, 1, 1, 1, '2019-01-22 05:42:35', '2019-01-22 05:43:48', NULL),
-(50, 'edit-plant-equipment', 'Edit Plant Equipment', 32, 1, 1, NULL, '2019-02-09 22:20:08', '2019-02-09 22:20:08', NULL),
-(51, 'view-plant-equipment', 'View Plant Equipment', 33, 1, 1, NULL, '2019-02-09 22:21:08', '2019-02-09 22:21:08', NULL),
-(52, 'delete-plant-equipment', 'Delete Plant Equipment', 34, 1, 1, NULL, '2019-02-09 22:22:25', '2019-02-09 22:22:25', NULL),
-(53, 'view-reports', 'View Reports', 40, 1, 1, NULL, '2019-02-09 22:48:43', '2019-02-09 22:48:43', NULL),
-(54, 'create-projects', 'Create Projects', 41, 1, 1, NULL, '2019-02-10 02:33:20', '2019-02-10 02:33:20', NULL),
-(55, 'edit-projects', 'Edit Projects', 33, 1, 1, NULL, '2019-02-10 02:46:59', '2019-02-10 02:46:59', NULL),
-(56, 'view-projects', 'View Projects', 34, 1, 1, NULL, '2019-02-10 03:12:35', '2019-02-10 03:12:35', NULL),
-(57, 'delete-projects', 'Delete Projects', 38, 1, 1, NULL, '2019-02-10 03:13:20', '2019-02-10 03:13:20', NULL);
+(1, 'view-backend', 'View Backend', 1, 1, 1, NULL, '2019-01-14 19:17:03', '2019-01-14 19:17:03', NULL),
+(2, 'view-frontend', 'View Frontend', 2, 1, 1, NULL, '2019-01-14 19:17:03', '2019-01-14 19:17:03', NULL),
+(3, 'view-access-management', 'View Access Management', 3, 1, 1, NULL, '2019-01-14 19:17:03', '2019-01-14 19:17:03', NULL),
+(4, 'view-user-management', 'View User Management', 4, 1, 1, NULL, '2019-01-14 19:17:03', '2019-01-14 19:17:03', NULL),
+(5, 'view-active-user', 'View Active User', 5, 1, 1, NULL, '2019-01-14 19:17:04', '2019-01-14 19:17:04', NULL),
+(6, 'view-deactive-user', 'View Deactive User', 6, 1, 1, NULL, '2019-01-14 19:17:04', '2019-01-14 19:17:04', NULL),
+(7, 'view-deleted-user', 'View Deleted User', 7, 1, 1, NULL, '2019-01-14 19:17:04', '2019-01-14 19:17:04', NULL),
+(8, 'show-user', 'Show User Details', 8, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(9, 'create-user', 'Create User', 9, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(10, 'edit-user', 'Edit User', 9, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(11, 'delete-user', 'Delete User', 10, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(12, 'activate-user', 'Activate User', 11, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(13, 'deactivate-user', 'Deactivate User', 12, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(14, 'login-as-user', 'Login As User', 13, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(15, 'clear-user-session', 'Clear User Session', 14, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(16, 'view-role-management', 'View Role Management', 15, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(17, 'create-role', 'Create Role', 16, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(18, 'edit-role', 'Edit Role', 17, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(19, 'delete-role', 'Delete Role', 18, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(20, 'view-permission-management', 'View Permission Management', 19, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(21, 'create-permission', 'Create Permission', 20, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(22, 'edit-permission', 'Edit Permission', 21, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(23, 'delete-permission', 'Delete Permission', 22, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(24, 'view-page', 'View Page', 23, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(25, 'create-page', 'Create Page', 24, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(26, 'edit-page', 'Edit Page', 25, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(27, 'delete-page', 'Delete Page', 26, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(28, 'view-email-template', 'View Email Templates', 27, 1, 1, NULL, '2019-01-14 19:17:05', '2019-01-14 19:17:05', NULL),
+(29, 'create-email-template', 'Create Email Templates', 28, 1, 1, NULL, '2019-01-14 19:17:06', '2019-01-14 19:17:06', NULL),
+(30, 'edit-email-template', 'Edit Email Templates', 29, 1, 1, NULL, '2019-01-14 19:17:06', '2019-01-14 19:17:06', NULL),
+(31, 'delete-email-template', 'Delete Email Templates', 30, 1, 1, NULL, '2019-01-14 19:17:06', '2019-01-14 19:17:06', NULL),
+(32, 'edit-settings', 'Edit Settings', 31, 1, 1, NULL, '2019-01-14 19:17:06', '2019-01-14 19:17:06', NULL),
+(33, 'view-blog-category', 'View Blog Categories Management', 32, 1, 1, NULL, '2019-01-14 19:17:06', '2019-02-24 17:34:13', '2019-02-24 17:34:13'),
+(34, 'create-blog-category', 'Create Blog Category', 33, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:34:24', '2019-02-24 17:34:24'),
+(35, 'edit-blog-category', 'Edit Blog Category', 34, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:34:36', '2019-02-24 17:34:36'),
+(36, 'delete-blog-category', 'Delete Blog Category', 35, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:34:47', '2019-02-24 17:34:47'),
+(37, 'view-blog-tag', 'View Blog Tags Management', 36, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:34:57', '2019-02-24 17:34:57'),
+(38, 'create-blog-tag', 'Create Blog Tag', 37, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:35:08', '2019-02-24 17:35:08'),
+(39, 'edit-blog-tag', 'Edit Blog Tag', 38, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:35:19', '2019-02-24 17:35:19'),
+(40, 'delete-blog-tag', 'Delete Blog Tag', 39, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:35:29', '2019-02-24 17:35:29'),
+(41, 'view-blog', 'View Blogs Management', 40, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:35:52', '2019-02-24 17:35:52'),
+(42, 'create-blog', 'Create Blog', 41, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:36:14', '2019-02-24 17:36:14'),
+(43, 'edit-blog', 'Edit Blog', 42, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:36:03', '2019-02-24 17:36:03'),
+(44, 'delete-blog', 'Delete Blog', 43, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:37:55', '2019-02-24 17:37:55'),
+(45, 'view-faq', 'View FAQ Management', 44, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:38:04', '2019-02-24 17:38:04'),
+(46, 'create-faq', 'Create FAQ', 45, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:38:12', '2019-02-24 17:38:12'),
+(47, 'edit-faq', 'Edit FAQ', 46, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:38:21', '2019-02-24 17:38:21'),
+(48, 'delete-faq', 'Delete FAQ', 47, 1, 1, NULL, '2019-01-14 19:17:07', '2019-02-24 17:38:54', '2019-02-24 17:38:54'),
+(49, 'create-plant-equipment', 'Create Plant Equipment', 31, 1, 1, 1, '2019-01-21 23:42:35', '2019-01-21 23:43:48', NULL),
+(50, 'edit-plant-equipment', 'Edit Plant Equipment', 32, 1, 1, NULL, '2019-02-09 16:20:08', '2019-02-09 16:20:08', NULL),
+(51, 'view-plant-equipment', 'View Plant Equipment', 33, 1, 1, NULL, '2019-02-09 16:21:08', '2019-02-09 16:21:08', NULL),
+(52, 'delete-plant-equipment', 'Delete Plant Equipment', 34, 1, 1, NULL, '2019-02-09 16:22:25', '2019-02-09 16:22:25', NULL),
+(53, 'view-reports', 'View Reports', 40, 1, 1, NULL, '2019-02-09 16:48:43', '2019-02-09 16:48:43', NULL),
+(54, 'create-projects', 'Create Projects', 41, 1, 1, NULL, '2019-02-09 20:33:20', '2019-02-09 20:33:20', NULL),
+(55, 'edit-projects', 'Edit Projects', 33, 1, 1, NULL, '2019-02-09 20:46:59', '2019-02-09 20:46:59', NULL),
+(56, 'view-projects', 'View Projects', 34, 1, 1, NULL, '2019-02-09 21:12:35', '2019-02-09 21:12:35', NULL),
+(57, 'delete-projects', 'Delete Projects', 38, 1, 1, NULL, '2019-02-09 21:13:20', '2019-02-09 21:13:20', NULL),
+(58, 'create-items', 'Create Items', 45, 1, 1, NULL, '2019-02-23 06:14:05', '2019-02-23 06:14:05', NULL),
+(59, 'edit-items', 'Edit Items', 46, 1, 1, NULL, '2019-02-23 06:15:10', '2019-02-23 06:15:10', NULL),
+(60, 'view-items', 'View Items', 47, 1, 1, NULL, '2019-02-23 06:15:38', '2019-02-23 06:15:38', NULL),
+(61, 'delete-items', 'Delete Items', 48, 1, 1, NULL, '2019-02-23 06:16:35', '2019-02-23 06:16:35', NULL),
+(62, 'view-products', 'View Products', 48, 1, 1, NULL, '2019-02-23 07:09:38', '2019-02-23 07:09:38', NULL),
+(63, 'create-products', 'Create Products', 49, 1, 1, NULL, '2019-02-23 07:10:22', '2019-02-23 07:10:22', NULL),
+(64, 'edit-products', 'Edit Products', 49, 1, 1, 1, '2019-02-23 07:10:55', '2019-02-23 07:11:59', NULL),
+(65, 'delete-products', 'Delete Products', 50, 1, 1, 1, '2019-02-23 07:11:18', '2019-02-23 07:11:35', NULL),
+(66, 'create-product-receive', 'Create Product Receive', 51, 1, 1, NULL, '2019-02-23 08:51:48', '2019-02-23 08:51:48', NULL),
+(67, 'edit-product-receive', 'Edit Product Receive', 52, 1, 1, NULL, '2019-02-23 08:52:36', '2019-02-23 08:52:36', NULL),
+(68, 'view-product-receive', 'View Product Receive', 53, 1, 1, NULL, '2019-02-23 08:53:22', '2019-02-23 08:53:22', NULL),
+(69, 'delete-product-receive', 'Delete Product Receive', 54, 1, 1, NULL, '2019-02-23 08:54:06', '2019-02-23 08:54:06', NULL),
+(70, 'create-project-challan', 'Create Project Challan', 61, 1, 1, NULL, '2019-02-23 10:14:49', '2019-02-23 10:14:49', NULL),
+(71, 'edit-project-challan', 'Ereate Project Challan', 60, 1, 1, NULL, '2019-02-23 10:15:22', '2019-02-23 10:15:22', NULL),
+(72, 'view-project-challan', 'View Project Challan', 62, 1, 1, NULL, '2019-02-23 10:15:58', '2019-02-23 10:15:58', NULL),
+(73, 'delete-project-challan', 'Delete Project Challan', 64, 1, 1, NULL, '2019-02-23 10:16:33', '2019-02-23 10:16:33', NULL),
+(74, 'view-suppliers', 'View Suppliers', 50, 1, 1, NULL, '2019-02-24 17:40:07', '2019-02-24 17:40:07', NULL),
+(75, 'edit-suppliers', 'Edit Suppliers', 51, 1, 1, NULL, '2019-02-24 17:40:39', '2019-02-24 17:40:39', NULL),
+(76, 'create-suppliers', 'Create Suppliers', 52, 1, 1, NULL, '2019-02-24 17:41:08', '2019-02-24 17:41:08', NULL),
+(77, 'delete-suppliers', 'Delete Suppliers', 54, 1, 1, NULL, '2019-02-24 17:41:39', '2019-02-24 17:41:39', NULL);
 
 -- --------------------------------------------------------
 
@@ -659,11 +955,38 @@ CREATE TABLE `plant_and_equipment` (
 --
 
 INSERT INTO `plant_and_equipment` (`id`, `project_id`, `equipment_type`, `date_form`, `date_to`, `name`, `eel_code`, `country_of_origin`, `capacity`, `make_by`, `model`, `year_of_manufac`, `present_location`, `remarks`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 2, '2019-02-01 00:00:00', '2019-02-09 00:00:00', 'CRAWLER CRANE', 'CC-001', 'CHINA', 'Bad', '380 TON, 84 M BOOM', 'ZCC3800', 2018, 'ON BOAT', 'Good', 1, NULL, '2019-01-23 03:01:36', '2019-02-10 15:39:11', NULL),
-(3, 3, 2, '2019-02-01 00:00:00', '2019-02-28 00:00:00', 'CRAWLER CRANE', 'CC-001', 'CHINA', 'Better', '380 TON, 84 M BOOM', 'ZCC3800', 2018, 'ON BOAT', 'Good', 1, NULL, '2019-01-23 04:16:31', '2019-02-10 15:38:43', NULL),
-(5, 1, 1, '2019-02-01 00:00:00', '2019-02-15 00:00:00', 'CRAWLER CRANE', 'CC-001', 'CHINA', 'Good', '380 TON, 84 M BOOM', 'ZCC3800', 2018, 'ON BOAT', 'Good', 1, NULL, '2019-01-23 04:26:54', '2019-02-10 15:38:53', NULL),
-(6, 3, 1, NULL, NULL, 'Test - 1', 'TT06', 'Hongkong', '380 TON, 84 M BOOM', 'Teo', 'BBOO', 2018, 'Bangladesh', 'Excellent', 1, NULL, '2019-02-10 16:01:02', '2019-02-10 16:06:33', NULL),
-(7, 1, 2, '2019-02-01 00:00:00', '2019-02-28 00:00:00', 'Test Eq', 'TW', 'CHINA', '380 TON, 84 M BOOM', 'test', '78M', 2018, 'Motijhil', 'Good', 1, NULL, '2019-02-12 00:38:57', '2019-02-12 00:38:57', NULL);
+(1, 1, 2, '2019-02-01 00:00:00', '2019-02-09 00:00:00', 'CRAWLER CRANE', 'CC-001', 'CHINA', 'Bad', '380 TON, 84 M BOOM', 'ZCC3800', 2018, 'ON BOAT', 'Good', 1, NULL, '2019-01-22 21:01:36', '2019-02-10 09:39:11', NULL),
+(3, 3, 2, '2019-02-01 00:00:00', '2019-02-28 00:00:00', 'CRAWLER CRANE', 'CC-001', 'CHINA', 'Better', '380 TON, 84 M BOOM', 'ZCC3800', 2018, 'ON BOAT', 'Good', 1, NULL, '2019-01-22 22:16:31', '2019-02-10 09:38:43', NULL),
+(5, 1, 1, '2019-02-01 00:00:00', '2019-02-15 00:00:00', 'CRAWLER CRANE', 'CC-001', 'CHINA', 'Good', '380 TON, 84 M BOOM', 'ZCC3800', 2018, 'ON BOAT', 'Good', 1, NULL, '2019-01-22 22:26:54', '2019-02-10 09:38:53', NULL),
+(6, 3, 1, NULL, NULL, 'Test - 1', 'TT06', 'Hongkong', '380 TON, 84 M BOOM', 'Teo', 'BBOO', 2018, 'Bangladesh', 'Excellent', 1, NULL, '2019-02-10 10:01:02', '2019-02-10 10:06:33', NULL),
+(7, 1, 2, '2019-02-01 00:00:00', '2019-02-28 00:00:00', 'Test Eq', 'TW', 'CHINA', '380 TON, 84 M BOOM', 'test', '78M', 2018, 'Motijhil', 'Good', 1, NULL, '2019-02-11 18:38:57', '2019-02-11 18:38:57', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `code` varchar(200) DEFAULT NULL,
+  `name` varchar(400) DEFAULT NULL,
+  `unit_name` varchar(100) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `item_id`, `code`, `name`, `unit_name`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 1, 'product-01', 'product-01', 'kg', 1, NULL, '2019-02-24 19:00:51', '2019-02-24 19:39:28', NULL),
+(3, 2, 'product-02', 'Product 02', 'kg', 1, NULL, '2019-02-24 20:54:41', '2019-02-24 20:54:41', NULL);
 
 -- --------------------------------------------------------
 
@@ -686,8 +1009,8 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`id`, `project_name`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Project A', 1, NULL, '2019-02-10 09:09:28', '2019-02-10 10:05:57', NULL),
-(3, 'Project B', 1, NULL, '2019-02-10 10:05:36', '2019-02-10 10:05:36', NULL);
+(1, 'Project A', 1, NULL, '2019-02-10 03:09:28', '2019-02-10 04:05:57', NULL),
+(3, 'Project B', 1, NULL, '2019-02-10 04:05:36', '2019-02-10 04:05:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -710,8 +1033,8 @@ CREATE TABLE `project_type` (
 --
 
 INSERT INTO `project_type` (`id`, `name`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Owned', 0, 0, '2019-02-10 16:18:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Rented', 0, 0, '2019-02-10 16:18:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, 'Owned', 0, 0, '2019-02-10 10:18:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Rented', 0, 0, '2019-02-10 10:18:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -737,9 +1060,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `all`, `sort`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Administrator', 1, 1, 1, 1, NULL, '2019-01-15 01:17:02', '2019-01-15 01:17:02', NULL),
-(2, 'Executive', 0, 2, 0, 1, 1, '2019-01-15 01:17:02', '2019-01-22 05:46:25', NULL),
-(3, 'User', 0, 3, 1, 1, NULL, '2019-01-15 01:17:02', '2019-01-15 01:17:02', NULL);
+(1, 'Administrator', 1, 1, 1, 1, NULL, '2019-01-14 19:17:02', '2019-01-14 19:17:02', NULL),
+(2, 'Executive', 0, 2, 0, 1, 1, '2019-01-14 19:17:02', '2019-01-21 23:46:25', NULL),
+(3, 'User', 0, 3, 1, 1, NULL, '2019-01-14 19:17:02', '2019-01-14 19:17:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -825,7 +1148,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `name`, `logo`, `favicon`, `seo_title`, `seo_keyword`, `seo_description`, `company_contact`, `company_address`, `from_name`, `from_email`, `facebook`, `linkedin`, `twitter`, `google`, `copyright_text`, `footer_text`, `terms`, `disclaimer`, `google_analytics`, `home_video1`, `home_video2`, `home_video3`, `home_video4`, `explanation1`, `explanation2`, `explanation3`, `explanation4`, `values`, `data_type`, `post_type`, `created_at`, `updated_at`) VALUES
-(1, NULL, '1547629427Saif--Power-tec-Logo-226x48.jpg', '1547632780Saif--Power-tec-Logo-favicon.jpg', 'Saif Inventory Management System', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-16 03:59:40');
+(1, NULL, '1547629427Saif--Power-tec-Logo-226x48.jpg', '1547632780Saif--Power-tec-Logo-favicon.jpg', 'Saif Inventory Management System', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-01-15 21:59:40');
 
 -- --------------------------------------------------------
 
@@ -843,6 +1166,70 @@ CREATE TABLE `social_logins` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suppliers`
+--
+
+CREATE TABLE `suppliers` (
+  `id` int(11) NOT NULL,
+  `code` varchar(300) NOT NULL,
+  `name` varchar(600) NOT NULL,
+  `address` text,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `suppliers`
+--
+
+INSERT INTO `suppliers` (`id`, `code`, `name`, `address`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'sup-01', 'Supplier 1 Updated', 'Mohammadpur, Housing LTD\r\nRoad: 03; House: 01\r\nDhaka,1207', 1, 0, 2019, '2019-02-24 18:48:18', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `temp_product_receive_data`
+--
+
+CREATE TABLE `temp_product_receive_data` (
+  `id` int(11) NOT NULL,
+  `receive_no` varchar(500) NOT NULL,
+  `receive_date` datetime NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `part_no` varchar(500) NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `temp_product_receive_data`
+--
+
+INSERT INTO `temp_product_receive_data` (`id`, `receive_no`, `receive_date`, `item_id`, `product_id`, `part_no`, `supplier_id`, `quantity`, `project_id`) VALUES
+(1, 'RCV-001', '2019-02-26 00:00:00', 1, 2, 'abc-001', 1, 10, 1),
+(2, 'RCV-001', '2019-02-26 00:00:00', 1, 2, 'abc-001', 1, 10, 1),
+(3, 'RCV-001', '2019-02-26 00:00:00', 1, 2, 'abc-001', 1, 10, 1),
+(4, 'RCV-001', '2019-02-26 00:00:00', 1, 2, 'abc-001', 1, 10, 1),
+(5, 'RCV-002', '2019-02-26 00:00:00', 1, 2, 'ABC-12', 1, 10, 1),
+(6, 'RCV-002', '2019-02-26 00:00:00', 1, 2, 'ABC-12', 1, 10, 1),
+(7, 'RCV-002', '2019-02-26 00:00:00', 1, 2, 'ABC-12', 1, 10, 1),
+(8, 'RCV-002', '2019-02-26 00:00:00', 1, 2, 'ABC-12', 1, 10, 1),
+(9, 'cff', '2019-02-26 00:00:00', 1, 2, 'sd', 1, 12, 1),
+(10, 'RCV-003', '2019-02-26 00:00:00', 1, 2, 'abc', 1, 12, 1),
+(11, 'RCV-003', '2019-02-26 00:00:00', 1, 2, 'abc', 1, 12, 1),
+(12, 'RCV-003', '2019-02-26 00:00:00', 1, 2, 'abc', 1, 120, 1),
+(13, 'RCV-003', '2019-02-26 00:00:00', 2, 3, 'abc', 1, 30, 1),
+(14, 'RCV-003', '2019-02-26 00:00:00', 1, 2, 'abc-001', 1, 10, 1),
+(15, 'RCV-003', '2019-02-26 00:00:00', 2, 3, 'abc-001', 1, 100, 1);
 
 -- --------------------------------------------------------
 
@@ -873,54 +1260,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `status`, `confirmation_code`, `confirmed`, `is_term_accept`, `remember_token`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Admin', 'Saif', 'admin@admin.com', '$2y$10$yzdRh.HNr8RukRLgiuVfoe37Ckjmr1wFdlQi0XHoTrCSLeBjLLYMS', 1, 'b1970adb3f301c8440c81e45b526060c', 1, 0, 'ZY2JWi3MlTmcBoCQqmBpxbOYhez4AQMUA4NZCyaJyo49rAmyotCvUmFJrEsS', 1, 1, '2019-01-15 01:17:02', '2019-01-21 21:36:38', NULL),
-(2, 'Vipul', 'Basapati', 'executive@executive.com', '$2y$10$Xtds/X9sMuHoguyev.I6JO0g2b1c2eT4UiEuB3L6FUmmQlEI7h4gu', 1, '68c7a7b3a2968803ae6db884ae89f446', 1, 0, NULL, 1, NULL, '2019-01-15 01:17:02', '2019-01-15 01:17:02', NULL),
-(3, 'User', 'Test', 'user@user.com', '$2y$10$hK926V1W.U2666U50rhQ7uj0TAMbB0cwa.kivaTzkVpSNVPQ7Re12', 1, 'fe3ae4e0b22211d756922a0bede508cf', 1, 0, NULL, 1, NULL, '2019-01-15 01:17:02', '2019-01-15 01:17:02', NULL),
-(4, 'Rashed', 'Al Banna', 'r@gmail.com', '$2y$10$TKxuqIrAdSNAR5cvG0MtAeJrV34bRogqLC9bTmyyhsxZldb6THXtK', 1, 'b9a747f4ee9cab6be9906c6af5b4e04a', 1, 0, 'z4qOqC85oZTHcGY9gblduYAj69WeiDyXzWTsA20mlHoBN9a56ve640nWsEI0', 1, NULL, '2019-02-04 03:18:51', '2019-02-04 03:18:51', NULL);
+(1, 'Admin', 'Saif', 'admin@admin.com', '$2y$10$yzdRh.HNr8RukRLgiuVfoe37Ckjmr1wFdlQi0XHoTrCSLeBjLLYMS', 1, 'b1970adb3f301c8440c81e45b526060c', 1, 0, 'BXKAo7JVM4Df7hZEorLxZmOActtwq1EThVPXrNSHjzMDGwkAhSTz6EzBQSMr', 1, 1, '2019-01-14 19:17:02', '2019-01-21 15:36:38', NULL),
+(2, 'Vipul', 'Basapati', 'executive@executive.com', '$2y$10$Xtds/X9sMuHoguyev.I6JO0g2b1c2eT4UiEuB3L6FUmmQlEI7h4gu', 1, '68c7a7b3a2968803ae6db884ae89f446', 1, 0, NULL, 1, NULL, '2019-01-14 19:17:02', '2019-01-14 19:17:02', NULL),
+(3, 'User', 'Test', 'user@user.com', '$2y$10$hK926V1W.U2666U50rhQ7uj0TAMbB0cwa.kivaTzkVpSNVPQ7Re12', 1, 'fe3ae4e0b22211d756922a0bede508cf', 1, 0, NULL, 1, NULL, '2019-01-14 19:17:02', '2019-01-14 19:17:02', NULL),
+(4, 'Rashed', 'Al Banna', 'r@gmail.com', '$2y$10$TKxuqIrAdSNAR5cvG0MtAeJrV34bRogqLC9bTmyyhsxZldb6THXtK', 1, 'b9a747f4ee9cab6be9906c6af5b4e04a', 1, 0, '4Kk9zXyngpH1yXycuQH5DFOF7BTipxs4xwacqtcnm35Pyz8t8lPgXuXGrzbm', 1, NULL, '2019-02-03 21:18:51', '2019-02-03 21:18:51', NULL);
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `blogs`
---
-ALTER TABLE `blogs`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `blog_categories`
---
-ALTER TABLE `blog_categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `blog_map_categories`
---
-ALTER TABLE `blog_map_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `blog_map_categories_blog_id_index` (`blog_id`),
-  ADD KEY `blog_map_categories_category_id_index` (`category_id`);
-
---
--- Indexes for table `blog_map_tags`
---
-ALTER TABLE `blog_map_tags`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `blog_map_tags_blog_id_index` (`blog_id`),
-  ADD KEY `blog_map_tags_tag_id_index` (`tag_id`);
-
---
--- Indexes for table `blog_tags`
---
-ALTER TABLE `blog_tags`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `faqs`
---
-ALTER TABLE `faqs`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `history`
@@ -934,6 +1281,90 @@ ALTER TABLE `history`
 -- Indexes for table `history_types`
 --
 ALTER TABLE `history_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inv_ga_listunit`
+--
+ALTER TABLE `inv_ga_listunit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inv_issue`
+--
+ALTER TABLE `inv_issue`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inv_issuedetail`
+--
+ALTER TABLE `inv_issuedetail`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inv_item_unit`
+--
+ALTER TABLE `inv_item_unit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inv_material`
+--
+ALTER TABLE `inv_material`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inv_materialbalance`
+--
+ALTER TABLE `inv_materialbalance`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inv_materialcategory`
+--
+ALTER TABLE `inv_materialcategory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inv_materialcategorysub`
+--
+ALTER TABLE `inv_materialcategorysub`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inv_receive`
+--
+ALTER TABLE `inv_receive`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inv_receivedetail`
+--
+ALTER TABLE `inv_receivedetail`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inv_supplier`
+--
+ALTER TABLE `inv_supplier`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inv_supplierbalance`
+--
+ALTER TABLE `inv_supplierbalance`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inv_warehosueinfo`
+--
+ALTER TABLE `inv_warehosueinfo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `items`
+--
+ALTER TABLE `items`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1004,6 +1435,12 @@ ALTER TABLE `plant_and_equipment`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `projects`
 --
 ALTER TABLE `projects`
@@ -1050,6 +1487,18 @@ ALTER TABLE `social_logins`
   ADD KEY `social_logins_user_id_foreign` (`user_id`);
 
 --
+-- Indexes for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `temp_product_receive_data`
+--
+ALTER TABLE `temp_product_receive_data`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -1061,45 +1510,85 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `blogs`
---
-ALTER TABLE `blogs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `blog_categories`
---
-ALTER TABLE `blog_categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `blog_map_categories`
---
-ALTER TABLE `blog_map_categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `blog_map_tags`
---
-ALTER TABLE `blog_map_tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `blog_tags`
---
-ALTER TABLE `blog_tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `faqs`
---
-ALTER TABLE `faqs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT for table `history_types`
 --
 ALTER TABLE `history_types`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `inv_ga_listunit`
+--
+ALTER TABLE `inv_ga_listunit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `inv_issue`
+--
+ALTER TABLE `inv_issue`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `inv_issuedetail`
+--
+ALTER TABLE `inv_issuedetail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `inv_item_unit`
+--
+ALTER TABLE `inv_item_unit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `inv_material`
+--
+ALTER TABLE `inv_material`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `inv_materialbalance`
+--
+ALTER TABLE `inv_materialbalance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `inv_materialcategory`
+--
+ALTER TABLE `inv_materialcategory`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `inv_materialcategorysub`
+--
+ALTER TABLE `inv_materialcategorysub`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `inv_receive`
+--
+ALTER TABLE `inv_receive`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `inv_receivedetail`
+--
+ALTER TABLE `inv_receivedetail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `inv_supplier`
+--
+ALTER TABLE `inv_supplier`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `inv_supplierbalance`
+--
+ALTER TABLE `inv_supplierbalance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `inv_warehosueinfo`
+--
+ALTER TABLE `inv_warehosueinfo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `items`
+--
+ALTER TABLE `items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `menus`
 --
@@ -1114,12 +1603,12 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 --
 -- AUTO_INCREMENT for table `pages`
 --
@@ -1129,7 +1618,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
 -- AUTO_INCREMENT for table `permission_role`
 --
@@ -1145,6 +1634,11 @@ ALTER TABLE `permission_user`
 --
 ALTER TABLE `plant_and_equipment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `projects`
 --
@@ -1175,6 +1669,16 @@ ALTER TABLE `settings`
 --
 ALTER TABLE `social_logins`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `temp_product_receive_data`
+--
+ALTER TABLE `temp_product_receive_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `users`
 --

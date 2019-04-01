@@ -25,6 +25,14 @@
                                         <tr>
                                             <td>
                                                 <div class="form-group">
+                                                    <label for="name" class="control-label col-sm-2">Code</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="material_id_code" placeholder="Enter Code" name="material_id_code" value="<?php echo getDefaultCategoryCode('inv_material', 'material_id_code', '03d', '001'); ?>">
+                                                    </div>
+                                                </div>                                                
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
                                                     <label for="name" class="control-label col-sm-2">Category</label>
                                                     <div class="col-sm-10">
                                                         <?php
@@ -33,21 +41,22 @@
                                                         <select class="form-control" id="material_id" name="material_id" onchange="getchilditemsByparent(this.value, '{{ $get_child_items_by_parent }}')">
                                                             <option value="">Select</option>
                                                             <?php
-                                                            $tableName = 'items';
-                                                            $order_by['order_by'] = 'ASC';
-                                                            $order_by['order_by_column'] = 'name';
-                                                            $projectsData = get_table_data_by_table($tableName, $order_by);
-                                                            if (isset($projectsData) && !empty($projectsData)) {
-                                                                foreach ($projectsData as $data) {
-                                                                    ?>
-                                                                    <option value="<?php echo $data->id; ?>"><?php echo $data->name; ?></option>
-                                                                <?php }
-                                                            }
+                                                                $tableName = 'items';
+                                                                $order_by['order_by'] = 'ASC';
+                                                                $order_by['order_by_column'] = 'name';
+                                                                $projectsData = get_table_data_by_table($tableName, $order_by);
+                                                                if (isset($projectsData) && !empty($projectsData)) {
+                                                                    foreach ($projectsData as $data) {
+                                                                        ?>
+                                                                        <option value="<?php echo $data->id; ?>"><?php echo $data->name; ?></option>
+                                                                    <?php }
+                                                                }
                                                             ?>
                                                         </select>
                                                     </div>
-                                                </div>                                                
-                                            </td>
+                                                </div>
+                                        </tr>
+                                        <tr>
                                             <td>
                                                 <div class="form-group">
                                                     <label for="name" class="control-label col-sm-2">Material sub</label>
@@ -56,10 +65,8 @@
                                                             <option value="">Select</option>
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div>                                                                                                
                                             </td>
-                                        </tr>
-                                        <tr>
                                             <td>
                                                 <div class="form-group">
                                                     <label for="name" class="control-label col-sm-2">Qty Unit</label>
@@ -82,21 +89,23 @@
                                                     </div>
                                                 </div>                                                
                                             </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <label for="name" class="control-label col-sm-2">Minimum Stock</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="material_min_stock" placeholder="Enter Min Stock" name="material_min_stock">
-                                                    </div>
-                                                </div>
-                                            </td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
                                                 <div class="form-group">
                                                     <label for="name" class="control-label col-sm-2">Description</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="material_description" placeholder="Enter name" name="material_description">
+                                                        <textarea  class="form-control" id="material_description" placeholder="Enter description" name="material_description"></textarea>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label for="name" class="control-label col-sm-2">Minimum Stock</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="material_min_stock" placeholder="Enter Min Stock" name="material_min_stock">
                                                     </div>
                                                 </div>
                                             </td>

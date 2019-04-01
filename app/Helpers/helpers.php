@@ -308,3 +308,50 @@ function get_data_name_by_where($table,$where){
 function get_product_name_by_product_id($product_id){
     return DB::table('products')->where('id', $product_id)->first();
 }
+
+function get_product_with_category() {
+    $final_array = [];
+    $category = DB::table('items')->get();
+    if (!$category->isEmpty()) {
+        foreach ($category as $cat) {
+            $inv_materialcategory = DB::table('inv_materialcategory')->where('category_id', $cat->id)->get();
+            if (!$inv_materialcategory->isEmpty()) {
+                foreach ($inv_materialcategory as $meta_cat) {
+                    $inv_material = DB::table('inv_material')->where('material_id', $cat->id)->where('material_sub_id', $meta_cat->id)->get();
+                    if (!$inv_material->isEmpty()) {
+                        foreach ($inv_material as $material) {
+                            $final_array[] = [
+                                'id'                    => $material->id,
+                                'material_id'           => $material->material_id,
+                                'material_name'         => $cat->name,
+                                'material_sub_id'       => $material->material_sub_id,
+                                'material_sub_name'     => $meta_cat->material_sub_description,
+                                'material_description'  => $material->material_description,
+                                'material_name'         => $material->material_description.' ('.$cat->name.' - '.$meta_cat->material_sub_description.' - '.$material->material_description.')',
+                            ];
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    return $final_array;
+}
+/*******************************************************************************
+ * To get the default category code:
+ * Params: 
+ * $table       =   from which table;
+ * $fieldName   =   which table column field to be increased,
+ * $modifier    =   default modifier like 02d or 03d
+ * $defaultCode =   01 or 001
+ * *****************************************************************************
+ */
+function getDefaultCategoryCode($table, $fieldName, $modifier, $defaultCode){
+    $lastRows   =   DB::table($table)->orderBy('id', 'desc')->first();
+    if(isset($lastRows) && !empty($lastRows)){
+        $number = intval($lastRows->{$fieldName}) + 1;
+        return sprintf('%'.$modifier, $number);
+    }
+    return $defaultCode;    
+}

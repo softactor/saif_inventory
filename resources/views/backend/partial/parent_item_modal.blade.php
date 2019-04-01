@@ -21,6 +21,16 @@
                         <div class="form-group">
                             <div class="box-body">
                                 <div class="form-group">
+                                    <div class="box-body">                                        
+                                        <div class="form-group">
+                                            <label for="name" class="col-lg-2 control-label required">Code</label>
+                                            <div class="col-lg-10">
+                                                <input id="item_code" class="form-control box-size" placeholder="Code" required="required" name="code" type="text" value="<?php echo getDefaultCategoryCode('items', 'code', '02d', '01'); ?>">
+                                            </div><!--col-lg-10-->
+                                        </div><!--form control-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     {{ Form::label('name', 'name', ['class' => 'col-lg-2 control-label required']) }}
 
                                     <div class="col-lg-10">

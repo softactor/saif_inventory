@@ -13,6 +13,7 @@
         <meta name="description" content="@yield('meta_description', 'Default Description')">
         <meta name="author" content="@yield('meta_author', 'Viral Solani')">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
         @yield('meta')
 
         <!-- Styles -->
@@ -90,6 +91,7 @@
         @yield('after-scripts')
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
         <script>
         $.noConflict();
         jQuery( document ).ready(function( $ ) {
@@ -104,6 +106,7 @@
             dateFormat: "yy-mm-dd"
           });
           $( "#material_information" ).accordion();
+          $('.select2').select2();
         });
         function getFilterWisePlantEquipmentResult(){
             $.ajax({

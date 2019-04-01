@@ -37,7 +37,7 @@
                                                             if (isset($projectsData) && !empty($projectsData)) {
                                                                 foreach ($projectsData as $data) {
                                                                     ?>
-                                                                    <option value="<?php echo $data->id; ?>"><?php echo $data->name; ?></option>
+                                                                    <option value="<?php echo $data->id; ?>"><?php echo $data->name.' ('.$data->code.')'; ?></option>
                                                                 <?php }
                                                             }
                                                             ?>
@@ -45,6 +45,16 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label for="name" class="col-md-4 required">Code</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" id="material_sub_cat_id" placeholder="Enter Code" name="material_sub_id" value="<?php echo getDefaultCategoryCode('inv_materialcategory', 'material_sub_id', '03d', '001'); ?>">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td colspan="2">
                                                 <div class="form-group">
                                                     <label for="name" class="col-md-4 required">Child Name</label>

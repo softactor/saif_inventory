@@ -25,6 +25,7 @@
                         <table id="blogs-table" class="table table-condensed table-hover table-bordered">
                             <thead>
                                 <tr>
+                                    <th>Code</th>
                                     <th>{{ trans('labels.backend.projects.table.title') }}</th>
                                     <th>{{ trans('labels.general.actions') }}</th>
                                 </tr>
@@ -35,6 +36,7 @@
                                     foreach ($plantEquipments as $equipments) {
                                         ?>
                                         <tr>
+                                            <td><?php echo $equipments->code; ?></td>
                                             <td><?php echo $equipments->name; ?></td>
                                             <td>
                                                 <div class="btn-group action-btn">
@@ -74,7 +76,8 @@
                             <thead>
                                 <tr>
                                     <th>Parent</th>
-                                    <th>Child</th>
+                                    <th>Code</th>
+                                    <th>Sub Category</th>
                                     <th>{{ trans('labels.general.actions') }}</th>
                                 </tr>
                             </thead>
@@ -85,6 +88,7 @@
                                         ?>
                                         <tr>
                                             <td><?php echo $equipments->name; ?></td>
+                                            <td><?php echo $equipments->material_sub_id; ?></td>
                                             <td><?php echo $equipments->material_sub_description; ?></td>
                                             <td>
                                                 <div class="btn-group action-btn">
@@ -123,6 +127,7 @@
                         <table id="blogs-table" class="table table-condensed table-hover table-bordered">
                             <thead>
                                 <tr>
+                                    <th>Code</th>
                                     <th>Material</th>
                                     <th>Sub Material</th>
                                     <th>Description</th>
@@ -137,6 +142,7 @@
                                     foreach ($subChildInfo as $equipments) {
                                         ?>
                                         <tr>
+                                            <td><?php echo $equipments->material_id_code; ?></td>
                                             <td><?php echo $equipments->name; ?></td>
                                             <td><?php echo $equipments->material_sub_description; ?></td>
                                             <td><?php echo $equipments->material_description; ?></td>

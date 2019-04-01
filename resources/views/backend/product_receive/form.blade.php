@@ -21,33 +21,20 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td colspan="3">
                         <div class="form-group">
-                            <label for="name" class="col-md-4 required">Items</label>
-                            <div class="col-md-8">
-                                <select class="form-control" id="item_id" name="item_id" required onchange="get_product_by_item_id(this.value);">
+                            <label for="name" class="col-md-2">Product</label>
+                            <div class="col-md-10">
+                                <select class="form-control select2" id="d_supplier_id" name="d_supplier_id" required>
                                     <option value="">Select</option>
                                     <?php
-                                    $tableName                      = 'items';
-                                    $order_by['order_by']           = 'ASC';
-                                    $order_by['order_by_column']    = 'name';
-                                    $projectsData                   = get_table_data_by_table($tableName, $order_by);
+                                    $projectsData   = get_product_with_category();
                                     if (isset($projectsData) && !empty($projectsData)) {
                                         foreach ($projectsData as $data) {
                                             ?>
-                                            <option value="<?php echo $data->id; ?>"><?php echo $data->name; ?></option>
+                                            <option value="<?php echo $data['id']; ?>"><?php echo $data['material_name']; ?></option>
                                         <?php }
                                     } ?>
-                                </select>
-                            </div>
-                        </div>
-                    </td>
-                    <td colspan="2">
-                        <div class="form-group">
-                            <label for="name" class="col-md-4 required">Products</label>
-                            <div class="col-md-8">
-                                <select class="form-control" id="product_id" name="product_id" required>
-                                    <option value="">Select</option>
                                 </select>
                             </div>
                         </div>
@@ -106,7 +93,7 @@
                             </div>
                         </div>
                     </td>
-                </tr>
+                </tr>                
                 <tr>                    
                     <td>
                         <div class="form-group">

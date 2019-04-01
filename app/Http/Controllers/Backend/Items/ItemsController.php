@@ -77,8 +77,9 @@ class ItemsController extends Controller
         }
         
         $createData = [
-            'name'  => $request->name,
-            'created_by'        => access()->user()->id,
+            'name'          => $request->name,
+            'code'          => $request->code,
+            'created_by'    => access()->user()->id,
         ];
 
         $create_response = ItemsModel::create($createData);
@@ -135,6 +136,7 @@ class ItemsController extends Controller
         // Create a new validator instance
         $validator  =   Validator::make($request->all(), [
             "category_id"               => "required",
+            "material_sub_id"           => "required",
             "material_sub_description"  => "required"
         ]);
         
@@ -148,7 +150,11 @@ class ItemsController extends Controller
         }
         
         // Duplicate check:         
-        $hasAlreadyData = DB::table('inv_materialcategory')->where('category_id', $request->category_id)->where('material_sub_description', $request->material_sub_description)->first();
+        $hasAlreadyData = DB::table('inv_materialcategory')
+                ->where('material_sub_id', $request->material_sub_id)
+                ->where('category_id', $request->category_id)
+                ->where('material_sub_description', $request->material_sub_description)
+                ->first();
         if(isset($hasAlreadyData) && !empty($hasAlreadyData)){
             return $feedback   =   [
                 'status'    =>  'error',
@@ -157,6 +163,7 @@ class ItemsController extends Controller
         }
         
         $createData = [
+            'material_sub_id'           => $request->material_sub_id,
             'category_id'               => $request->category_id,
             'material_sub_description'  => $request->material_sub_description,
         ];
@@ -238,6 +245,7 @@ class ItemsController extends Controller
         
         // Create a new validator instance
         $validator  =   Validator::make($request->all(), [
+            "material_id_code"      => "required",
             "material_id"           => "required",
             "material_sub_id"       => "required",
             "material_description"  => "required",
@@ -256,6 +264,7 @@ class ItemsController extends Controller
         
         // Duplicate check:         
         $hasAlreadyData = DB::table('inv_material')
+                ->where('material_id_code', $request->material_id_code)
                 ->where('material_id', $request->material_id)
                 ->where('material_sub_id', $request->material_sub_id)
                 ->where('material_description', $request->material_description)
@@ -268,6 +277,7 @@ class ItemsController extends Controller
         }
         
         $createData = [
+            'material_id_code'      => $request->material_id_code,
             'material_id'           => $request->material_id,
             'material_sub_id'       => $request->material_sub_id,
             'material_description'  => $request->material_description,
