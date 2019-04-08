@@ -19,27 +19,7 @@
                             </div>
                         </div>
                     </td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <div class="form-group">
-                            <label for="name" class="col-md-2">Product</label>
-                            <div class="col-md-10">
-                                <select class="form-control select2" id="d_supplier_id" name="d_supplier_id" required>
-                                    <option value="">Select</option>
-                                    <?php
-                                    $projectsData   = get_product_with_category();
-                                    if (isset($projectsData) && !empty($projectsData)) {
-                                        foreach ($projectsData as $data) {
-                                            ?>
-                                            <option value="<?php echo $data['id']; ?>"><?php echo $data['material_name']; ?></option>
-                                        <?php }
-                                    } ?>
-                                </select>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                </tr>                
                 <tr>
                     <td colspan="2">
                         <div class="form-group">
@@ -93,7 +73,27 @@
                             </div>
                         </div>
                     </td>
-                </tr>                
+                </tr> 
+                <tr>
+                    <td colspan="3">
+                        <div class="form-group">
+                            <label for="name" class="col-md-2">Product</label>
+                            <div class="col-md-10">
+                                <select class="form-control select2" id="product_id" name="product_id" required>
+                                    <option value="">Select</option>
+                                    <?php
+                                    $projectsData   = get_product_with_category();
+                                    if (isset($projectsData) && !empty($projectsData)) {
+                                        foreach ($projectsData as $data) {
+                                            ?>
+                                            <option value="<?php echo $data['id']; ?>"><?php echo $data['material_name']; ?></option>
+                                        <?php }
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
                 <tr>                    
                     <td>
                         <div class="form-group">

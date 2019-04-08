@@ -34,13 +34,14 @@
                     </div>
                 </div>
                 <div class='col-md-7'>
-                    <div class="table-responsive">          
+                    <div class="table-responsive table-bordered">          
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Product Name</th>
                                     <th>Quantity</th>
+                                    <th>Unit</th>
                                     <th>Unit Price</th>
                                     <th style="text-align: right">Total</th>
                                     <th>Action</th>

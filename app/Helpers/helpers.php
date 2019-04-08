@@ -306,7 +306,16 @@ function get_data_name_by_where($table,$where){
 }
 
 function get_product_name_by_product_id($product_id){
-    return DB::table('products')->where('id', $product_id)->first();
+    return DB::table('inv_material')->where('id', $product_id)->first();
+}
+
+function getProductUnitWithProductId($product_id){
+    return DB::table('inv_material as p')
+            ->select('u.unit_name')
+            ->where('p.id', $product_id)
+            ->join('inv_item_unit as u', 'u.id', '=', 'p.qty_unit')
+            ->first()->unit_name;
+    
 }
 
 function get_product_with_category() {
@@ -354,4 +363,8 @@ function getDefaultCategoryCode($table, $fieldName, $modifier, $defaultCode){
         return sprintf('%'.$modifier, $number);
     }
     return $defaultCode;    
+}
+
+function getTableRawDetails($tablename, $row_id){
+    return DB::table($tablename)->where('id', $row_id)->first();
 }
