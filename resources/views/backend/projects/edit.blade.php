@@ -32,6 +32,22 @@
                         ?>">
                     </div>    
                 </div> 
+                <div class="form-group">
+                    <label class="col-lg-2 control-label required" for="name">Code:</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control box-size" id="code" placeholder="Code" name="code" value="<?php
+                        if (isset($editData->code)) {
+                            echo $editData->code;
+                        }
+                        ?>">
+                    </div>    
+                </div> 
+                <div class="form-group">
+                    <label class="col-lg-2 control-label required" for="name">Address:</label>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" rows="5" id="address" name="address"><?php if (isset($editData->address)) { echo $editData->address; } ?></textarea>
+                    </div>    
+                </div>
                 <input type="hidden" name="edit_id" value="<?php echo $editData->id; ?>">
                 <input type="submit" type="submit" class="btn btn-primary btn-md text-center" value="Update">
             </form>

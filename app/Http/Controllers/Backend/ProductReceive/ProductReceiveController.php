@@ -41,7 +41,7 @@ class ProductReceiveController extends Controller
     
     public function generateReceivecode(){
         
-        $rendomnumber   =   rand(10, 200);
+        $rendomnumber   =   getDefaultCategoryCode('inv_receive', 'mrr_no', '03d', '001');
         return 'RCV-'.$rendomnumber;
     }
     public function product_receive_list(){

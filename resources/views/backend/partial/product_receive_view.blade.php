@@ -17,10 +17,7 @@
             From
             <address>
                 <strong>{{ getTableRawDetails('suppliers', $inv_receive->supplier_id)->name }}</strong><br>
-                795 Folsom Ave, Suite 600<br>
-                San Francisco, CA 94107<br>
-                Phone: (804) 123-5432<br>
-                Email: info@almasaeedstudio.com
+                {{ getTableRawDetails('suppliers', $inv_receive->supplier_id)->address }}
             </address>
         </div>
         <!-- /.col -->
@@ -28,10 +25,7 @@
             To
             <address>
                 <strong>{{ getTableRawDetails('projects', $inv_receive->receive_ware_hosue_id)->project_name }}</strong><br>
-                795 Folsom Ave, Suite 600<br>
-                San Francisco, CA 94107<br>
-                Phone: (555) 539-1037<br>
-                Email: john.doe@example.com
+                {{ getTableRawDetails('projects', $inv_receive->receive_ware_hosue_id)->address }}
             </address>
         </div>
     </div>

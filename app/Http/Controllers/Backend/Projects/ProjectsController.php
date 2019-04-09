@@ -32,7 +32,9 @@ class ProjectsController extends Controller
     public function store(Request $request) {
         // Create a new validator instance
         $validator  =   Validator::make($request->all(), [
-            "project_name"                  => "required"
+            "project_name"          => "required",
+            "code"                  => "required",
+            "address"               => "required",
         ]);
         
         // Validation Fails:
@@ -51,7 +53,9 @@ class ProjectsController extends Controller
         
         $createData = [
             'project_name'  => $request->project_name,
-            'created_by'        => access()->user()->id,
+            'code'          => $request->code,
+            'address'       => $request->address,
+            'created_by'    => access()->user()->id,
         ];
 
         $create_response = ProjectsModel::create($createData);
@@ -67,6 +71,8 @@ class ProjectsController extends Controller
     public function update(Request $request){
         $equipment                      = ProjectsModel::find($request->edit_id);
         $equipment->project_name        = $request->project_name;
+        $equipment->code                = $request->code;
+        $equipment->address             = $request->address;
         $equipment->save();
         return new RedirectResponse(route('admin.projects.index'), ['flash_success' => trans('alerts.backend.projects.updated')]); 
     }

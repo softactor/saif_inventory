@@ -39,7 +39,7 @@ class ProductChallanController extends Controller
     
     public function generateReceivecode(){
         
-        $rendomnumber   =   rand(10, 200);
+        $rendomnumber   =   getDefaultCategoryCode('inv_issue', 'issue_id', '03d', '001');
         return 'ISS-'.$rendomnumber;
     }
     public function store(Request $request) {

@@ -44,7 +44,7 @@
                 <div class="form-group">
                     <label class="col-lg-2 control-label required" for="name">Address:</label>
                     <div class="col-lg-10">
-                        <textarea class="form-control" rows="5" id="address" name="address"><?php if (isset($editData->name)) { echo $editData->address; } ?></textarea>
+                        <textarea class="form-control" rows="5" id="address" name="address"><?php if (isset($editData->address)) { echo $editData->address; } ?></textarea>
                     </div>    
                 </div>
                 <input type="hidden" name="edit_id" value="<?php echo $editData->id; ?>">

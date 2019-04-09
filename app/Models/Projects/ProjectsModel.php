@@ -27,5 +27,5 @@ class ProjectsModel  extends Model {
      *
      * @var array
      */
-    protected $fillable = ['project_name','created_by','updated_by','deleted_at','created_at','updated_at'];
+    protected $fillable = ['project_name','code','address','created_by','updated_by','deleted_at','created_at','updated_at'];
 }
