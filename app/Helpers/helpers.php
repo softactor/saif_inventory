@@ -368,3 +368,71 @@ function getDefaultCategoryCode($table, $fieldName, $modifier, $defaultCode){
 function getTableRawDetails($tablename, $row_id){
     return DB::table($tablename)->where('id', $row_id)->first();
 }
+/*
+ * This methid is used to get Parent name and Subparent Name
+ * by the material id
+ * can be call able from any where
+ * Created Date: 07/05/2019
+ * Created By: Tanveer Qureshee
+ * 
+ */
+function get_parent_and_subparent_by_material_id($material_id) {
+    $return = false;
+    $data = DB::table('items as i')
+            ->join('inv_materialcategory as imc', 'i.id', '=', 'imc.category_id')
+            ->join('inv_material as im', 'imc.id', '=', 'im.material_sub_id')
+            ->join('inv_item_unit as iiu', 'im.qty_unit', '=', 'iiu.id')
+            ->where('im.id', '=', $material_id)
+            ->select('i.name','i.id as parent_id','imc.material_sub_description','imc.id as sub_id', 'im.material_description', 'iiu.unit_name as unit_name')
+            ->first();
+
+    if (isset($data) && !empty($data)) {
+        $return = $data;
+    }
+
+    return $return;
+}
+
+/*
+ * This methid is used to get Parent name and Subparent Name
+ * by the material id
+ * can be call able from any where
+ * Created Date: 07/05/2019
+ * Created By: Tanveer Qureshee
+ * 
+ */
+function get_product_stock_by_material_id($param) {
+    $return = false;
+    $receiveData = DB::table('inv_materialbalance')
+            ->select(DB::raw('mb_materialid, sum(mbin_qty) as receiveTotal, sum(mbout_qty) as issueTotal, mbin_qty, mbin_val, mbout_qty, mbout_val, mbprice'))
+            ->where('mb_materialid', $param['where']['mb_materialid'])
+            ->where('mb_date', '>=', $param['where']['mb_date_from'])
+            ->where('mbtype', 'Receive')
+            ->first();
+    $issueData = DB::table('inv_materialbalance')
+            ->select(DB::raw('mb_materialid, sum(mbin_qty) as receiveTotal, sum(mbout_qty) as issueTotal, mbin_qty, mbin_val, mbout_qty, mbout_val, mbprice'))
+            ->where('mb_materialid', $param['where']['mb_materialid'])
+            ->where('mb_date', '>=', $param['where']['mb_date_from'])
+            ->where('mbtype', 'Issue')
+            ->first();
+    $feedbackData   =   [];
+    if(isset($receiveData) && !empty($receiveData)){
+        $feedbackData   =   [
+            'mb_materialid' => $receiveData->mb_materialid,
+            'receiveTotal'  => $receiveData->receiveTotal,
+            'issueTotal'    => $receiveData->issueTotal,
+            'mbin_qty'      => $receiveData->mbin_qty,
+            'mbin_val'      => $receiveData->mbin_val,
+            'mbout_qty'     => ((isset($issueData->mbout_qty) && !empty($issueData->mbout_qty)) ? $issueData->mbout_qty: 0),
+            'mbout_val'     => ((isset($issueData->mbout_val) && !empty($issueData->mbout_val)) ? $issueData->mbout_val: 0),
+            'mbprice'       => $receiveData->mbprice,
+            'quantity'      => ((isset($issueData->mbout_qty) && !empty($issueData->mbout_qty)) ? ($receiveData->mbin_qty-$issueData->mbout_qty): $receiveData->mbin_qty),
+        ];
+    }
+    
+    if (isset($feedbackData) && !empty($feedbackData)) {
+        $return = $feedbackData;
+    }
+
+    return $return;
+}

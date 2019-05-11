@@ -49,8 +49,10 @@ class PlantEquipmentController extends Controller
         
         // Validation Fails:
         if ($validator->fails()) {
-            echo 'Validation Error!';
-            exit;
+            return redirect('admin/plant_and_equipment/create')
+                            ->withErrors($validator)
+                            ->with('error', 'Validation fail!')
+                            ->withInput();
         }
         
         // Duplicate check:

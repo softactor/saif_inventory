@@ -14,4 +14,5 @@ Route::group(['namespace' => 'ProductChallan'], function () {
     Route::get('product_issue_list', 'ProductChallanController@product_issue_list')->name('product_challan.product_issue_list');
     Route::get('product_issue_view', 'ProductChallanController@product_issue_view')->name('product_challan.view');
     Route::post('process_product_issue_delete_url', 'ProductChallanController@process_product_issue_delete_url')->name('product_challan.process_product_issue_delete_url');
+    Route::get('issue_cancel', 'ProductChallanController@issue_cancel')->name('product_challan.issue_cancel');
 });

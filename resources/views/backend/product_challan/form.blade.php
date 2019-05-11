@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <label for="name" class="col-md-4">Part No</label>
                             <div class="col-md-8">
-                                <input type="text" name="part_no" id="part_no" class="form-control">
+                                <input type="text" name="part_no" id="part_no" class="form-control" value="<?php if(isset($projectData['part_no']) && !empty($projectData['part_no'])){ echo $projectData['part_no']; } ?>" onkeyup="productPartNoSuggession(this.value);">
                             </div>
                         </div>
                     </td>
@@ -43,7 +43,7 @@
                                     if (isset($projectsData) && !empty($projectsData)) {
                                         foreach ($projectsData as $data) {
                                             ?>
-                                            <option value="<?php echo $data->id; ?>"><?php echo $data->project_name; ?></option>
+                                            <option value="<?php echo $data->id; ?>" <?php if(isset($projectData['project_id']) && $projectData['project_id'] == $data->id){ echo "selected"; } ?>><?php echo $data->project_name; ?></option>
                                         <?php }
                                     }
                                     ?>

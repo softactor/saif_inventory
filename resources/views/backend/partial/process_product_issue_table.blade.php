@@ -33,6 +33,6 @@
         <button type="button" class="btn btn-primary btn-sm">Cancel</button>
     </td>
 </tr>
-<?php } ?>
-<input type="hidden" id='product_remove_url' value="<?php echo route('admin.product_challan.process_product_issue_delete_url'); ?>">
+<input type="hidden" id='product_remove_url' value="<?php echo route('admin.product_receive.process_product_receive_delete_url'); ?>">
 <input type="hidden" id='product_receive_no' value="<?php echo $product_receive_no; ?>">
+<?php } ?>

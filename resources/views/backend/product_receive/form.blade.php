@@ -19,37 +19,6 @@
                             </div>
                         </div>
                     </td>
-                </tr>                
-                <tr>
-                    <td colspan="2">
-                        <div class="form-group">
-                            <label for="name" class="col-md-4">Part No</label>
-                            <div class="col-md-8">
-                                <input type="text" name="part_no" id="part_no" class="form-control">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <label for="name" class="col-md-4 required">Project</label>
-                            <div class="col-md-8">
-                                <select class="form-control" id="project_id" name="project_id" required>
-                                    <option value="">Select</option>
-                                    <?php
-                                    $tableName = 'projects';
-                                    $order_by['order_by'] = 'ASC';
-                                    $order_by['order_by_column'] = 'project_name';
-                                    $projectsData = get_table_data_by_table($tableName, $order_by);
-                                    if (isset($projectsData) && !empty($projectsData)) {
-                                        foreach ($projectsData as $data) {
-                                            ?>
-                                            <option value="<?php echo $data->id; ?>"><?php echo $data->project_name; ?></option>
-                                        <?php }
-                                    } ?>
-                                </select>
-                            </div>
-                        </div>
-                    </td>
                 </tr>
                 <tr>
                     <td colspan="3">
@@ -87,6 +56,37 @@
                                         foreach ($projectsData as $data) {
                                             ?>
                                             <option value="<?php echo $data['id']; ?>"><?php echo $data['material_name']; ?></option>
+                                        <?php }
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="form-group">
+                            <label for="name" class="col-md-4">Part No</label>
+                            <div class="col-md-8">
+                                <input type="text" name="part_no" id="part_no" class="form-control">
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label for="name" class="col-md-4 required">Project</label>
+                            <div class="col-md-8">
+                                <select class="form-control" id="project_id" name="project_id" required>
+                                    <option value="">Select</option>
+                                    <?php
+                                    $tableName = 'projects';
+                                    $order_by['order_by'] = 'ASC';
+                                    $order_by['order_by_column'] = 'project_name';
+                                    $projectsData = get_table_data_by_table($tableName, $order_by);
+                                    if (isset($projectsData) && !empty($projectsData)) {
+                                        foreach ($projectsData as $data) {
+                                            ?>
+                                            <option value="<?php echo $data->id; ?>"><?php echo $data->project_name; ?></option>
                                         <?php }
                                     } ?>
                                 </select>

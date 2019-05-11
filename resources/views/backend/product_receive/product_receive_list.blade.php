@@ -17,6 +17,7 @@
             <table id="blogs-table" class="table table-condensed table-hover table-bordered">
                 <thead>
                     <tr>
+                        <th>Part No</th>
                         <th>Receive No</th>
                         <th>Date</th>
                         <th>Quantity</th>
@@ -30,6 +31,7 @@
                         foreach ($product_receive_list as $list) {
                             ?>
                             <tr>
+                                <td><?php echo $list->part_no; ?></td>
                                 <td><?php echo $list->mrr_no; ?></td>
                                 <td><?php echo date("F jS, Y", strtotime($list->mrr_date)); ?></td>
                                 <td><?php echo $list->no_of_material; ?></td>

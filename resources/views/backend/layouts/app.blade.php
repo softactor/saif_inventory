@@ -13,7 +13,8 @@
         <meta name="description" content="@yield('meta_description', 'Default Description')">
         <meta name="author" content="@yield('meta_author', 'Viral Solani')">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />        
+        <link href="{{ asset('css/backend/site_style.css') }}" rel="stylesheet" />        
         @yield('meta')
 
         <!-- Styles -->
@@ -40,11 +41,6 @@
         <script>
             window.Laravel = {!! json_encode([ 'csrfToken' => csrf_token() ]) !!};
         </script>
-        <?php
-            if(!empty($google_analytics)){
-                echo $google_analytics;
-            }
-        ?>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <style type="text/css">
             .phpdebugbar{
@@ -107,6 +103,33 @@
           });
           $( "#material_information" ).accordion();
           $('.select2').select2();
+          var availableTags = [
+                "ActionScript",
+                "AppleScript",
+                "Asp",
+                "BASIC",
+                "C",
+                "C++",
+                "Clojure",
+                "COBOL",
+                "ColdFusion",
+                "Erlang",
+                "Fortran",
+                "Groovy",
+                "Haskell",
+                "Java",
+                "JavaScript",
+                "Lisp",
+                "Perl",
+                "PHP",
+                "Python",
+                "Ruby",
+                "Scala",
+                "Scheme"
+              ];
+              $("#part_no").autocomplete({
+                source: availableTags
+              });
         });
         function getFilterWisePlantEquipmentResult(){
             $.ajax({
@@ -121,6 +144,25 @@
                     if(response.status == 'success'){
                         $('#plantEquipmentFilterresultModal').modal('show');
                         $('#dataArea').html(response.data);
+                    }                   
+                },
+                async: false // <- this turns it into synchronous
+            });
+        }
+        function getFilterWiseStockManagementResult(){
+            $.ajax({
+                url: $('#report_url').val(),
+                type: 'POST',
+                dataType: 'json',
+                data: $("#stockManagementFilter").serialize(),
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function (response) {
+                    console.log('Bang');
+                    console.log(response);
+                    if(response.status == 'success'){
+                        $('#stock_management_data').html(response.data);
                     }                   
                 },
                 async: false // <- this turns it into synchronous
@@ -585,7 +627,31 @@
                 async: false // <- this turns it into synchronous
             });
         }
+        // Code that uses other library's $ can follow here.
         
+        function calcelProductIssueDetails(receive_no, url){
+            $.ajax({
+                url: url,
+                type: 'Get',
+                dataType: 'json',
+                data: 'receive_no=' + receive_no,
+                success: function (response) {
+                    if (response.status == 'success') {
+                        swal("Success", response.message, "success");
+                        setTimeout(function () {
+                            window.location = response.redirect_route;
+                        }, 2000);
+                    }else{
+                       swal("Failed!", response.message, "error"); 
+                    }                   
+                },
+                async: false // <- this turns it into synchronous
+            });
+        }
+        function productPartNoSuggession(typePartNo){
+            console.log(typePartNo);
+            
+        }
         </script>
     </body>
 </html>

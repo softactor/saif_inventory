@@ -34,7 +34,9 @@ class ProductChallanController extends Controller
     
     public function create(){
         $receiveCode   = $this->generateReceivecode(); 
-        return new ViewResponse('backend.product_challan.create', compact('receiveCode'));
+        // check if there is any unprocess issue:
+        $products               =   DB::table('temp_product_receive_data')->where('receive_no', $receiveCode)->get();
+        return new ViewResponse('backend.product_challan.create', compact('receiveCode','products'));
     }
     
     public function generateReceivecode(){
@@ -47,7 +49,7 @@ class ProductChallanController extends Controller
         $receive_products   =   '';
         $status             =   'error';
         //get mrrno:
-        $mrrno  =   getDefaultCategoryCode('inv_issue', 'mrr_no', '03d', '001');
+        $mrrno  =   getDefaultCategoryCode('inv_issue', 'issue_id', '03d', '001');
         // Create a new validator instance
         $whereParam     =   [
             'receive_no'    =>  $request->receive_no
@@ -203,6 +205,12 @@ class ProductChallanController extends Controller
             $status         =   'validation_error';
             $feedbackData   =   $validator->errors();
         } else {
+            // check product is already in the receive form:
+            $whereParam     =   [
+                'receive_no'    =>  $request->receive_no,
+                'product_id'    =>  $request->product_id,
+            ];
+            $existingProduct    =   DB::table('temp_product_receive_data')->where($whereParam)->first();
             // get product last unit price:
             $productUnitDetails     =   DB::table('inv_receivedetail')->where('material_id', $request->product_id)->orderBy('id', 'DESC')->first();
             $productUnitPrice       =   $productUnitDetails->unit_price;
@@ -221,23 +229,22 @@ class ProductChallanController extends Controller
             ];
 
             // check product is already in the receive form:
+            $whereParam =   [];
             $whereParam = [
                 'mb.mb_materialid' => $request->product_id,
             ];
             $existingProductQty = DB::table('inv_materialbalance as mb')
                             ->select(DB::raw("(SUM(mb.mbin_qty)-SUM(mb.mbout_qty)) as BalanceQty"))
                             ->where($whereParam)->first();
-
-            if ($existingProductQty->BalanceQty < $request->quantity) {
+            if (isset($existingProduct) && !empty($existingProduct)) {
+                $totalRequestQuantity   =   $request->quantity + $existingProduct->quantity;
+            }else{
+               $totalRequestQuantity    =   $request->quantity;
+            }
+            if ($existingProductQty->BalanceQty < $totalRequestQuantity) {
                 $status         =   'qty_error';
                 $feedbackData   =   'Insufficient quantity';
-            } else {                
-                // check product is already in the receive form:
-                $whereParam     =   [
-                    'receive_no'    =>  $request->receive_no,
-                    'product_id'    =>  $request->product_id,
-                ];
-                $existingProduct    =   DB::table('temp_product_receive_data')->where($whereParam)->first();
+            } else {
                 if (isset($existingProduct) && !empty($existingProduct)) {
                     $updateQuantity = $existingProduct->quantity + $request->quantity;
                     $updateData = [
@@ -286,5 +293,15 @@ class ProductChallanController extends Controller
             ];
             echo json_encode($feedback_data);
         }        
+    }
+    
+    public function issue_cancel(Request $request){
+        $deletedRows = DB::table('temp_product_receive_data')->where('receive_no', $request->receive_no)->delete();
+        $feedback_data          =   [
+            'status'          =>  'success',
+            'redirect_route'  =>  route('admin.product_challan.create'),
+            'message'         => 'Process have successfully deleted.'
+        ];
+        echo json_encode($feedback_data);
     }
 }

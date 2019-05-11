@@ -115,7 +115,7 @@ CREATE TABLE `inv_ga_listunit` (
 
 CREATE TABLE `inv_issue` (
   `id` int(11) NOT NULL,
-  `issue_id` int(10) NOT NULL,
+  `issue_id` varchar(25) NOT NULL,
   `issue_date` date NOT NULL,
   `buyer_id` varchar(25) CHARACTER SET utf8 NOT NULL,
   `posted_to_gl` int(11) NOT NULL,
@@ -123,8 +123,18 @@ CREATE TABLE `inv_issue` (
   `issue_type` varchar(20) CHARACTER SET utf8 NOT NULL,
   `issue_unit_id` varchar(20) CHARACTER SET utf8 NOT NULL,
   `chk_year_end` int(11) NOT NULL,
-  `no_of_material` float NOT NULL
+  `no_of_material` float NOT NULL,
+  `issue_total` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `inv_issue`
+--
+
+INSERT INTO `inv_issue` (`id`, `issue_id`, `issue_date`, `buyer_id`, `posted_to_gl`, `remarks`, `issue_type`, `issue_unit_id`, `chk_year_end`, `no_of_material`, `issue_total`) VALUES
+(2, '001', '2019-04-13', '1', 1, 'test', 'Issue', '3', 1, 11, 51),
+(3, '002', '2019-05-07', '1', 1, 'test', 'Issue', '3', 1, 5, 45000),
+(4, '003', '2019-05-09', '2', 1, 'test', 'Issue', '3', 1, 2, 200);
 
 -- --------------------------------------------------------
 
@@ -148,6 +158,16 @@ CREATE TABLE `inv_issuedetail` (
   `sales_margin` float NOT NULL,
   `id_serial_id` varchar(50) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `inv_issuedetail`
+--
+
+INSERT INTO `inv_issuedetail` (`id`, `issue_id`, `material_id`, `expense_acct_id`, `cost_center`, `issue_qty`, `issue_price`, `sl_no`, `total_issue`, `sales_price`, `total_sales`, `sales_profit`, `sales_margin`, `id_serial_id`) VALUES
+(4, '001', '5', '1', '1', 5, 3, 1, 15, 0, 0, 0, 0, '1'),
+(5, '001', '4', '1', '1', 6, 6, 1, 36, 0, 0, 0, 0, '1'),
+(6, '002', '6', '1', '1', 5, 9000, 1, 45000, 0, 0, 0, 0, '1'),
+(7, '003', '7', '1', '1', 2, 100, 1, 200, 0, 0, 0, 0, '1');
 
 -- --------------------------------------------------------
 
@@ -177,6 +197,7 @@ INSERT INTO `inv_item_unit` (`id`, `unit_name`) VALUES
 
 CREATE TABLE `inv_material` (
   `id` int(11) NOT NULL,
+  `material_id_code` varchar(10) DEFAULT NULL,
   `material_id` varchar(15) CHARACTER SET utf8 NOT NULL,
   `material_sub_id` varchar(25) CHARACTER SET utf8 NOT NULL,
   `material_description` varchar(75) CHARACTER SET utf8 NOT NULL,
@@ -199,8 +220,11 @@ CREATE TABLE `inv_material` (
 -- Dumping data for table `inv_material`
 --
 
-INSERT INTO `inv_material` (`id`, `material_id`, `material_sub_id`, `material_description`, `material_min_stock`, `avg_con_sump`, `lead_time`, `re_order_level`, `qty_unit`, `op_balance_qty`, `op_balance_val`, `chk_print`, `cur_qty`, `cur_price`, `cur_value`, `last_issue`, `last_receive`) VALUES
-(1, '16', '11', 'test', 5, 0, 0, 0, '1', 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00');
+INSERT INTO `inv_material` (`id`, `material_id_code`, `material_id`, `material_sub_id`, `material_description`, `material_min_stock`, `avg_con_sump`, `lead_time`, `re_order_level`, `qty_unit`, `op_balance_qty`, `op_balance_val`, `chk_print`, `cur_qty`, `cur_price`, `cur_value`, `last_issue`, `last_receive`) VALUES
+(4, '001', '21', '3', 'Cement 50 KG', 20, 0, 0, 0, '1', 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00'),
+(5, '002', '19', '1', 'Acid', 10, 0, 0, 0, '1', 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00'),
+(6, '003', '21', '3', 'Box Crane 2190', 50, 0, 0, 0, '1', 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00'),
+(7, '004', '22', '4', 'Tata wheel 1220', 10, 0, 0, 0, '3', 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -222,8 +246,24 @@ CREATE TABLE `inv_materialbalance` (
   `mbserial` float NOT NULL,
   `mbserial_id` varchar(10) CHARACTER SET utf8 NOT NULL,
   `mbunit_id` varchar(15) CHARACTER SET utf8 NOT NULL,
-  `jvno` varchar(25) CHARACTER SET utf8 NOT NULL
+  `jvno` varchar(25) CHARACTER SET utf8 NOT NULL,
+  `part_no` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `inv_materialbalance`
+--
+
+INSERT INTO `inv_materialbalance` (`id`, `mb_ref_id`, `mb_materialid`, `mb_date`, `mbin_qty`, `mbin_val`, `mbout_qty`, `mbout_val`, `mbprice`, `mbtype`, `mbserial`, `mbserial_id`, `mbunit_id`, `jvno`, `part_no`) VALUES
+(6, '001', '5', '2019-04-13', 50, 150, 0, 0, 3, 'Receive', 1.1, '0', '1', '001', '123456'),
+(7, '001', '4', '2019-04-13', 60, 360, 0, 0, 6, 'Receive', 1.1, '0', '1', '001', '123456'),
+(8, '001', '5', '2019-04-13', 0, 0, 5, 15, 3, 'Issue', 1.1, '0', '3', '001', NULL),
+(9, '001', '4', '2019-04-13', 0, 0, 6, 36, 6, 'Issue', 1.1, '0', '3', '001', NULL),
+(10, '002', '4', '2019-04-21', 10, 60, 0, 0, 6, 'Receive', 1.1, '0', '3', '002', '1235567'),
+(11, '003', '6', '2019-05-07', 12, 108000, 0, 0, 9000, 'Receive', 1.1, '0', '3', '003', '212134'),
+(12, '002', '6', '2019-05-07', 0, 0, 5, 45000, 9000, 'Issue', 1.1, '0', '3', '002', NULL),
+(13, '004', '7', '2019-05-09', 2, 200, 0, 0, 100, 'Receive', 1.1, '0', '3', '004', '9090911'),
+(14, '003', '7', '2019-05-09', 0, 0, 2, 200, 100, 'Issue', 1.1, '0', '3', '003', NULL);
 
 -- --------------------------------------------------------
 
@@ -243,16 +283,11 @@ CREATE TABLE `inv_materialcategory` (
 --
 
 INSERT INTO `inv_materialcategory` (`id`, `material_sub_id`, `category_id`, `material_sub_description`) VALUES
-(1, NULL, '4', 'cat test 1 updated'),
-(2, NULL, '4', 'test 2'),
-(3, NULL, '3', 'test 3'),
-(4, NULL, '3', 'test 4'),
-(5, NULL, '2', 'test 5'),
-(6, NULL, '2', 'test 6'),
-(7, NULL, '5', 'test vc 1'),
-(8, NULL, '5', 'test vc 2'),
-(11, NULL, '16', 'Acid'),
-(12, NULL, '16', 'sugar');
+(1, '001', '19', 'Test 01'),
+(2, '002', '19', 'Test 02'),
+(3, '003', '21', 'Heavy Device 001'),
+(4, '004', '22', 'Tata'),
+(5, '005', '22', 'Content');
 
 -- --------------------------------------------------------
 
@@ -278,7 +313,7 @@ CREATE TABLE `inv_materialcategorysub` (
 CREATE TABLE `inv_receive` (
   `id` int(11) NOT NULL,
   `mrr_no` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `mrr_date` date NOT NULL,
+  `mrr_date` datetime NOT NULL,
   `purchase_id` varchar(15) CHARACTER SET utf8 NOT NULL,
   `receive_acct_id` varchar(15) CHARACTER SET utf8 NOT NULL,
   `supplier_id` varchar(15) CHARACTER SET utf8 NOT NULL,
@@ -290,8 +325,19 @@ CREATE TABLE `inv_receive` (
   `chk_year_end` int(11) NOT NULL,
   `receive_total` float NOT NULL,
   `no_of_material` float NOT NULL,
-  `jv_no` varchar(25) CHARACTER SET utf8 NOT NULL
+  `jv_no` varchar(25) CHARACTER SET utf8 NOT NULL,
+  `part_no` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `inv_receive`
+--
+
+INSERT INTO `inv_receive` (`id`, `mrr_no`, `mrr_date`, `purchase_id`, `receive_acct_id`, `supplier_id`, `posted_tog`, `remarks`, `receive_type`, `receive_ware_hosue_id`, `receive_unit_id`, `chk_year_end`, `receive_total`, `no_of_material`, `jv_no`, `part_no`) VALUES
+(14, '001', '2019-04-13 09:02:42', '001', '5-11', '1', 1, 'test', 'Receive', 1, '1', 1, 510, 110, '001', '123456'),
+(15, '002', '2019-04-21 05:31:12', '002', '5-11', '1', 1, 'test', 'Receive', 3, '3', 1, 997, 10, '002', '1235567'),
+(16, '003', '2019-05-07 05:44:09', '003', '5-11', '1', 1, 'test', 'Receive', 3, '3', 1, 108000, 12, '003', '212134'),
+(17, '004', '2019-05-09 04:57:01', '004', '5-11', '2', 1, 'test', 'Receive', 3, '3', 1, 200, 2, '004', '9090911');
 
 -- --------------------------------------------------------
 
@@ -307,8 +353,20 @@ CREATE TABLE `inv_receivedetail` (
   `unit_price` float NOT NULL,
   `sl_no` int(11) NOT NULL,
   `total_receive` float NOT NULL,
-  `rd_serial_id` varchar(20) CHARACTER SET utf8 NOT NULL
+  `rd_serial_id` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `part_no` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `inv_receivedetail`
+--
+
+INSERT INTO `inv_receivedetail` (`id`, `mrr_no`, `material_id`, `receive_qty`, `unit_price`, `sl_no`, `total_receive`, `rd_serial_id`, `part_no`) VALUES
+(29, '001', '5', 50, 3, 1, 150, '1', '123456'),
+(30, '001', '4', 60, 6, 1, 360, '1', '123456'),
+(31, '002', '4', 10, 99.7, 1, 997, '1', '1235567'),
+(32, '003', '6', 12, 9000, 1, 108000, '1', '212134'),
+(33, '004', '7', 2, 100, 1, 200, '1', '9090911');
 
 -- --------------------------------------------------------
 
@@ -368,6 +426,7 @@ CREATE TABLE `inv_warehosueinfo` (
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
   `name` varchar(400) DEFAULT NULL,
+  `code` varchar(4) DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `created_at` int(11) DEFAULT NULL,
@@ -379,15 +438,11 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`id`, `name`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, 'Items-2', 1, NULL, 2019, '2019-02-24 20:54:08', NULL),
-(3, 'cccc', 1, NULL, 2019, '2019-03-12 02:31:50', NULL),
-(4, 'cat 5', 1, NULL, 2019, '2019-03-18 23:33:40', NULL),
-(5, 'vc', 1, NULL, 2019, '2019-03-12 03:09:57', NULL),
-(6, 'vcd', 1, NULL, 2019, '2019-03-12 03:10:29', NULL),
-(7, 'new item update', 1, NULL, 2019, '2019-03-18 23:33:52', NULL),
-(15, 'apple', 1, NULL, 2019, '2019-03-19 01:48:52', NULL),
-(16, 'Raw materials', 1, NULL, 2019, '2019-03-19 04:47:27', NULL);
+INSERT INTO `items` (`id`, `name`, `code`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(19, 'Raw Materials', '01', 1, NULL, 2019, '2019-03-30 01:59:40', NULL),
+(20, 'Equipment', '02', 1, NULL, 2019, '2019-03-30 01:59:59', NULL),
+(21, 'Port Device', '03', 1, NULL, 2019, '2019-04-01 23:26:49', NULL),
+(22, 'Wheel', '04', 1, NULL, 2019, '2019-05-08 22:47:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -412,7 +467,7 @@ CREATE TABLE `menus` (
 --
 
 INSERT INTO `menus` (`id`, `type`, `name`, `items`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'backend', 'Backend Sidebar Menu', '[{\"id\":11,\"name\":\"Access Management\",\"url\":\"\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa-users\",\"view_permission_id\":\"view-access-management\",\"content\":\"Access Management\",\"children\":[{\"id\":12,\"name\":\"User Management\",\"url\":\"admin.access.user.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"view_permission_id\":\"view-user-management\",\"content\":\"User Management\"},{\"id\":13,\"name\":\"Role Management\",\"url\":\"admin.access.role.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"view_permission_id\":\"view-role-management\",\"content\":\"Role Management\"},{\"id\":14,\"name\":\"Permission Management\",\"url\":\"admin.access.permission.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"view_permission_id\":\"view-permission-management\",\"content\":\"Permission Management\"}]},{\"id\":1,\"name\":\"Module\",\"url\":\"admin.modules.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa-wrench\",\"view_permission_id\":\"view-module\",\"content\":\"Module\"},{\"id\":3,\"name\":\"Menus\",\"url\":\"admin.menus.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa-bars\",\"view_permission_id\":\"view-menu\",\"content\":\"Menus\"},{\"id\":9,\"name\":\"Settings\",\"url\":\"admin.settings.edit?id=1\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa-gear\",\"view_permission_id\":\"edit-settings\",\"content\":\"Settings\"},{\"id\":17,\"name\":\"Projects\",\"url\":\"admin.projects.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-tasks\",\"view_permission_id\":\"view-projects\",\"content\":\"Projects\"},{\"view_permission_id\":\"view-items\",\"icon\":\"fa fa-get-pocket\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.items.index\",\"name\":\"Items\",\"id\":18,\"content\":\"Items\"},{\"id\":22,\"name\":\"Suppliers\",\"url\":\"admin.suppliers.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-user-circle\",\"view_permission_id\":\"view-suppliers\",\"content\":\"Suppliers\"},{\"id\":19,\"name\":\"Products\",\"url\":\"admin.products.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-gift\",\"view_permission_id\":\"view-products\",\"content\":\"Products\"},{\"id\":20,\"name\":\"Product Receive\",\"url\":\"admin.product_receive.create\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-cube\",\"view_permission_id\":\"create-product-receive\",\"content\":\"Product Receive\"},{\"view_permission_id\":\"create-product-challan\",\"icon\":\"fa fa-truck\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.product_challan.create\",\"name\":\"Product Issue\",\"id\":21,\"content\":\"Product Issue\"},{\"view_permission_id\":\"view-plant-equipment\",\"icon\":\"fa fa-trello\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.plantEquipment.index\",\"name\":\"Plant Equipment\",\"id\":15,\"content\":\"Plant Equipment\"},{\"view_permission_id\":\"view-reports\",\"icon\":\"fa fa-bar-chart\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.reports.index\",\"name\":\"Reports\",\"id\":16,\"content\":\"Reports\"}]', 1, NULL, '2019-01-14 19:17:14', '2019-02-24 17:44:48', NULL);
+(1, 'backend', 'Backend Sidebar Menu', '[{\"view_permission_id\":\"view-access-management\",\"icon\":\"fa-users\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"\",\"name\":\"Access Management\",\"id\":11,\"content\":\"Access Management\",\"children\":[{\"view_permission_id\":\"view-user-management\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.access.user.index\",\"name\":\"User Management\",\"id\":12,\"content\":\"User Management\"},{\"view_permission_id\":\"view-role-management\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.access.role.index\",\"name\":\"Role Management\",\"id\":13,\"content\":\"Role Management\"},{\"view_permission_id\":\"view-permission-management\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.access.permission.index\",\"name\":\"Permission Management\",\"id\":14,\"content\":\"Permission Management\"}]},{\"view_permission_id\":\"view-module\",\"icon\":\"fa-wrench\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.modules.index\",\"name\":\"Module\",\"id\":1,\"content\":\"Module\"},{\"view_permission_id\":\"view-menu\",\"icon\":\"fa-bars\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.menus.index\",\"name\":\"Menus\",\"id\":3,\"content\":\"Menus\"},{\"view_permission_id\":\"edit-settings\",\"icon\":\"fa-gear\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.settings.edit?id=1\",\"name\":\"Settings\",\"id\":9,\"content\":\"Settings\"},{\"view_permission_id\":\"view-projects\",\"icon\":\"fa fa-tasks\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.projects.index\",\"name\":\"Projects\",\"id\":17,\"content\":\"Projects\"},{\"id\":18,\"name\":\"Items\",\"url\":\"admin.items.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-get-pocket\",\"view_permission_id\":\"view-items\",\"content\":\"Items\"},{\"view_permission_id\":\"view-suppliers\",\"icon\":\"fa fa-user-circle\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.suppliers.index\",\"name\":\"Suppliers\",\"id\":22,\"content\":\"Suppliers\"},{\"id\":19,\"name\":\"Products Receive\",\"url\":\"admin.products.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-gift\",\"view_permission_id\":\"view-products\",\"content\":\"Products Receive\",\"children\":[{\"view_permission_id\":\"create-product-receive\",\"icon\":\"fa fa-cube\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.product_receive.create\",\"name\":\"Receive Form\",\"id\":20,\"content\":\"Receive Form\"},{\"id\":23,\"name\":\"Receive List\",\"url\":\"admin.product_receive.product_receive_list\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-truck\",\"view_permission_id\":\"view-reports\",\"content\":\"Receive List\"}]},{\"id\":25,\"name\":\"Product Issue\",\"url\":\"\",\"url_type\":\"static\",\"open_in_new_tab\":0,\"icon\":\"fa fa-truck\",\"view_permission_id\":\"view-reports\",\"content\":\"Product Issue\",\"children\":[{\"view_permission_id\":\"create-product-challan\",\"icon\":\"fa fa-truck\",\"open_in_new_tab\":0,\"url_type\":\"route\",\"url\":\"admin.product_challan.create\",\"name\":\"Issue Form\",\"id\":21,\"content\":\"Issue Form\"},{\"id\":26,\"name\":\"Issue List\",\"url\":\"admin.product_challan.product_issue_list\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-truck\",\"view_permission_id\":\"view-reports\",\"content\":\"Issue List\"}]},{\"id\":15,\"name\":\"Plant Equipment\",\"url\":\"admin.plantEquipment.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-trello\",\"view_permission_id\":\"view-plant-equipment\",\"content\":\"Plant Equipment\"},{\"view_permission_id\":\"view-reports\",\"icon\":\"fa fa-bar-chart\",\"open_in_new_tab\":0,\"url_type\":\"static\",\"url\":\"\",\"name\":\"Reports\",\"id\":16,\"content\":\"Reports\",\"children\":[{\"id\":27,\"name\":\"Products\",\"url\":\"admin.reports.index\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-bar-chart\",\"view_permission_id\":\"view-reports\",\"content\":\"Products\"},{\"id\":28,\"name\":\"Stock Management\",\"url\":\"admin.reports.stock-management\",\"url_type\":\"route\",\"open_in_new_tab\":0,\"icon\":\"fa fa-bar-chart\",\"view_permission_id\":\"view-reports\",\"content\":\"Stock Management\"}]}]', 1, NULL, '2019-01-14 19:17:14', '2019-04-26 19:52:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -666,7 +721,59 @@ INSERT INTO `notifications` (`id`, `message`, `user_id`, `type`, `is_read`, `cre
 (149, 'User Logged In: Admin', 1, 1, 0, '2019-03-18 02:55:31', NULL),
 (150, 'User Logged In: Admin', 1, 1, 0, '2019-03-18 21:34:29', NULL),
 (151, 'User Logged In: Admin', 1, 1, 0, '2019-03-19 03:44:58', NULL),
-(152, 'User Logged In: Admin', 1, 1, 0, '2019-03-19 20:48:25', NULL);
+(152, 'User Logged In: Admin', 1, 1, 0, '2019-03-19 20:48:25', NULL),
+(153, 'User Logged In: Admin', 1, 1, 0, '2019-03-20 22:19:52', NULL),
+(154, 'User Logged In: Admin', 1, 1, 0, '2019-03-23 00:12:27', NULL),
+(155, 'User Logged In: Admin', 1, 1, 0, '2019-03-24 22:23:42', NULL),
+(156, 'User Logged In: Admin', 1, 1, 0, '2019-03-26 23:28:44', NULL),
+(157, 'User Logged In: Admin', 1, 1, 0, '2019-03-27 20:36:15', NULL),
+(158, 'User Logged In: Admin', 1, 1, 0, '2019-03-28 01:42:10', NULL),
+(159, 'User Logged In: Admin', 1, 1, 0, '2019-03-29 22:47:27', NULL),
+(160, 'User Logged In: Admin', 1, 1, 0, '2019-03-31 21:18:42', NULL),
+(161, 'User Logged In: Admin', 1, 1, 0, '2019-04-01 03:14:19', NULL),
+(162, 'User Logged In: Admin', 1, 1, 0, '2019-04-01 22:59:31', NULL),
+(163, 'User Logged In: Admin', 1, 1, 0, '2019-04-02 03:16:40', NULL),
+(164, 'User Logged In: Admin', 1, 1, 0, '2019-04-02 21:52:00', NULL),
+(165, 'User Logged In: Admin', 1, 1, 0, '2019-04-03 03:28:03', NULL),
+(166, 'User Logged In: Admin', 1, 1, 0, '2019-04-03 09:35:50', NULL),
+(167, 'User Logged In: Admin', 1, 1, 0, '2019-04-03 21:48:55', NULL),
+(168, 'User Logged In: Admin', 1, 1, 0, '2019-04-04 21:19:25', NULL),
+(169, 'User Logged In: Admin', 1, 1, 0, '2019-04-04 23:32:12', NULL),
+(170, 'User Logged In: Admin', 1, 1, 0, '2019-04-05 01:36:28', NULL),
+(171, 'User Logged In: Admin', 1, 1, 0, '2019-04-05 22:16:13', NULL),
+(172, 'User Logged In: Admin', 1, 1, 0, '2019-04-06 21:43:12', NULL),
+(173, 'User Logged In: Admin', 1, 1, 0, '2019-04-07 20:46:00', NULL),
+(174, 'User Logged In: Admin', 1, 1, 0, '2019-04-08 03:44:37', NULL),
+(175, 'User Logged In: Admin', 1, 1, 0, '2019-04-08 04:07:09', NULL),
+(176, 'User Logged In: Admin', 1, 1, 0, '2019-04-08 23:15:59', NULL),
+(177, 'User Logged In: Admin', 1, 1, 0, '2019-04-09 02:09:51', NULL),
+(178, 'User Logged In: Admin', 1, 1, 0, '2019-04-09 22:37:47', NULL),
+(179, 'User Logged In: Admin', 1, 1, 0, '2019-04-10 04:54:52', NULL),
+(180, 'User Logged In: Admin', 1, 1, 0, '2019-04-13 00:19:24', NULL),
+(181, 'User Logged In: Admin', 1, 1, 0, '2019-04-15 21:44:52', NULL),
+(182, 'User Logged In: Admin', 1, 1, 0, '2019-04-16 02:23:59', NULL),
+(183, 'User Logged In: Admin', 1, 1, 0, '2019-04-16 05:12:55', NULL),
+(184, 'User Logged In: Admin', 1, 1, 0, '2019-04-20 22:13:16', NULL),
+(185, 'User Logged In: Admin', 1, 1, 0, '2019-04-23 03:53:48', NULL),
+(186, 'User Logged In: Admin', 1, 1, 0, '2019-04-23 23:22:26', NULL),
+(187, 'User Logged In: Admin', 1, 1, 0, '2019-04-24 05:24:06', NULL),
+(188, 'User Logged In: Admin', 1, 1, 0, '2019-04-25 01:36:08', NULL),
+(189, 'User Logged In: Admin', 1, 1, 0, '2019-04-25 05:30:54', NULL),
+(190, 'User Logged In: Admin', 1, 1, 0, '2019-04-26 19:06:07', NULL),
+(191, 'User Logged In: Admin', 1, 1, 0, '2019-04-27 00:28:53', NULL),
+(192, 'User Logged In: Admin', 1, 1, 0, '2019-04-27 02:21:19', NULL),
+(193, 'User Logged In: Admin', 1, 1, 0, '2019-04-27 21:49:04', NULL),
+(194, 'User Logged In: Admin', 1, 1, 0, '2019-04-28 00:42:50', NULL),
+(195, 'User Logged In: Admin', 1, 1, 0, '2019-04-28 02:05:11', NULL),
+(196, 'User Logged In: Admin', 1, 1, 0, '2019-05-05 22:03:49', NULL),
+(197, 'User Logged In: Admin', 1, 1, 0, '2019-05-06 02:45:29', NULL),
+(198, 'User Logged In: Admin', 1, 1, 0, '2019-05-06 22:09:31', NULL),
+(199, 'User Logged In: Admin', 1, 1, 0, '2019-05-07 02:26:46', NULL),
+(200, 'User Logged In: Admin', 1, 1, 0, '2019-05-07 22:02:50', NULL),
+(201, 'User Logged In: Admin', 1, 1, 0, '2019-05-08 22:18:28', NULL),
+(202, 'User Logged In: Admin', 1, 1, 0, '2019-05-08 22:40:26', NULL),
+(203, 'User Logged In: Admin', 1, 1, 0, '2019-05-09 01:42:40', NULL),
+(204, 'User Logged In: Admin', 1, 1, 0, '2019-05-10 23:26:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -996,7 +1103,9 @@ INSERT INTO `products` (`id`, `item_id`, `code`, `name`, `unit_name`, `created_b
 
 CREATE TABLE `projects` (
   `id` int(11) NOT NULL,
+  `code` varchar(200) DEFAULT NULL,
   `project_name` varchar(500) NOT NULL,
+  `address` text,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1008,9 +1117,9 @@ CREATE TABLE `projects` (
 -- Dumping data for table `projects`
 --
 
-INSERT INTO `projects` (`id`, `project_name`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Project A', 1, NULL, '2019-02-10 03:09:28', '2019-02-10 04:05:57', NULL),
-(3, 'Project B', 1, NULL, '2019-02-10 04:05:36', '2019-02-10 04:05:36', NULL);
+INSERT INTO `projects` (`id`, `code`, `project_name`, `address`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'P-001', 'E-Engineering', '72, Mohakhali C/A, (8th Floor), Rupayan Center, Dhaka-1212, Bangladesh.\r\nTel. : (88-02) 9825705, 9891562, 9891597, 9856358-9,\r\n9857902, 9852454, 9854423,\r\nFax: (88-02) 9855949, \r\nWeb:www.saifpowertecltd.com', 1, NULL, '2019-02-10 03:09:28', '2019-04-08 23:46:55', NULL),
+(3, 'P-002', 'Solar Power', '72, Mohakhali C/A, (8th Floor), Rupayan Center, Dhaka-1212, Bangladesh.\r\nTel. : (88-02) 9825705, 9891562, 9891597, 9856358-9,\r\n9857902, 9852454, 9854423,\r\nFax: (88-02) 9855949, \r\nWeb:www.saifpowertecltd.com', 1, NULL, '2019-02-10 04:05:36', '2019-04-08 23:48:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -1190,7 +1299,8 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id`, `code`, `name`, `address`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'sup-01', 'Supplier 1 Updated', 'Mohammadpur, Housing LTD\r\nRoad: 03; House: 01\r\nDhaka,1207', 1, 0, 2019, '2019-02-24 18:48:18', '0000-00-00 00:00:00');
+(1, 'sup-01', 'Apex Production', 'Contact: 017166998877\r\nMohammadpur, Housing LTD\r\nRoad: 03; House: 01\r\nDhaka,1207', 1, 0, 2019, '2019-04-08 23:21:09', '0000-00-00 00:00:00'),
+(2, 'tata-012', 'Tata', 'test', 1, 0, 2019, '2019-05-08 22:51:14', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1202,11 +1312,11 @@ CREATE TABLE `temp_product_receive_data` (
   `id` int(11) NOT NULL,
   `receive_no` varchar(500) NOT NULL,
   `receive_date` datetime NOT NULL,
-  `item_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `part_no` varchar(500) NOT NULL,
-  `supplier_id` int(11) NOT NULL,
+  `supplier_id` varchar(250) DEFAULT NULL,
   `quantity` int(11) NOT NULL,
+  `unit_price` float NOT NULL DEFAULT '0',
   `project_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1214,22 +1324,16 @@ CREATE TABLE `temp_product_receive_data` (
 -- Dumping data for table `temp_product_receive_data`
 --
 
-INSERT INTO `temp_product_receive_data` (`id`, `receive_no`, `receive_date`, `item_id`, `product_id`, `part_no`, `supplier_id`, `quantity`, `project_id`) VALUES
-(1, 'RCV-001', '2019-02-26 00:00:00', 1, 2, 'abc-001', 1, 10, 1),
-(2, 'RCV-001', '2019-02-26 00:00:00', 1, 2, 'abc-001', 1, 10, 1),
-(3, 'RCV-001', '2019-02-26 00:00:00', 1, 2, 'abc-001', 1, 10, 1),
-(4, 'RCV-001', '2019-02-26 00:00:00', 1, 2, 'abc-001', 1, 10, 1),
-(5, 'RCV-002', '2019-02-26 00:00:00', 1, 2, 'ABC-12', 1, 10, 1),
-(6, 'RCV-002', '2019-02-26 00:00:00', 1, 2, 'ABC-12', 1, 10, 1),
-(7, 'RCV-002', '2019-02-26 00:00:00', 1, 2, 'ABC-12', 1, 10, 1),
-(8, 'RCV-002', '2019-02-26 00:00:00', 1, 2, 'ABC-12', 1, 10, 1),
-(9, 'cff', '2019-02-26 00:00:00', 1, 2, 'sd', 1, 12, 1),
-(10, 'RCV-003', '2019-02-26 00:00:00', 1, 2, 'abc', 1, 12, 1),
-(11, 'RCV-003', '2019-02-26 00:00:00', 1, 2, 'abc', 1, 12, 1),
-(12, 'RCV-003', '2019-02-26 00:00:00', 1, 2, 'abc', 1, 120, 1),
-(13, 'RCV-003', '2019-02-26 00:00:00', 2, 3, 'abc', 1, 30, 1),
-(14, 'RCV-003', '2019-02-26 00:00:00', 1, 2, 'abc-001', 1, 10, 1),
-(15, 'RCV-003', '2019-02-26 00:00:00', 2, 3, 'abc-001', 1, 100, 1);
+INSERT INTO `temp_product_receive_data` (`id`, `receive_no`, `receive_date`, `product_id`, `part_no`, `supplier_id`, `quantity`, `unit_price`, `project_id`) VALUES
+(99, 'RCV-001', '2019-04-13 00:00:00', 5, '123456', '1', 50, 3, 1),
+(100, 'RCV-001', '2019-04-13 00:00:00', 4, '123456', '1', 60, 6, 1),
+(101, 'ISS-001', '2019-04-13 00:00:00', 5, '123456', '1', 5, 3, 3),
+(102, 'ISS-001', '2019-04-13 00:00:00', 4, '123456', '1', 6, 6, 3),
+(103, 'RCV-002', '2019-04-21 00:00:00', 4, '1235567', '1', 10, 99.7, 3),
+(104, 'RCV-003', '2019-05-07 00:00:00', 6, '212134', '1', 12, 9000, 3),
+(106, 'ISS-002', '2019-05-07 00:00:00', 6, '212134', '1', 5, 9000, 3),
+(107, 'RCV-004', '2019-05-09 00:00:00', 7, '9090911', '2', 2, 100, 3),
+(108, 'ISS-003', '2019-05-09 00:00:00', 7, '9090911', '2', 2, 100, 3);
 
 -- --------------------------------------------------------
 
@@ -1260,7 +1364,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `status`, `confirmation_code`, `confirmed`, `is_term_accept`, `remember_token`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Admin', 'Saif', 'admin@admin.com', '$2y$10$yzdRh.HNr8RukRLgiuVfoe37Ckjmr1wFdlQi0XHoTrCSLeBjLLYMS', 1, 'b1970adb3f301c8440c81e45b526060c', 1, 0, 'BXKAo7JVM4Df7hZEorLxZmOActtwq1EThVPXrNSHjzMDGwkAhSTz6EzBQSMr', 1, 1, '2019-01-14 19:17:02', '2019-01-21 15:36:38', NULL),
+(1, 'Admin', 'Saif', 'admin@admin.com', '$2y$10$yzdRh.HNr8RukRLgiuVfoe37Ckjmr1wFdlQi0XHoTrCSLeBjLLYMS', 1, 'b1970adb3f301c8440c81e45b526060c', 1, 0, 'leVGiTe0KWeXBHFQ45jWu8j3OHIEiyM5ysUvC9uySRWgf1REmqgrQsSdaMov', 1, 1, '2019-01-14 19:17:02', '2019-01-21 15:36:38', NULL),
 (2, 'Vipul', 'Basapati', 'executive@executive.com', '$2y$10$Xtds/X9sMuHoguyev.I6JO0g2b1c2eT4UiEuB3L6FUmmQlEI7h4gu', 1, '68c7a7b3a2968803ae6db884ae89f446', 1, 0, NULL, 1, NULL, '2019-01-14 19:17:02', '2019-01-14 19:17:02', NULL),
 (3, 'User', 'Test', 'user@user.com', '$2y$10$hK926V1W.U2666U50rhQ7uj0TAMbB0cwa.kivaTzkVpSNVPQ7Re12', 1, 'fe3ae4e0b22211d756922a0bede508cf', 1, 0, NULL, 1, NULL, '2019-01-14 19:17:02', '2019-01-14 19:17:02', NULL),
 (4, 'Rashed', 'Al Banna', 'r@gmail.com', '$2y$10$TKxuqIrAdSNAR5cvG0MtAeJrV34bRogqLC9bTmyyhsxZldb6THXtK', 1, 'b9a747f4ee9cab6be9906c6af5b4e04a', 1, 0, '4Kk9zXyngpH1yXycuQH5DFOF7BTipxs4xwacqtcnm35Pyz8t8lPgXuXGrzbm', 1, NULL, '2019-02-03 21:18:51', '2019-02-03 21:18:51', NULL);
@@ -1528,12 +1632,12 @@ ALTER TABLE `inv_ga_listunit`
 -- AUTO_INCREMENT for table `inv_issue`
 --
 ALTER TABLE `inv_issue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `inv_issuedetail`
 --
 ALTER TABLE `inv_issuedetail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `inv_item_unit`
 --
@@ -1543,17 +1647,17 @@ ALTER TABLE `inv_item_unit`
 -- AUTO_INCREMENT for table `inv_material`
 --
 ALTER TABLE `inv_material`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `inv_materialbalance`
 --
 ALTER TABLE `inv_materialbalance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `inv_materialcategory`
 --
 ALTER TABLE `inv_materialcategory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `inv_materialcategorysub`
 --
@@ -1563,12 +1667,12 @@ ALTER TABLE `inv_materialcategorysub`
 -- AUTO_INCREMENT for table `inv_receive`
 --
 ALTER TABLE `inv_receive`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `inv_receivedetail`
 --
 ALTER TABLE `inv_receivedetail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `inv_supplier`
 --
@@ -1588,7 +1692,7 @@ ALTER TABLE `inv_warehosueinfo`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `menus`
 --
@@ -1608,7 +1712,7 @@ ALTER TABLE `modules`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 --
 -- AUTO_INCREMENT for table `pages`
 --
@@ -1673,12 +1777,12 @@ ALTER TABLE `social_logins`
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `temp_product_receive_data`
 --
 ALTER TABLE `temp_product_receive_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 --
 -- AUTO_INCREMENT for table `users`
 --
