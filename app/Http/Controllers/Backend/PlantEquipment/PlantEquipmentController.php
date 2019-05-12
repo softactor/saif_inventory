@@ -78,6 +78,7 @@ class PlantEquipmentController extends Controller
             'model'             => $request->model,
             'year_of_manufac'   => $request->year_of_manufac,
             'present_location'  => $request->present_location,
+            'present_condition' => $request->present_condition,
             'remarks'           => $request->remarks,
             'created_by'        => access()->user()->id,
         ];
@@ -106,6 +107,7 @@ class PlantEquipmentController extends Controller
         $equipment->model               = $request->model;
         $equipment->year_of_manufac     = $request->year_of_manufac;
         $equipment->present_location    = $request->present_location;
+        $equipment->present_condition   = $request->present_condition;
         $equipment->remarks             = $request->remarks;
         $equipment->save();
         return new RedirectResponse(route('admin.plantEquipment.index'), ['flash_success' => trans('alerts.backend.plantequipment.updated')]); 

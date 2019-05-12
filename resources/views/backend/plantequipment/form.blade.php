@@ -138,7 +138,15 @@
     <div class="form-group">
         <label for="year_of_manufac" class="col-lg-2 control-label">Year of Manufacture</label>
         <div class="col-lg-10">
-            <input type="text" class="form-control" id="year_of_manufac" name="year_of_manufac" value="{{ old('year_of_manufac') }}">
+            <select class="form-control box-size" id="year_of_manufac" name="year_of_manufac">
+                <option value="">Select</option>
+                <?php
+                    $start  =   date('Y');
+                        for($start; $start >=1950; $start--){
+                ?>
+                <option value="<?php echo $start; ?>"><?php echo $start; ?></option>
+                <?php } ?>
+            </select>
             <?php
                 if ($errors->has('year_of_manufac')) {
                     echo '<span class="form-error-style">'.$errors->first('year_of_manufac').'</span>';
@@ -157,6 +165,30 @@
             ?>
         </div>
     </div>
+    <div class="form-group">
+        <label for="name" class="col-lg-2 control-label required">Present Condition</label>
+        <div class="col-lg-10">
+            <select class="form-control box-size" id="present_condition" name="present_condition">
+                <option value="">Select</option>
+                <?php
+                    $tableName                      =   'present_condition';
+                    $order_by['order_by']           =   'ASC';
+                    $order_by['order_by_column']    =   'name';
+                    $projectsData                   =   get_table_data_by_table($tableName, $order_by);
+                    if(isset($projectsData) && !empty($projectsData)){
+                        foreach($projectsData as $data){
+                ?>
+                <option value="<?php echo $data->id; ?>"><?php echo $data->name; ?></option>
+                <?php }} ?>
+            </select>
+            <?php
+                if ($errors->has('present_condition')) {
+                    echo '<span class="form-error-style">'.$errors->first('present_condition').'</span>';
+                }
+            ?>
+        </div>
+    </div>
+    <!--present_condition-->
     <div class="form-group">
         <label for="remarks" class="col-lg-2 control-label">Remarks</label>
         <div class="col-lg-10">
