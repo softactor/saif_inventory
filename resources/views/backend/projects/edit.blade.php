@@ -43,7 +43,7 @@
                     </div>    
                 </div> 
                 <div class="form-group">
-                    <label class="col-lg-2 control-label required" for="name">Address:</label>
+                    <label class="col-lg-2 control-label" for="name">Address:</label>
                     <div class="col-lg-10">
                         <textarea class="form-control" rows="5" id="address" name="address"><?php if (isset($editData->address)) { echo $editData->address; } ?></textarea>
                     </div>    

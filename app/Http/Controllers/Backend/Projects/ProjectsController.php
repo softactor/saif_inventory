@@ -34,7 +34,6 @@ class ProjectsController extends Controller
         $validator  =   Validator::make($request->all(), [
             "project_name"          => "required",
             "code"                  => "required",
-            "address"               => "required",
         ]);
         
         // Validation Fails:

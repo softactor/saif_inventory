@@ -14,7 +14,7 @@
         </div><!--col-lg-10-->
     </div><!--form control-->
     <div class="form-group">
-        {{ Form::label('address', trans('validation.attributes.backend.plant_equipments.remarks'), ['class' => 'col-lg-2 control-label required']) }}
+        {{ Form::label('address', trans('validation.attributes.backend.plant_equipments.remarks'), ['class' => 'col-lg-2 control-label']) }}
 
         <div class="col-lg-10 mce-box">
             {{ Form::textarea('address', null, ['class' => 'form-control', 'placeholder' => 'address']) }}
