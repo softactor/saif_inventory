@@ -15,6 +15,7 @@
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />        
         <link href="{{ asset('css/backend/site_style.css') }}" rel="stylesheet" />        
+        <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet" />        
         @yield('meta')
 
         <!-- Styles -->
@@ -88,9 +89,11 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+        <script src="{{ asset('js/datatables.min.js') }}"></script>
         <script>
         $.noConflict();
         jQuery( document ).ready(function( $ ) {
+            $('#equipment-table').DataTable();
           // Code that uses jQuery's $ can follow here.
           $( "#from_date" ).datepicker({
             dateFormat: "yy-mm-dd"
