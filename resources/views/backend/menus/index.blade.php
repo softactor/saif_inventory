@@ -95,6 +95,7 @@
             });
 
             Backend.DataTableSearch.init(dataTable);
+            $('#equipment-table').dataTable();
         });
     </script>
 @endsection

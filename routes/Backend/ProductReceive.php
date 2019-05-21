@@ -1,6 +1,6 @@
 <?php
 /*
- * Plant Equipment Management
+ * Product Receive Management
  */
 Route::group(['namespace' => 'ProductReceive'], function () {
     Route::get('product_receive/index', 'ProductReceiveController@index')->name('product_receive.index');

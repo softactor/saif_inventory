@@ -436,3 +436,9 @@ function get_product_stock_by_material_id($param) {
 
     return $return;
 }
+function get_user_details_by_user_id($user_id){
+        $users   =   DB::table('users')
+                                ->where('id',$user_id)
+                                ->first();
+        return $users;
+    }

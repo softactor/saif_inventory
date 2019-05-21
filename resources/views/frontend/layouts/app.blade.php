@@ -14,21 +14,13 @@
         <!-- Meta -->
         <meta name="description" content="@yield('meta_description', 'Laravel AdminPanel')">
         <meta name="author" content="@yield('meta_author', 'Viral Solani')">
-        @yield('meta')
-
-        <!-- Styles -->
-        @yield('before-styles')
-
-        <!-- Check if the language is set to RTL, so apply the RTL layouts -->
-        <!-- Otherwise apply the normal LTR layouts -->
-        @langRTL
-            {{ Html::style(getRtlCss(mix('css/frontend.css'))) }}
-        @else
-            {{ Html::style(mix('css/frontend.css')) }}
-        @endif
-        {!! Html::style('js/select2/select2.css') !!}
-        @yield('after-styles')
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ asset('css/login.css') }}">
         <link type="text/css" rel="stylesheet" href="<?php echo asset('css/site_style.css') ?>">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        
         <!-- Scripts -->
         <script>
             window.Laravel = <?php echo json_encode([
@@ -38,22 +30,13 @@
     </head>
     <body id="app-layout">
         <div id="app">
-            @include('includes.partials.logged-in-as')
-            @include('frontend.includes.nav')
-
-            <div class="container">
-                @include('includes.partials.messages')
-                @yield('content')
-            </div><!-- container -->
+            @include('includes.partials.opmessage')
+            <div class="main">
+                <div class="container">
+                    @yield('content')
+                </div>
+            </div>
         </div><!--#app-->
-
-        <!-- Scripts -->
-        @yield('before-scripts')
-        {!! Html::script(mix('js/frontend.js')) !!}
-        @yield('after-scripts')
-        {{ Html::script('js/frontend/frontend.js') }}
-        {!! Html::script('js/select2/select2.js') !!}
-
         <script type="text/javascript">
             if("{{Route::currentRouteName()}}" !== "frontend.user.account")
             {
