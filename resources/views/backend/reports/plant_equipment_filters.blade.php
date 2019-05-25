@@ -32,6 +32,22 @@
         </select>
     </div>
     <div class="form-group">
+        <label class="sr-only" for="email">Equipment Type</label>
+        <select class="form-control box-size" id="country_of_origin" name="country_of_origin">
+            <option value="">Select</option>
+            <?php
+                $tableName                      =   'country';
+                $order_by['order_by']           =   'ASC';
+                $order_by['order_by_column']    =   'nicename';
+                $projectsData                   =   get_table_data_by_table($tableName, $order_by);
+                if(isset($projectsData) && !empty($projectsData)){
+                    foreach($projectsData as $data){
+            ?>
+            <option value="<?php echo $data->id; ?>"><?php echo $data->nicename; ?></option>
+            <?php }} ?>
+        </select>
+    </div>
+    <div class="form-group">
         <label class="sr-only" for="name">Name</label>
         <input type="text" class="form-control" id="name" name="name" placeholder="Equipment Name">
     </div>

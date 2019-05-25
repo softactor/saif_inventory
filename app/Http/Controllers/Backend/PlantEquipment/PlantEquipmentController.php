@@ -150,6 +150,9 @@ class PlantEquipmentController extends Controller
             if (isset($request->equipment_type) && !empty($request->equipment_type)) {
                 $query->where('p.equipment_type', '=', $request->equipment_type);
             }
+            if (isset($request->country_of_origin) && !empty($request->country_of_origin)) {
+                $query->where('p.country_of_origin', '=', $request->country_of_origin);
+            }
             $plantEquipments = $query->select('p.*')->get();
         }
         if ($plantEquipments->isEmpty()) {
