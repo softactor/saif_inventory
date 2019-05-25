@@ -105,7 +105,7 @@
                             <option value="<?php echo $data->id; ?>"<?php if (isset($editData->country_of_origin) && $editData->country_of_origin == $data->id) { echo "selected";}?>><?php echo $data->nicename; ?></option>
                             <?php }} ?>
                         </select>
-                        <input type="text" class="form-control box-size" id="country_of_origin" placeholder="Country Of Origin" name="country_of_origin" value="<?php
+                        <input type="text" class="form-control box-size" id="coo" placeholder="Country Of Origin" name="coo" value="<?php
                         if (isset($editData->country_of_origin)) {
                             echo $editData->country_of_origin;
                         }
