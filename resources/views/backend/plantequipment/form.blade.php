@@ -94,7 +94,19 @@
     <div class="form-group">
         <label for="country_of_origin" class="col-lg-2 control-label">Country Of Origin</label>
         <div class="col-lg-10">
-            <input type="text" class="form-control" id="country_of_origin" name="country_of_origin" value="{{ old('country_of_origin') }}">
+            <select class="form-control box-size" id="country_of_origin" name="country_of_origin">
+                <option value="">Select</option>
+                <?php
+                    $tableName                      =   'country';
+                    $order_by['order_by']           =   'ASC';
+                    $order_by['order_by_column']    =   'nicename';
+                    $projectsData                   =   get_table_data_by_table($tableName, $order_by);
+                    if(isset($projectsData) && !empty($projectsData)){
+                        foreach($projectsData as $data){
+                ?>
+                <option value="<?php echo $data->id; ?>"><?php echo $data->nicename; ?></option>
+                <?php }} ?>
+            </select>
             <?php
                 if ($errors->has('country_of_origin')) {
                     echo '<span class="form-error-style">'.$errors->first('country_of_origin').'</span>';

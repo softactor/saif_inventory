@@ -16,12 +16,7 @@ class ReportsController extends Controller{
     }
     
     public function get_plant_equipment_reports(Request $request){
-        $all    =   $request->all();
-        print '<pre>';
-        print_r($all);
-        print '</pre>';
-        exit;
-        
+        return new ViewResponse('backend.reports.plant_equipment_reports');
     }    
     public function stock_management(){
         return new ViewResponse('backend.reports.stock_management_report');

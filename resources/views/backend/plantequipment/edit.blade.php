@@ -92,6 +92,19 @@
                 <div class="form-group">
                     <label class="col-lg-2 control-label required" for="email">Country Of Origin:</label>
                     <div class="col-lg-10">
+                        <select class="form-control box-size" id="country_of_origin" name="country_of_origin">
+                            <option value="">Select</option>
+                            <?php
+                                $tableName                      =   'country';
+                                $order_by['order_by']           =   'ASC';
+                                $order_by['order_by_column']    =   'nicename';
+                                $projectsData                   =   get_table_data_by_table($tableName, $order_by);
+                                if(isset($projectsData) && !empty($projectsData)){
+                                    foreach($projectsData as $data){
+                            ?>
+                            <option value="<?php echo $data->id; ?>"<?php if (isset($editData->country_of_origin) && $editData->country_of_origin == $data->id) { echo "selected";}?>><?php echo $data->nicename; ?></option>
+                            <?php }} ?>
+                        </select>
                         <input type="text" class="form-control box-size" id="country_of_origin" placeholder="Country Of Origin" name="country_of_origin" value="<?php
                         if (isset($editData->country_of_origin)) {
                             echo $editData->country_of_origin;
