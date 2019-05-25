@@ -31,7 +31,6 @@
                             ?>
                         </td>
                         <td><?php echo date("F jS, Y", strtotime($equipments->created_at)); ?></td>
-                        <td><?php echo $equipments->created_at; ?></td>
                     </tr>
                 <?php }
             } ?>
