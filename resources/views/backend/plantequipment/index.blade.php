@@ -40,7 +40,7 @@
                         <tr>
                             <td><?php echo $equipments->name; ?></td>
                             <td><?php echo $equipments->eel_code; ?></td>
-                            <td><?php echo $equipments->country_of_origin; ?></td>
+                            <td><?php echo '';//getTableRawDetails('country', $equipments->country_of_origin)->nicename; ?></td>
                             <td><?php echo $equipments->capacity; ?></td>
                             <td><?php echo $equipments->make_by; ?></td>
                             <td><?php echo $equipments->model; ?></td>
