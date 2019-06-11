@@ -31,12 +31,12 @@
                             ?>
                         </h3>
 
-                        <p>Owned Equipments</p>
+                        <p>Owned Equipment</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-cogs"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.plantEquipment.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
