@@ -9,9 +9,9 @@
     <span class="sr-only">Toggle Dropdown</span>
   </button>
   <ul class="dropdown-menu" role="menu">
-    <li><a href="{{route('admin.product_requisition.index')}}"><i class="fa fa-list-ul"></i> All Requisition</a></li>
+    <li><a href="{{route('admin.product_movement.index')}}"><i class="fa fa-list-ul"></i> All Movement</a></li>
     @permission('create-projects')
-    <li><a href="{{route('admin.product_requisition.create')}}"><i class="fa fa-plus"></i> Create Requisition</a></li>
+    <li><a href="{{route('admin.product_movement.create')}}"><i class="fa fa-plus"></i> Create Movement</a></li>
     @endauth
   </ul>
 </div>

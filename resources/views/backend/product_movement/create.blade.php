@@ -4,7 +4,7 @@
 
 @section('page-header')
     <h1>
-        <small>Purchase Requisition</small>
+        <small>Create Movement</small>
     </h1>
 @endsection
 
@@ -13,10 +13,10 @@
 
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Purchase Requisition</h3>
+            <h3 class="box-title">Create Movement</h3>
 
             <div class="box-tools pull-right">
-                @include('backend.requisition.partials.products-header-buttons')
+                @include('backend.product_movement.partials.products-header-buttons')
             </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
 
@@ -25,7 +25,7 @@
             <div class='row'>
                 <div class='col-md-5'>
                     <div class="form-group">
-                        @include("backend.requisition.form")
+                        @include("backend.product_movement.form")
                         <div class="edit-form-btn">
                             <button type="button" class="btn btn-primary btn-md" onclick="addProductIntoProductReceiveForm();">Add</button>
                             {{ link_to_route('admin.products.index', 'Remove', [], ['class' => 'btn btn-danger btn-md']) }}

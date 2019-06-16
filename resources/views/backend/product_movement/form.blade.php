@@ -13,7 +13,7 @@
                     </td>
                     <td colspan="2">
                         <div class="form-group">
-                            <label for="name" class="col-md-4">Req No</label>
+                            <label for="name" class="col-md-4">MV No</label>
                             <div class="col-md-8">
                                 <input type="text" name="receive_no" id="receive_no" class="form-control" value="<?php echo $receiveCode; ?>">
                             </div>
@@ -21,9 +21,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3">
+                    <td>
                         <div class="form-group">
-                            <label for="name" class="col-md-4 required">Project</label>
+                            <label for="name" class="col-md-4 required">F.Project</label>
                             <div class="col-md-8">
                                 <select class="form-control" id="project_id" name="project_id" required>
                                     <option value="">Select</option>
@@ -42,7 +42,28 @@
                             </div>
                         </div>
                     </td>
-                </tr> 
+                    <td colspan="2">
+                        <div class="form-group">
+                            <label for="name" class="col-md-4 required">T.Project</label>
+                            <div class="col-md-8">
+                                <select class="form-control" id="project_id" name="project_id" required>
+                                    <option value="">Select</option>
+                                    <?php
+                                    $tableName = 'projects';
+                                    $order_by['order_by'] = 'ASC';
+                                    $order_by['order_by_column'] = 'project_name';
+                                    $projectsData = get_table_data_by_table($tableName, $order_by);
+                                    if (isset($projectsData) && !empty($projectsData)) {
+                                        foreach ($projectsData as $data) {
+                                            ?>
+                                            <option value="<?php echo $data->id; ?>"><?php echo $data->project_name; ?></option>
+                                        <?php }
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="3">
                         <div class="form-group">

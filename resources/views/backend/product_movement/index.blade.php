@@ -3,15 +3,15 @@
 @section ('title', trans('labels.backend.projects.management'))
 
 @section('page-header')
-    <h1>Requisition Management</h1>
+    <h1>Product Movement</h1>
 @endsection
 
 @section('content')
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Requisitions</h3>
+            <h3 class="box-title">Product Movement</h3>
             <div class="box-tools pull-right">
-                @include('backend.requisition.partials.products-header-buttons')
+                @include('backend.product_movement.partials.products-header-buttons')
             </div>
         </div><!-- /.box-header -->
 

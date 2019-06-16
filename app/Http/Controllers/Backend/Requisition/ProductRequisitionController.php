@@ -36,7 +36,7 @@ class ProductRequisitionController extends Controller
     
     public function create(){
         $receiveCode   = $this->generateReceivecode();        
-        return new ViewResponse('backend.product_receive.create', compact('receiveCode'));
+        return new ViewResponse('backend.requisition.create', compact('receiveCode'));
     }
     
     public function generateReceivecode(){

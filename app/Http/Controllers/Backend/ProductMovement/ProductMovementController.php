@@ -31,12 +31,12 @@ class ProductMovementController extends Controller
     public function index()
     {
 //        $plantEquipments     = ItemsModel::all();
-        return new ViewResponse('backend.product_receive.index', compact('plantEquipments'));
+        return new ViewResponse('backend.product_movement.index', compact('plantEquipments'));
     }
     
     public function create(){
         $receiveCode   = $this->generateReceivecode();        
-        return new ViewResponse('backend.product_receive.create', compact('receiveCode'));
+        return new ViewResponse('backend.product_movement.create', compact('receiveCode'));
     }
     
     public function generateReceivecode(){

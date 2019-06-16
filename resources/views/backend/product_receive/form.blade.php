@@ -13,7 +13,7 @@
                     </td>
                     <td colspan="2">
                         <div class="form-group">
-                            <label for="name" class="col-md-4">Receive No</label>
+                            <label for="name" class="col-md-4">RCV No</label>
                             <div class="col-md-8">
                                 <input type="text" name="receive_no" id="receive_no" class="form-control" value="<?php echo $receiveCode; ?>">
                             </div>
@@ -105,7 +105,7 @@
                     </td>
                     <td colspan="2">                        
                         <div class="form-group">
-                            <label for="name" class="col-md-4 required">Unit Price</label>
+                            <label for="name" class="col-md-4 required">U.Price</label>
                             <div class="col-md-8">
                                 <input type="text" name="unit_price" id="unit_price" class="form-control">
                             </div>
