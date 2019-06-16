@@ -1,10 +1,10 @@
 @extends ('backend.layouts.app')
 
-@section ('title', trans('labels.backend.projects.management') . ' | ' . trans('labels.backend.projects.create'))
+@section ('title', 'Purchase Requisition')
 
 @section('page-header')
     <h1>
-        <small>Products</small>
+        <small>Purchase Requisition</small>
     </h1>
 @endsection
 
