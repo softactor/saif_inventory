@@ -5,7 +5,7 @@
         $grandTotal     =   0;
         foreach($products as $data){
             $requisition_id =   $data->receive_no;
-            $row_id         =   'product_row_id_'.$data->product_id;
+            $row_id         =   'requisition_row_id_'.$data->product_id;
 ?>
 <tr id='<?php echo $row_id; ?>'>
     <td>{{ $count++ }}</td>

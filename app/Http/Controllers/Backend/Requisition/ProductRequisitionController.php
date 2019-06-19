@@ -190,7 +190,7 @@ class ProductRequisitionController extends Controller
         $products                   =   '';
         $deletedRows                = DB::table('temp_product_receive_data')->where('id', $request->delete_id)->delete();
         // Now update the generated dom file 
-        $products_data              =   DB::table('temp_product_receive_data')->where('receive_no', $request->receive_no)->get();
+        $products_data              =   DB::table('temp_product_receive_data')->where('receive_no', $request->product_receive_no)->get();
         
         if(!$products_data->isEmpty()){
             $products = $products_data;
