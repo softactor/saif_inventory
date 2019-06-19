@@ -36,7 +36,7 @@
                         <tr>
                             <td><?php echo $equipments->requisition_id; ?></td>
                             <td><?php echo $equipments->requisition_date; ?></td>
-                            <td><?php //echo getTableRawDetails('projects', $equipments->project_id)->project_name; ?></td>
+                            <td><?php echo $equipments->project_id;//echo getTableRawDetails('projects', $equipments->project_id)->project_name; ?></td>
                             <td><?php echo $equipments->no_of_material; ?></td>
                             <td><?php echo 'pending'; ?></td>
                             <td>
