@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    {{ Form::open(['route' => 'admin.products.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'id' => 'productReceiveForm', 'files' => true]) }}
+    {{ Form::open(['route' => 'admin.product_requisition.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'id' => 'productRequisitionForm', 'files' => true]) }}
 
     <div class="box box-info">
         <div class="box-header with-border">
@@ -27,7 +27,7 @@
                     <div class="form-group">
                         @include("backend.requisition.form")
                         <div class="edit-form-btn">
-                            <button type="button" class="btn btn-primary btn-md" onclick="addProductIntoProductReceiveForm();">Add</button>
+                            <button type="button" class="btn btn-primary btn-md" onclick="addProductIntoProductRequisitionForm();">Add</button>
                             {{ link_to_route('admin.products.index', 'Remove', [], ['class' => 'btn btn-danger btn-md']) }}
                             <div class="clearfix"></div>
                         </div>
@@ -41,9 +41,6 @@
                                     <th>#</th>
                                     <th>Product Name</th>
                                     <th>Quantity</th>
-                                    <th>Unit</th>
-                                    <th>Unit Price</th>
-                                    <th style="text-align: right">Total</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

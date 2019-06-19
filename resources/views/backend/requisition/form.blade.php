@@ -7,7 +7,7 @@
                         <div class="form-group">
                             <label for="name" class="col-md-4">Date</label>
                             <div class="col-md-8">
-                                <input type="text" autocomplete="off" name="receive_date" id="receive_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
+                                <input type="text" autocomplete="off" name="requisition_date" id="requisition_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
                             </div>
                         </div>
                     </td>
@@ -15,7 +15,7 @@
                         <div class="form-group">
                             <label for="name" class="col-md-4">Req No</label>
                             <div class="col-md-8">
-                                <input type="text" name="receive_no" id="receive_no" class="form-control" value="<?php echo $receiveCode; ?>">
+                                <input type="text" name="requisition_id" id="requisition_id" class="form-control" value="<?php echo $receiveCode; ?>">
                             </div>
                         </div>
                     </td>
@@ -23,8 +23,8 @@
                 <tr>
                     <td colspan="3">
                         <div class="form-group">
-                            <label for="name" class="col-md-4 required">Project</label>
-                            <div class="col-md-8">
+                            <label for="name" class="col-md-2 required">Project</label>
+                            <div class="col-md-10">
                                 <select class="form-control" id="project_id" name="project_id" required>
                                     <option value="">Select</option>
                                     <?php
@@ -72,18 +72,10 @@
                             </div>
                         </div>
                     </td>
-                    <td colspan="2">                        
-                        <div class="form-group">
-                            <label for="name" class="col-md-4 required">U.Price</label>
-                            <div class="col-md-8">
-                                <input type="text" name="unit_price" id="unit_price" class="form-control">
-                            </div>
-                        </div>
-                    </td>
                 </tr>
             </tbody>
         </table>
         <input type="hidden" id='get_product_url' value="<?php echo route('admin.products.get_product_by_item_id'); ?>" />
-        <input type="hidden" id='process_product_receive_url' value="<?php echo route('admin.product_receive.process_product_receive_url'); ?>" />
+        <input type="hidden" id='process_product_requisition_url' value="<?php echo route('admin.product_requisition.process_product_requisition_url'); ?>" />
     </div>
 </div>
