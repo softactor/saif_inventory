@@ -17,7 +17,7 @@
 
         <div class="box-body">
             <div class="table-responsive data-table-wrapper">
-                <table id="blogs-table" class="table table-condensed table-hover table-bordered">
+                <table id="blogs-table" class="table table-condensed table-hover table-bordered color_table_head">
                     <thead>
                         <tr>
                             <th style="text-align: center;">Requisition Code</th>
@@ -36,7 +36,7 @@
                         <tr>
                             <td><?php echo $equipments->requisition_id; ?></td>
                             <td><?php echo $equipments->requisition_date; ?></td>
-                            <td><?php echo $equipments->project_id; ?></td>
+                            <td><?php echo getTableRawDetails('projects', $equipments->project_id)->project_name; ?></td>
                             <td><?php echo $equipments->no_of_material; ?></td>
                             <td><?php echo 'pending'; ?></td>
                             <td>
