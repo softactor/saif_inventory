@@ -23,20 +23,22 @@
                             <th style="text-align: center;">Requisition Code</th>
                             <th style="text-align: center;">Requisition Date</th>
                             <th style="text-align: center;">Project</th>
+                            <th style="text-align: center;">Quantity</th>
                             <th style="text-align: center;">Status</th>
                             <th style="text-align: center;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
-                            if(isset($plantEquipments) && !empty($plantEquipments)){
-                                foreach($plantEquipments as $equipments){
+                            if(isset($requisition_data) && !empty($requisition_data)){
+                                foreach($requisition_data as $equipments){
                         ?>
                         <tr>
-                            <td><?php echo $equipments->code; ?></td>
-                            <td><?php echo $equipments->name; ?></td>
-                            <td><?php echo $equipments->name; ?></td>
-                            <td><?php echo $equipments->name; ?></td>
+                            <td><?php echo $equipments->requisition_id; ?></td>
+                            <td><?php echo $equipments->requisition_date; ?></td>
+                            <td><?php echo $equipments->project_id; ?></td>
+                            <td><?php echo $equipments->no_of_material; ?></td>
+                            <td><?php echo 'pending'; ?></td>
                             <td>
                                 <div class="btn-group action-btn">
                                     @permission('edit-products')

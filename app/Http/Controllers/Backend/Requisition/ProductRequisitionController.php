@@ -28,17 +28,15 @@ class ProductRequisitionController extends Controller
      *
      * @return ViewResponse
      */
-    public function index()
-    {
-//        $plantEquipments     = ItemsModel::all();
-        return new ViewResponse('backend.requisition.index', compact('plantEquipments'));
+    public function index(){
+        $requisition_data              =   DB::table('inv_requisition')->get();
+        return new ViewResponse('backend.requisition.index', compact('requisition_data'));
     }
     
     public function create(){
         $receiveCode   = $this->generateRequisitioncode();        
         return new ViewResponse('backend.requisition.create', compact('receiveCode'));
-    }
-    
+    }    
     public function generateRequisitioncode(){
         
         $rendomnumber   =   getDefaultCategoryCode('inv_requisition', 'id', '03d', '001');
@@ -146,6 +144,7 @@ class ProductRequisitionController extends Controller
         if(!$existingProduct->isEmpty()){
             $total_quantity =   0;
             foreach($existingProduct as $rcvProduct){
+                $project_id             =   $rcvProduct->project_id;
                 $total_quantity         =   $total_quantity+$rcvProduct->quantity;                
                 // make data for inv requisition details table data
                 $inv_receivedetail[]    =   [
@@ -159,6 +158,7 @@ class ProductRequisitionController extends Controller
             
             // make data for inv_requisition table
             $inv_receive    =   [
+                'project_id'        =>    $project_id,
                 'requisition_id'    =>    $receive_no,
                 'requisition_date'  =>    (isset($request->requisition_date) && !empty($request->requisition_date) ? date('Y-m-d h:i:s', strtotime($request->requisition_date)) : date('Y-m-d h:i:s')),
                 'remarks'           =>    $request->remarks,
