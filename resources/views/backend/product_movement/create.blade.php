@@ -34,22 +34,35 @@
                     </div>
                 </div>
                 <div class='col-md-7'>
-                    <div class="table-responsive table-bordered">          
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Product Name</th>
-                                    <th>Quantity</th>
-                                    <th>Unit</th>
-                                    <th>Unit Price</th>
-                                    <th style="text-align: right">Total</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="receiveProductBody">
-                            </tbody>
-                        </table>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="Show_requisition_list"> Show requisition list</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive table-bordered">          
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Product Name</th>
+                                            <th>Quantity</th>
+                                            <th>Unit</th>
+                                            <th>Unit Price</th>
+                                            <th style="text-align: right">Total</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="receiveProductBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

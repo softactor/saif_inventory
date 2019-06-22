@@ -12,5 +12,6 @@ Route::group(['namespace' => 'Requisition'], function () {
     Route::post('process_product_requisition_url', 'ProductRequisitionController@process_product_requisition_url')->name('product_requisition.process_product_requisition_url');
     Route::get('product_requisition_list', 'ProductRequisitionController@product_requisition_list')->name('product_requisition.product_requisition_list');
     Route::get('product_requisition_view', 'ProductRequisitionController@product_requisition_view')->name('product_requisition.view');
+    Route::get('getRequisitionDetailsByRequisitionId', 'ProductRequisitionController@getRequisitionDetailsByRequisitionId')->name('product_requisition.getRequisitionDetailsByRequisitionId');
     Route::post('process_product_requisition_delete_url', 'ProductRequisitionController@process_product_requisition_delete_url')->name('product_requisition.process_product_requisition_delete_url');
 });

@@ -210,4 +210,26 @@ class ProductRequisitionController extends Controller
         }
         
     }
+    
+    function getRequisitionDetailsByRequisitionId(Request $request){
+        $products                   =   '';
+        $reqRows                = DB::table('inv_requisition')->where('id', $request->requisition_id)->first();
+        // Now update the generated dom file 
+        $products_data              =   DB::table('inv_requisition_details')->where('requisition_id', $reqRows->requisition_id)->get();
+        
+        if(!$products_data->isEmpty()){
+            $details_data       =   View::make('backend.partial.requisition_json_data', compact('products_data','reqRows'));
+            $feedback_data      =   [
+                'status'            =>  'success',
+                'data'              =>  $details_data->render()
+            ];
+            echo json_encode($feedback_data);
+        }else{
+            $feedback_data  =   [
+                'status'            =>  'error',
+                'data'              =>  ''
+            ];
+            echo json_encode($feedback_data);
+        }
+    }
 }

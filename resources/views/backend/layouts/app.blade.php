@@ -728,6 +728,26 @@
             console.log(typePartNo);
             
         }
+        function getRequisitionDetailsByRequisitionId(id, url){
+            if(id){
+                $.ajax({
+                    url: url,
+                    type: 'Get',
+                    dataType: 'json',
+                    data: 'requisition_id=' + id,
+                    success: function (response) {
+                        if (response.status == 'success') {
+                           $('#rjdata').html(response.data);
+                        }else{
+                           swal("Failed!", response.message, "error"); 
+                        }                   
+                    },
+                    async: false // <- this turns it into synchronous
+                });
+            }else{
+                $('#rjdata').html('');
+            }
+        }
         </script>
     </body>
 </html>
