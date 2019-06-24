@@ -104,6 +104,12 @@
           $( "#receive_date" ).datepicker({
             dateFormat: "yy-mm-dd"
           });
+          $( "#mv_from_date" ).datepicker({
+            dateFormat: "yy-mm-dd"
+          });
+          $( "#mv_to_date" ).datepicker({
+            dateFormat: "yy-mm-dd"
+          });
           $( "#material_information" ).accordion();
           $('.select2').select2();
           var availableTags = [
@@ -277,6 +283,40 @@
                 type: 'POST',
                 dataType: 'json',
                 data: $("#productRequisitionForm").serialize(),
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function (response) {
+                    if(response.status == 'success'){
+                        $("span.has-error").html(" ");
+                        $("span").removeClass("has-error");
+                        $('#receiveProductBody').html(response.data);   
+                    }else{
+                        $("span.has-error").html(" ");
+                        $("span").removeClass("has-error");
+                        $.each(response.data, function(index, val){
+                            if(index == 'project_id'){
+                                $('#project_id').after('<span class="has-error">'+val+'</span>');
+                            }else if(index == 'supplier_id'){
+                                $('#supplier_id').after('<span class="has-error">'+val+'</span>');
+                            }else if(index == 'product_id'){
+                                $('#product_id').after('<span class="has-error">'+val+'</span>');
+                            }else{
+                                $('input[name='+index+']').after('<span class="has-error">'+val+'</span>');
+                            }
+                        })
+                    }
+                },
+                async: false // <- this turns it into synchronous
+            });
+        }
+        
+        function addProductIntoProductMovementForm(){
+            $.ajax({
+                url         :  $('#process_product_movement_url').val(),
+                type        :  'POST',
+                dataType    :  'json',
+                data        :  $("#productMovementForm").serialize(),
                 headers: {
                     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
                 },
@@ -646,6 +686,45 @@
                     type        : 'POST',
                     dataType    : 'json',
                     data        : 'receive_no='+receive_no,
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    success: function (response) {
+                    //$('#productReceiveConfirmModal').modal();                    
+                    if (response.status == 'success') {
+                        swal("Success", response.message, "success");
+                        setTimeout(function () {
+                            window.location = response.redirect_route;
+                        }, 2000);
+                    }else{
+                       swal("Failed!", response.message, "error"); 
+                    }
+                    },
+                    async: false // <- this turns it into synchronous
+                });
+               }else{
+                   swal.close();
+               }
+            });
+        }
+        function saveproductMovementDetails(receive_no, url){            
+            swal({
+                title               : "Movement Confirm?",
+                type                : "warning",
+                showCancelButton    : true,
+                confirmButtonColor  : '#DD6B55',
+                confirmButtonText   : 'Yes',
+                cancelButtonText    : "Cancel",
+                closeOnConfirm      : false,
+                closeOnCancel       : false
+             },
+            function(isConfirm){
+              if (isConfirm){ 
+                $.ajax({
+                    url         :  url,
+                    type        : 'POST',
+                    dataType    : 'json',
+                    data        : $("#productMovementForm").serialize(),
                     headers: {
                         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
                     },

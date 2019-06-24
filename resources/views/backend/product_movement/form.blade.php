@@ -5,7 +5,7 @@
                 <tr>
                     <td>
                         <div class="form-group">
-                            <label for="name" class="col-md-4">Date</label>
+                            <label for="name" class="col-md-4">E.Date</label>
                             <div class="col-md-8">
                                 <input type="text" autocomplete="off" name="receive_date" id="receive_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
                             </div>
@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <label for="name" class="col-md-4 required">F.Project</label>
                             <div class="col-md-8">
-                                <select class="form-control" id="project_id" name="project_id" required>
+                                <select class="form-control" id="from_project_id" name="from_project_id" required>
                                     <option value="">Select</option>
                                     <?php
                                     $tableName = 'projects';
@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <label for="name" class="col-md-4 required">T.Project</label>
                             <div class="col-md-8">
-                                <select class="form-control" id="project_id" name="project_id" required>
+                                <select class="form-control" id="to_project_id" name="to_project_id" required>
                                     <option value="">Select</option>
                                     <?php
                                     $tableName = 'projects';
@@ -60,6 +60,24 @@
                                         <?php }
                                     } ?>
                                 </select>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label for="name" class="col-md-4 required">F.Date</label>
+                            <div class="col-md-8">
+                                <input type="text" autocomplete="off" name="mv_from_date" id="mv_from_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
+                            </div>
+                        </div>
+                    </td>
+                    <td colspan="2">
+                        <div class="form-group">
+                            <label for="name" class="col-md-4 required">T.Date</label>
+                            <div class="col-md-8">
+                                <input type="text" autocomplete="off" name="mv_to_date" id="mv_to_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
                             </div>
                         </div>
                     </td>
@@ -93,18 +111,10 @@
                             </div>
                         </div>
                     </td>
-                    <td colspan="2">                        
-                        <div class="form-group">
-                            <label for="name" class="col-md-4 required">U.Price</label>
-                            <div class="col-md-8">
-                                <input type="text" name="unit_price" id="unit_price" class="form-control">
-                            </div>
-                        </div>
-                    </td>
                 </tr>
             </tbody>
         </table>
         <input type="hidden" id='get_product_url' value="<?php echo route('admin.products.get_product_by_item_id'); ?>" />
-        <input type="hidden" id='process_product_receive_url' value="<?php echo route('admin.product_receive.process_product_receive_url'); ?>" />
+        <input type="hidden" id='process_product_movement_url' value="<?php echo route('admin.product_movement.process_product_movement_url'); ?>" />
     </div>
 </div>

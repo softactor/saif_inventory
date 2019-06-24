@@ -4,16 +4,16 @@
 
 @section('page-header')
     <h1>
-        <small>Create Movement</small>
+        <small>Movement Entry</small>
     </h1>
 @endsection
 
 @section('content')
-    {{ Form::open(['route' => 'admin.products.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'id' => 'productReceiveForm', 'files' => true]) }}
+    {{ Form::open(['route' => 'admin.products.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'id' => 'productMovementForm', 'files' => true]) }}
 
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Create Movement</h3>
+            <h3 class="box-title">Movement Entry</h3>
 
             <div class="box-tools pull-right">
                 @include('backend.product_movement.partials.products-header-buttons')
@@ -27,22 +27,13 @@
                     <div class="form-group">
                         @include("backend.product_movement.form")
                         <div class="edit-form-btn">
-                            <button type="button" class="btn btn-primary btn-md" onclick="addProductIntoProductReceiveForm();">Add</button>
+                            <button type="button" class="btn btn-primary btn-md" onclick="addProductIntoProductMovementForm();">Add</button>
                             {{ link_to_route('admin.products.index', 'Remove', [], ['class' => 'btn btn-danger btn-md']) }}
                             <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>
                 <div class='col-md-7'>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form action="">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" id="Show_requisition_list"> Show requisition list</label>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive table-bordered">          
@@ -52,9 +43,6 @@
                                             <th>#</th>
                                             <th>Product Name</th>
                                             <th>Quantity</th>
-                                            <th>Unit</th>
-                                            <th>Unit Price</th>
-                                            <th style="text-align: right">Total</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
