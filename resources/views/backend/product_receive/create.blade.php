@@ -60,10 +60,9 @@
                                                     foreach($requisitionList as $rdata){
                                                         $timestamp  =   $rdata->requisition_date;
                                                         $hrdate     =   date("F jS, Y", strtotime($timestamp)); //September 30th, 2013
-                                                    }
-                                                }
                                             ?>
                                             <option value="<?php echo $rdata->id; ?>"><?php echo $rdata->requisition_id.' ( '.$hrdate.' )'; ?></option>
+                                                <?php }} ?>
                                         </select>
                                     </div>
                                     <div class="col-md-12">
