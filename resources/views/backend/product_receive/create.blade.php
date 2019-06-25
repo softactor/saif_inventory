@@ -74,6 +74,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
+                            @include("backend.partial.item_added_process_style")
                             <div class="table-responsive table-bordered">          
                                 <table class="table">
                                     <thead>

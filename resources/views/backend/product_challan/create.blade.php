@@ -43,6 +43,7 @@
                     </div>
                 </div>
                 <div class='col-md-7'>
+                    @include("backend.partial.item_added_process_style")
                     <div class="table-responsive table-bordered">          
                         <table class="table">
                             <thead>

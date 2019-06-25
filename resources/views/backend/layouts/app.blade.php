@@ -278,6 +278,7 @@
         }
         
         function addProductIntoProductRequisitionForm(){
+            $('.item_added_process_style').show();
             $.ajax({
                 url: $('#process_product_requisition_url').val(),
                 type: 'POST',
@@ -290,7 +291,8 @@
                     if(response.status == 'success'){
                         $("span.has-error").html(" ");
                         $("span").removeClass("has-error");
-                        $('#receiveProductBody').html(response.data);   
+                        $('#receiveProductBody').html(response.data); 
+                        $('.item_added_process_style').hide();
                     }else{
                         $("span.has-error").html(" ");
                         $("span").removeClass("has-error");
@@ -305,6 +307,7 @@
                                 $('input[name='+index+']').after('<span class="has-error">'+val+'</span>');
                             }
                         })
+                        $('.item_added_process_style').hide();
                     }
                 },
                 async: false // <- this turns it into synchronous
