@@ -209,6 +209,7 @@
         }
         //addProductIntoProductIssueForm
         function addProductIntoProductIssueForm(){
+            $('.item_added_process_style').show();
             $.ajax({
                 url: $('#process_product_issue_url').val(),
                 type: 'POST',
@@ -222,7 +223,9 @@
                         $("span.has-error").html(" ");
                         $("span").removeClass("has-error");
                         $('#receiveProductBody').html(response.data);   
+                        $('.item_added_process_style').hide();
                     }else if(response.status =='validation_error'){
+                        $('.item_added_process_style').hide();
                         $("span.has-error").html(" ");
                         $("span").removeClass("has-error");
                         $.each(response.data, function(index, val){
@@ -237,6 +240,7 @@
                             }
                         })
                     }else if(response.status == 'qty_error'){
+                        $('.item_added_process_style').hide();
                         swal("Quantity Error!", response.data, "error");
                     }
                 },
@@ -244,6 +248,7 @@
             });
         }
         function addProductIntoProductReceiveForm(){
+            $('.item_added_process_style').show();
             $.ajax({
                 url: $('#process_product_receive_url').val(),
                 type: 'POST',
@@ -256,8 +261,10 @@
                     if(response.status == 'success'){
                         $("span.has-error").html(" ");
                         $("span").removeClass("has-error");
-                        $('#receiveProductBody').html(response.data);   
+                        $('#receiveProductBody').html(response.data); 
+                        $('.item_added_process_style').hide();
                     }else{
+                        $('.item_added_process_style').hide();
                         $("span.has-error").html(" ");
                         $("span").removeClass("has-error");
                         $.each(response.data, function(index, val){
@@ -315,6 +322,7 @@
         }
         
         function addProductIntoProductMovementForm(){
+            $('.item_added_process_style').show();
             $.ajax({
                 url         :  $('#process_product_movement_url').val(),
                 type        :  'POST',
@@ -327,8 +335,10 @@
                     if(response.status == 'success'){
                         $("span.has-error").html(" ");
                         $("span").removeClass("has-error");
-                        $('#receiveProductBody').html(response.data);   
+                        $('#receiveProductBody').html(response.data);  
+                        $('.item_added_process_style').hide();
                     }else{
+                        $('.item_added_process_style').hide();
                         $("span.has-error").html(" ");
                         $("span").removeClass("has-error");
                         $.each(response.data, function(index, val){
