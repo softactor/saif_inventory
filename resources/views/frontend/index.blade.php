@@ -24,6 +24,7 @@
                     </div>
                     <div class="middle">                        
                         <div id="login">
+                            @if (! $logged_in_user)
                             <form action="{{ route('frontend.auth.login') }}" method="POST">
                                 @csrf
                                 <fieldset class="clearfix">
@@ -37,6 +38,16 @@
                                 </fieldset>
                                 <div class="clearfix"></div>
                             </form>
+                            @else
+                                <ul class="withlogin_login_style">
+                                    @permission('view-backend')
+                                        <li>{{ link_to_route('admin.dashboard', trans('navs.frontend.user.administration')) }}</li>
+                                    @endauth
+
+                                    <li>{{ link_to_route('frontend.user.account', trans('navs.frontend.user.account')) }}</li>
+                                    <li>{{ link_to_route('frontend.auth.logout', trans('navs.general.logout')) }}</li>
+                                </ul>
+                            @endif
                             <div class="clearfix"></div>
                         </div> <!-- end login -->
                         <div class="logo">
