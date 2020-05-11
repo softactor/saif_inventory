@@ -30,6 +30,6 @@
     "node-sass": "^4.9.0",
     "pluralize": "^7.0.0",
     "select2": "^4.0.4",
-    "tinymce": "^4.5.8"
+    "tinymce": "^4.9.10"
   }
 }
